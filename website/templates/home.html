@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPALS</title>
+</head>
+<body class="row g-3" style="padding: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+            <h1>OPALS</h1>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <div>
+        <h2>Welcom</h2>
+
+    <div>
+        Please provide the name and address of the childcare center where this assessment is being conducted
+    </div>
+
+    <br><br>
+    </div>
+
+    <a href="{% url 'page1' %}" class="btn btn-primary" style="background-color: #333333; border-radius: 20px;" >Begin</a>
+    <br><br>
+    </body>
+    </html>
+
+
+  <style>
+    /* Style the radio buttons */
+    input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    /* Style the labels */
+    label {
+        font-size: 16px;
+    }
+
+    /* Style the selected radio button label */
+    input[type="radio"]:checked + label {
+        font-weight: bold;
+        color: #007bff; /* Blue color for selected option */
+    }
+
+    body {
+        background-color: #f8f9fa; /* Set a light background color */
+        color: #343a40; /* Set a dark text color */
+    }
+
+    h1 {
+        color: #007bff; /* Set a primary color for the heading */
+    }
+
+    .container {
+        background-color: #ffffff; /* Set a white background color for the container */
+        border-radius: 10px; /* Add rounded corners to the container */
+        padding: 20px; /* Add some padding to the container */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Set the primary color for the button */
+        border-color: #007bff; /* Set the border color for the button */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darken the button color on hover */
+        border-color: #0056b3; /* Darken the border color on hover */
+    }
+
+    /* Add some margin to the top and bottom of the content */
+    .content-margin {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Style the form inputs */
+    input[type="text"],
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    /* Style the form labels */
+    label {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+</style>
+
+<script>
+
+  // document.addEventListener("DomContentLoaded", function() {
+
+
+  //   var nextButton = document.getElementById("next-button");
+  //   var inputName = document.getElementById("inputName").value;
+  //   var inputAddress = document.getElementById("inputAddress").value;
+  //   var inputCity = document.getElementById("inputCity").value;
+  //   var inputState = document.getElementById("inputState").value;
+  //   var inputZip = document.getElementById("inputZip").value;
+  //   var date = document.getElementById("date").value;
+
+  //   const OLE = document.querySelector('input[name="OLE"]:checked');
+
+  //   console.log(inputName);
+  //   document.write("Name: " + inputName + "<br>");
+
+  // });
+    
+    // var inputPreschoolOLE = document.getElementById("inputPreschoolOLE").value;
+    // var inputTwosOLE = document.getElementById("inputTwosOLE").value;
+    // var inputInfantToddlerOLE = document.getElementById("inputInfantToddlerOLE").value;
+    // var inputOtherOLE = document.getElementById("inputOtherOLE").value;
+
+  //   const Level1 = document.querySelector('input[name="Level1"]:checked');
+
+  //   const PathwayLayout = document.querySelector('input[name="PathwayLayout"]:checked');
+  //   const Loop = document.querySelector('input[name="Loop"]:checked');
+  //   const Width = document.querySelector('input[name="Width"]:checked');
+  //   const Connectedtobuilding = document.querySelector('input[name="Connectedtobuilding"]:checked');
+  //   const Level2 = document.querySelector('input[name="Level2"]:checked');
+
+  //   const Level3 = document.querySelector('input[name="Level3"]:checked');
+
+  //   const Level4 = document.querySelector('input[name="Level4"]:checked');
+
+  //   const Level5 = document.querySelector('input[name="Level5"]:checked');
+
+  //   const Level6 = document.querySelector('input[name="Level6"]:checked');
+
+  //   const Level7 = document.querySelector('input[name="Level7"]:checked');
+
+  //   const Level8 = document.querySelector('input[name="Level8"]:checked');
+
+  //   const Level9 = document.querySelector('input[name="Level9"]:checked');
+
+  //   const Level10 = document.querySelector('input[name="Level10"]:checked');
+
+  //   const Level11 = document.querySelector('input[name="Level11"]:checked');
+
+  //   const Level12 = document.querySelector('input[name="Level12"]:checked');
+
+  //   const Level13 = document.querySelector('input[name="Level13"]:checked');
+
+  //   document.write("Name: " + inputName + "<br>");
+  //   document.write("Address: " + inputAddress + "<br>");
+  //   document.write("City: " + inputCity + "<br>");
+  //   document.write("State: " + inputState + "<br>");
+  //   document.write("Zip: " + inputZip + "<br>");
+  //   document.write("Date: " + date + "<br>");
+  //   document.write("OLE: " + OLE.value + "<br>");
+  //   document.write("Level1: " + Level1.value + "<br>");
+  //   document.write("PathwayLayout: " + PathwayLayout.value + "<br>");
+  //   document.write("Loop: " + Loop.value + "<br>");
+  //   document.write("Width: " + Width.value + "<br>");
+  //   document.write("Connectedtobuilding: " + Connectedtobuilding.value + "<br>");
+  //   document.write("Level2: " + Level2.value + "<br>");
+  //   document.write("Level3: " + Level3.value + "<br>");
+  //   document.write("Level4: " + Level4.value + "<br>");
+  //   document.write("Level5: " + Level5.value + "<br>");
+  //   document.write("Level6: " + Level6.value + "<br>");
+  //   document.write("Level7: " + Level7.value + "<br>");
+  //   document.write("Level8: " + Level8.value + "<br>");
+  //   document.write("Level9: " + Level9.value + "<br>");
+  //   document.write("Level10: " + Level10.value + "<br>");
+  //   document.write("Level11: " + Level11.value + "<br>");
+  //   document.write("Level12: " + Level12.value + "<br>");
+  //   document.write("Level13: " + Level13.value + "<br>");
+    
+
+  // }
+  </script>
+
+
+
+
+{% endblock %}
