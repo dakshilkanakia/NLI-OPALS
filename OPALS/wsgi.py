@@ -1,5 +1,5 @@
 """
-WSGI config for POEMS project.
+WSGI config for OPALS project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'POEMS.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'OPALS.settings')
 
 application = get_wsgi_application()
