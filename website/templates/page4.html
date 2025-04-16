@@ -1,0 +1,677 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPALS page 4</title>
+    <style>
+        /* Overall form styling */
+        .opals-form {
+            padding: 20px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Page title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+        
+        /* Section styling */
+        .form-section {
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        /* Checkbox grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        /* Checkbox item styling */
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        
+        .checkbox-item label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* Radio button styling */
+        .radio-group {
+            margin-top: 15px;
+            border-top: 1px dashed #ccc;
+            padding-top: 15px;
+        }
+        
+        .radio-group p {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .radio-options ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .radio-options li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .radio-options label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .radio-options input[type="radio"] {
+            margin-right: 8px;
+            margin-top: 3px;
+        }
+        
+        /* Button styling */
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .submit-button {
+            padding: 10px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .submit-button:hover {
+            background-color: #3e8e41;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <form class="opals-form" method="post">
+        {% csrf_token %}
+        
+        <h2 class="page-title">OPALS Assessment - Page 4</h2>
+
+        <!-- Infant Settings Section -->
+        <div class="form-section">
+            <h3 class="section-title">Infants: Settings Available</h3>
+            <p>Check all settings that are available for infants:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.breast_feeding }}
+                    <label for="{{ form.breast_feeding.id_for_label }}">Breastfeeding/Bottle-Feeding Nook</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.indoor_outdoor_transition1 }}
+                    <label for="{{ form.indoor_outdoor_transition1.id_for_label }}">Covered Usable Indoor-Outdoor Transition Space</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.deck1 }}
+                    <label for="{{ form.deck1.id_for_label }}">Deck</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.diaper_changing_station }}
+                    <label for="{{ form.diaper_changing_station.id_for_label }}">Diaper Changing Station</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.gathering_setting1 }}
+                    <label for="{{ form.gathering_setting1.id_for_label }}">Gathering Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.grove_trees1 }}
+                    <label for="{{ form.grove_trees1.id_for_label }}">Grove of Small Trees/Large Shrubs</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.mound1 }}
+                    <label for="{{ form.mound1.id_for_label }}">Mound/Slope</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.manufactured_play1 }}
+                    <label for="{{ form.manufactured_play1.id_for_label }}">Manufactured Play Equipment</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multipurpose_lawn1 }}
+                    <label for="{{ form.multipurpose_lawn1.id_for_label }}">Multipurpose Activity Setting/Lawn</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multisensory_pathway1 }}
+                    <label for="{{ form.multisensory_pathway1.id_for_label }}">Multisensory Pathway</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multisensory_setting1 }}
+                    <label for="{{ form.multisensory_setting1.id_for_label }}">Multisensory Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.music_play1 }}
+                    <label for="{{ form.music_play1.id_for_label }}">Music Play Area</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.playhouse1 }}
+                    <label for="{{ form.playhouse1.id_for_label }}">Playhouse</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pollinator_garden1 }}
+                    <label for="{{ form.pollinator_garden1.id_for_label }}">Pollinator/Flower Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.porch_swing1 }}
+                    <label for="{{ form.porch_swing1.id_for_label }}">Porch Swing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.primary_pathway1 }}
+                    <label for="{{ form.primary_pathway1.id_for_label }}">Primary Pathway(Push/Pull Wheeled Toys)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.ramp1 }}
+                    <label for="{{ form.ramp1.id_for_label }}">Ramp(if used to play)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sand_play1 }}
+                    <label for="{{ form.sand_play1.id_for_label }}">Sand Play Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.small_bridge }}
+                    <label for="{{ form.small_bridge.id_for_label }}">Small Bridge</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.steppingstone_pathway1 }}
+                    <label for="{{ form.steppingstone_pathway1.id_for_label }}">Steppingstone Pathway(In Lawn)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.tent_structures1 }}
+                    <label for="{{ form.tent_structures1.id_for_label }}">Tent-Like Play Structures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.textured_panel }}
+                    <label for="{{ form.textured_panel.id_for_label }}">Textured Panel Wall</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.water_play_hands_1 }}
+                    <label for="{{ form.water_play_hands_1.id_for_label }}">Water Play(Hands-In)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other1 }}
+                    <label for="{{ form.other1.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>Are there 8 or more play and learning settings?</p>
+                <div class="radio-options">
+                    <p class = 'level191'> Level 1: 0-1 settings</p>
+                    <p class = 'level192'>Level 2: 2-4 settings</p>
+                    <p class = 'level193'>Level 3: 5-7 settings<p/>
+                    <p class = 'level194'>Level 4: 8 or more settings</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Toddler Settings Section -->
+        <div class="form-section">
+            <h3 class="section-title">Toddlers: Settings Available</h3>
+            <p>Check all settings that are available for toddlers:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.area_pets1 }}
+                    <label for="{{ form.area_pets1.id_for_label }}">Area for Pets(Chickens and Rabbits)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.indoor_outdoor_transition2 }}
+                    <label for="{{ form.indoor_outdoor_transition2.id_for_label }}">Covered Useable Indoor-Outdoor Transition Space</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.cozy_nook1 }}
+                    <label for="{{ form.cozy_nook1.id_for_label }}">Cozy Nook</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.balance_beam1 }}
+                    <label for="{{ form.balance_beam1.id_for_label }}">Balance Beam</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bridge1 }}
+                    <label for="{{ form.bridge1.id_for_label }}">Bridge</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.deck2 }}
+                    <label for="{{ form.deck2.id_for_label }}">Deck</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.earth_play1 }}
+                    <label for="{{ form.earth_play1.id_for_label }}">Earth Play(Dirt or Mud)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.editable_landscape1 }}
+                    <label for="{{ form.editable_landscape1.id_for_label }}">Editable Landscape</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.fruit_garden1 }}
+                    <label for="{{ form.fruit_garden1.id_for_label }}">Fruit and/or Vegetable Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.gathering_setting2 }}
+                    <label for="{{ form.gathering_setting2.id_for_label }}">Gathering Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.grove_trees2 }}
+                    <label for="{{ form.grove_trees2.id_for_label }}">Grove of Small Trees/Large Shrubs</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hard_surface1 }}
+                    <label for="{{ form.hard_surface1.id_for_label }}">Hard Surface for Wheeled toys</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.loose_parts1 }}
+                    <label for="{{ form.loose_parts1.id_for_label }}">Loose Parts Play Area</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.manufactured_play2 }}
+                    <label for="{{ form.manufactured_play2.id_for_label }}">Manufactured Play Equipment</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.mound2 }}
+                    <label for="{{ form.mound2.id_for_label }}">Mound/Slope</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multipurpose_lawn2 }}
+                    <label for="{{ form.multipurpose_lawn2.id_for_label }}">Multipurpose Activity Setting/Lawn</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multisensory_pathway2 }}
+                    <label for="{{ form.multisensory_pathway2.id_for_label }}">Multisensory Pathway</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multisensory_setting2 }}
+                    <label for="{{ form.multisensory_setting2.id_for_label }}">Multisensory Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.music_play2 }}
+                    <label for="{{ form.music_play2.id_for_label }}">Music Play Area</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.outdoor_classroom1 }}
+                    <label for="{{ form.outdoor_classroom1.id_for_label }}">Outdoor Classroom</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.playhouse2 }}
+                    <label for="{{ form.playhouse2.id_for_label }}">Playhouse</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pollinator_garden2 }}
+                    <label for="{{ form.pollinator_garden2.id_for_label }}">Pollinator/Flower Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.porch_swing2 }}
+                    <label for="{{ form.porch_swing2.id_for_label }}">Porch Swing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.primary_pathway2 }}
+                    <label for="{{ form.primary_pathway2.id_for_label }}">Primary Pathway(Push/Pull Wheeled Toys)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.project_space }}
+                    <label for="{{ form.project_space.id_for_label }}">Project Space</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.ramp2 }}
+                    <label for="{{ form.ramp2.id_for_label }}">Ramp(if used to play)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sand_play2 }}
+                    <label for="{{ form.sand_play2.id_for_label }}">Sand Play Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.steppingstone_pathway2 }}
+                    <label for="{{ form.steppingstone_pathway2.id_for_label }}">Steppingstone Pathway(In Lawn)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.swing1 }}
+                    <label for="{{ form.swing1.id_for_label }}">Swing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.table1 }}
+                    <label for="{{ form.table1.id_for_label }}">Table</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.tent_structures2 }}
+                    <label for="{{ form.tent_structures2.id_for_label }}">Tent-Like Play Structures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.water_play_hands_2 }}
+                    <label for="{{ form.water_play_hands_2.id_for_label }}">Water Play(Hands-In)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.water_play_body_1 }}
+                    <label for="{{ form.water_play_body_1.id_for_label }}">Water Play(Full Body)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other2 }}
+                    <label for="{{ form.other2.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>Are there 10 or more play and learning settings?</p>
+                <div class="radio-options">
+                    <p class = 'level201'> Level 1: 0-3 settings</p>
+                    <p class = 'level202'>Level 2: 4-7 settings</p>
+                    <p class = 'level203'>Level 3: 8-9 settings<p/>
+                    <p class = 'level204'>Level 4: 10 settings or more</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Preschool Settings Section -->
+        <div class="form-section">
+            <h3 class="section-title">Preschool: Settings Available</h3>
+            <p>Check all settings that are available for preschool children:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.area_pets2 }}
+                    <label for="{{ form.area_pets2.id_for_label }}">Area for Pets(Chickens and Rabbits)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.balance_beam }}
+                    <label for="{{ form.balance_beam.id_for_label }}">Balance Beam</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bridge2 }}
+                    <label for="{{ form.bridge2.id_for_label }}">Bridge</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.indoor_outdoor_transition3 }}
+                    <label for="{{ form.indoor_outdoor_transition3.id_for_label }}">Covered Usable Indoor-Outdoor Transition Space</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.cozy_nook2 }}
+                    <label for="{{ form.cozy_nook2.id_for_label }}">Cozy Nook</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.deck3 }}
+                    <label for="{{ form.deck3.id_for_label }}">Deck</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dry_creek_bed }}
+                    <label for="{{ form.dry_creek_bed.id_for_label }}">Dry Creek Bed</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.earth_play2 }}
+                    <label for="{{ form.earth_play2.id_for_label }}">Earth Play(Dirt or Mud)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.editable_landscape2 }}
+                    <label for="{{ form.editable_landscape2.id_for_label }}">Editable Landscape</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.fruit_garden2 }}
+                    <label for="{{ form.fruit_garden2.id_for_label }}">Fruit and/or Vegetable Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.gathering_setting3 }}
+                    <label for="{{ form.gathering_setting3.id_for_label }}">Gathering Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.grass_maze }}
+                    <label for="{{ form.grass_maze.id_for_label }}">Grass Maze</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.grove_trees3 }}
+                    <label for="{{ form.grove_trees3.id_for_label }}">Grove of Small Trees/Large Shrubs</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hard_surface2 }}
+                    <label for="{{ form.hard_surface2.id_for_label }}">Hard Surface for Wheeled toys</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.loose_parts2 }}
+                    <label for="{{ form.loose_parts2.id_for_label }}">Loose Parts Play Area</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.manufactured_play3 }}
+                    <label for="{{ form.manufactured_play3.id_for_label }}">Manufactured Play Equipment</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.mound3 }}
+                    <label for="{{ form.mound3.id_for_label }}">Mound/Slope</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multipurpose_lawn3 }}
+                    <label for="{{ form.multipurpose_lawn3.id_for_label }}">Multipurpose Activity Setting/Lawn</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multisensory_pathway3 }}
+                    <label for="{{ form.multisensory_pathway3.id_for_label }}">Multisensory Pathway</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.multisensory_setting3 }}
+                    <label for="{{ form.multisensory_setting3.id_for_label }}">Multisensory Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.music_play3 }}
+                    <label for="{{ form.music_play3.id_for_label }}">Music Play Area</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.natural_construction_area }}
+                    <label for="{{ form.natural_construction_area.id_for_label }}">Natural Construction Area</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.outdoor_classroom2 }}
+                    <label for="{{ form.outdoor_classroom2.id_for_label }}">Outdoor Classroom</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.performance_space }}
+                    <label for="{{ form.performance_space.id_for_label }}">Performance Space</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.playhouse3 }}
+                    <label for="{{ form.playhouse3.id_for_label }}">Playhouse</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pollinator_garden3 }}
+                    <label for="{{ form.pollinator_garden3.id_for_label }}">Pollinator/Flower Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.primary_pathway3 }}
+                    <label for="{{ form.primary_pathway3.id_for_label }}">Primary Pathway(Push/Pull Wheeled Toys)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.project_space2 }}
+                    <label for="{{ form.project_space2.id_for_label }}">Project Space</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.ramp3 }}
+                    <label for="{{ form.ramp3.id_for_label }}">Ramp(if used to play)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sand_play3 }}
+                    <label for="{{ form.sand_play3.id_for_label }}">Sand Play Setting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.steppingstone_pathway3 }}
+                    <label for="{{ form.steppingstone_pathway3.id_for_label }}">Steppingstone Pathway(In Lawn)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.swing2 }}
+                    <label for="{{ form.swing2.id_for_label }}">Swing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.table2 }}
+                    <label for="{{ form.table2.id_for_label }}">Table</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.tent_structures3 }}
+                    <label for="{{ form.tent_structures3.id_for_label }}">Tent-Like Play Structures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.water_play_hands_3 }}
+                    <label for="{{ form.water_play_hands_3.id_for_label }}">Water Play(Hands-In)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.water_play_body_2 }}
+                    <label for="{{ form.water_play_body_2.id_for_label }}">Water Play(Full Body)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.woodwork_bench }}
+                    <label for="{{ form.woodwork_bench.id_for_label }}">Woodwork Bench</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other3 }}
+                    <label for="{{ form.other3.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>Are there 10 or more play and learning settings?</p>
+                <div class="radio-options">
+                    <p class = 'level211'> Level 1: 0-3 settings</p>
+                    <p class = 'level212'>Level 2: 4-7 settings</p>
+                    <p class = 'level213'>Level 3: 8-9 settings<p/>
+                    <p class = 'level214'>Level 4: 10 settings or more</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button type="submit" class="submit-button">Submit Assessment</button>
+        </div>
+    </form>
+</body>
+</html>
+
+{% endblock %}

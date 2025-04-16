@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPALS page 1</title>
+</head>
+<body>
+    {% load static %}
+    <form class="row" style="padding-left: 40px; padding-right: 40px;" method="post">
+        {% csrf_token %}
+        <br>
+        <div style="padding-top: 40px">
+            {{ form.first_name }}
+        </div>
+        <div>
+            {{ form.last_name }}
+        </div>
+
+        <div>
+            {{ form.email }}
+        </div>
+
+        <div>
+            {{ form.address }}
+        </div>
+
+        <div>
+            {{ form.city }}
+        </div>
+
+        <div>
+            {{ form.state }}
+        </div>
+
+        <div>
+            {{ form.zip_code }}
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="nextButton" style="background-color: #333333; border-radius: 20px;">
+            Get Started</button>
+
+            <p style="padding: 10px;"></p>
+
+    </form>
+
+   
+</body>
+{% load static %}
+
+</html>
+
+
+{% endblock %}

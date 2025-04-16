@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPALS page 3</title>
+    <style>
+        /* Overall form styling */
+        .opals-form {
+            padding: 20px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Question container styling */
+        .question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        /* Question text styling */
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        /* Radio group container */
+        .radio-group {
+            margin-top: 8px;
+        }
+        
+        /* Fix for the radio lists */
+        .radio-group ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .radio-group li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        /* Radio label styling */
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        /* Radio input styling */
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+            margin-top: 3px;
+        }
+        
+        /* Page title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+        
+        /* Button styling */
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        /* Button container */
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <form class="opals-form" method="post">
+        {% csrf_token %}
+        
+        <h2 class="page-title">OPALS Assessment - Page 3</h2>
+
+        <div class="question-container">
+            <p class="question-text">1.13 Are there enough patch(es) of shade provided for all children when needed? </p>
+            <div class="radio-group">
+                {{ form.question13 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.14 Are there sufficient trees? </p>
+            <div class="radio-group">
+                {{ form.question14 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.15 Are there sufficient other plants (shrubs, vines, perennials, and ornamental grasses)?</p>
+            <div class="radio-group">
+                {{ form.question15 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.16. (Preschool only) Is there a designated fruit and vegetable garden with enough produce to taste or use for snacking and/or meals? </p>
+            <div class="radio-group">
+                {{ form.question16 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.17 (Infant/Toddler/ Twos). Is there outdoor storage (for wheeled toys, portable play equipment, loose parts, and learning materials)?</p>
+            <div class="radio-group">
+                {{ form.question17 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.18 (Infant/Toddler/ Twos). Is there outdoor storage (for wheeled toys, portable play equipment, loose parts, and learning materials)?</p>
+            <div class="radio-group">
+                {{ form.question18 }}
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="submit-button">Next</button>
+        </div>
+    </form>
+</body>
+</html>
+
+{% endblock %}

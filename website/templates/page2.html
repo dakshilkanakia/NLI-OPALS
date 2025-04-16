@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPALS page 2</title>
+    <style>
+        /* Reset all styling for the form elements */
+.opals-form * {
+    box-sizing: border-box;
+}
+
+/* Main form styling */
+.opals-form {
+    padding: 20px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Question containers */
+.question-container {
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+/* Question text */
+.question-text {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Radio group container */
+.radio-group {
+    margin-top: 8px;
+}
+
+/* Main form-check-input container */
+.form-check-input {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px;
+    background: transparent !important;
+}
+
+/* Individual radio containers */
+.form-check-input > div {
+    position: relative;
+    margin-right: 20px;
+    background: transparent !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+/* Hide the default radio buttons completely */
+.form-check-input input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+/* Style the labels that will replace the radio buttons */
+.form-check-input label {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    cursor: pointer;
+    padding-left: 30px;
+    position: relative;
+    background: transparent !important;
+    line-height: normal !important;
+}
+
+/* Create custom radio button circles */
+.form-check-input label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: none !important;
+}
+
+/* Style for checked state */
+.form-check-input input[type="radio"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+}
+
+/* Fix for vertical alignment of text */
+.form-check-input label {
+    height: 22px !important;
+    line-height: 22px !important;
+}
+
+/* Page title */
+.page-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+    </style>
+</head>
+<body>
+    {% load static %}
+    <form class="opals-form" method="post">
+        {% csrf_token %}
+        
+        <h2 class="page-title">OPALS Assessment - Page 2</h2>
+
+        <div class="question-container">
+            <p class="question-text">1.1 Center building is visible from the parking area, even if the building entrance is not next to the parking area.</p>
+            <div class="radio-group">
+                {{ form.question1 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.2 There is evidence that traffic speed is reduced by traffic calming measures or devices.</p>
+            <div class="radio-group">
+                {{ form.question2 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.3 Parking area(s) are fully or partially connected to a sidewalk that leads to and from the building main entrance and, if necessary, a crosswalk is provided (i.e., if traffic lane(s) cross the line of pedestrian travel).</p>
+            <div class="radio-group">
+                {{ form.question3 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.4 The outdoor arrival area is welcoming and child-friendly (communicated by signage, planting, child-friendly decorations, seating, etc.)</p>
+            <div class="radio-group">
+                {{ form.question4 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.5 Building entrance is sheltered by a waterproof overhead structure large enough to shelter caregiver and child during inclement weather, while preparing to enter the center building; (i.e., used to shake off and fold umbrella, knock snow off boots, etc.)</p>
+            <div class="radio-group">
+                {{ form.question5 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.6 If present, the overhead structure is large enough to cover a space that serves as a place to socialize.</p>
+            <div class="radio-group">
+                {{ form.question6 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.7 The outdoor play and learning areas are shielded or buffered from the fumes and danger of adjacent parking areas (e.g., buffering by shrubs, solid fencing, wall, or distanced from parked vehicles).</p>
+            <div class="radio-group">
+                {{ form.question7 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.8 Classrooms have windows.</p>
+            <div class="radio-group">
+                {{ form.question8 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.9 Some windows are at the children's eye level (when laying or standing on the floor or by using safe "step-up" furniture, or when occupying an elevated surface such as a loft, designed for use by children).</p>
+            <div class="radio-group">
+                {{ form.question9 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.10 Some windows can be opened to allow fresh air.</p>
+            <div class="radio-group">
+                {{ form.question10 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.11 Classrooms open directly outdoors into covered transition spaces (e.g. deck, patio, pergola) large enough (i.e., able to hold at least 2-3 children) to be used for classroom-related activities including noisy, messy activities.</p>
+            <div class="radio-group">
+                {{ form.question11 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text">1.12 Surface drainage in the outdoor area appears adequate (no visible soil erosion or gullies, sustained pooling of water, or washed-out mulch).</p>
+            <div class="radio-group">
+                {{ form.question12 }}
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+                Next
+            </button>
+        </div>
+    </form>
+</body>
+</html>
+
+{% endblock %}
