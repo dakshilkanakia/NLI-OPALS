@@ -60,6 +60,18 @@ class Page1Form(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control center-placeholder', 'placeholder': 'Zip'})
     )
 
+    age_groups = forms.MultipleChoiceField(
+        label = "What age groups will you be evaluating for this assessment? Please select all that apply",
+        widget=forms.CheckboxSelectMultiple,
+        choices=(
+            ('Infant', 'Infant'),
+            ('Toddler', 'Toddler/Twos'),
+            ('Preschool', 'Preschool'),
+        )
+    )
+
+
+
 class Page2Form(forms.Form):
     CHOICES = [('Yes', 'Yes'), ('No', 'No')]
     
@@ -217,7 +229,7 @@ class Page4Form(forms.Form):
             ('level193', '5-7 settings.  '),
             ('level194', '8 or more settings.  '),
         ],
-        widget=forms.RadioSelect,required=True,
+        widget=forms.RadioSelect,required=False,
         )
 
     area_pets1 = forms.BooleanField(required=False, label="Area for Pets(Chickens and Rabbits)", widget=forms.CheckboxInput())
@@ -262,7 +274,7 @@ class Page4Form(forms.Form):
             ('level203', '8-9 settings.  '),
             ('leve204', '10 or more settings.  '),
         ],
-        widget=forms.RadioSelect,required=True,
+        widget=forms.RadioSelect,required=False,
         )
 
     area_pets2 = forms.BooleanField(required=False, label="Area for Pets(Chickens and Rabbits)", widget=forms.CheckboxInput())
@@ -311,7 +323,7 @@ class Page4Form(forms.Form):
             ('level213', '8-9 settings.  '),
             ('level214', '10 or more settings.  '),
         ],
-        widget=forms.RadioSelect,required=True,
+        widget=forms.RadioSelect,required=False,
         )
 
 

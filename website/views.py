@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 import os
 import numpy as np
@@ -21,7 +22,8 @@ def page1(request):
             request.session['city'] = form.cleaned_data['city']
             request.session['state'] = form.cleaned_data['state']
             request.session['zip_code'] = form.cleaned_data['zip_code']
-            print(request.session['first_name'])
+            request.session['age_groups'] = form.cleaned_data['age_groups']
+            print(request.session['age_groups'])
             return redirect('page2')  # Redirect to the next page after saving
         
         else:
@@ -68,7 +70,7 @@ def page3(request):
             request.session['question17'] = form.cleaned_data['question17']
             request.session['question18'] = form.cleaned_data['question18']
 
-            return redirect('page3')  # Redirect to a thank you page
+            return redirect('page4')  # Redirect to a thank you page
         else:
             print(form.errors)  # For debugging
     else:
@@ -107,7 +109,7 @@ def page4(request):
             request.session['other1'] = form.cleaned_data['other1']
             
             # Infants total settings radio
-            request.session['question19'] = form.cleaned_data['question19']
+            # request.session['question19'] = form.cleaned_data['question19']
             
             # Toddlers settings checkboxes
             request.session['area_pets1'] = form.cleaned_data['area_pets1']
@@ -146,7 +148,7 @@ def page4(request):
             request.session['other2'] = form.cleaned_data['other2']
             
             # Toddlers total settings radio
-            request.session['question20'] = form.cleaned_data['question20']
+            # request.session['question20'] = form.cleaned_data['question20']
             
             # Preschool settings checkboxes
             request.session['area_pets2'] = form.cleaned_data['area_pets2']
@@ -189,7 +191,21 @@ def page4(request):
             request.session['other3'] = form.cleaned_data['other3']
             
             # Preschool total settings radio
-            request.session['question21'] = form.cleaned_data['question21']
+            # request.session['question21'] = form.cleaned_data['question21']
+
+            infant_settings = json.loads(request.POST.get('infant_settings_data', '[]'))
+            toddler_settings = json.loads(request.POST.get('toddler_settings_data', '[]'))
+            preschool_settings = json.loads(request.POST.get('preschool_settings_data', '[]'))
+            
+            # Log or use the data
+            print(f"Infant Settings ({len(infant_settings)}): {infant_settings}")
+            print(f"Toddler Settings ({len(toddler_settings)}): {toddler_settings}")
+            print(f"Preschool Settings ({len(preschool_settings)}): {preschool_settings}")
+
+            request.session['infant_settings'] = infant_settings
+            request.session['toddler_settings'] = toddler_settings
+            request.session['preschool_settings'] = preschool_settings
+            
 
             return redirect('page4')
         else:

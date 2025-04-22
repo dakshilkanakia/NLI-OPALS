@@ -126,6 +126,7 @@
         }
     </style>
 </head>
+
 <body>
     {% load static %}
     <form class="opals-form" method="post">
@@ -263,9 +264,9 @@
             <div class="radio-group">
                 <p>Are there 8 or more play and learning settings?</p>
                 <div class="radio-options">
-                    <p class = 'level191'> Level 1: 0-1 settings</p>
+                    <p class = 'level191'>Level 1: 0-1 settings</p>
                     <p class = 'level192'>Level 2: 2-4 settings</p>
-                    <p class = 'level193'>Level 3: 5-7 settings<p/>
+                    <p class = 'level193'>Level 3: 5-7 settings</p>
                     <p class = 'level194'>Level 4: 8 or more settings</p>
                 </div>
             </div>
@@ -451,9 +452,9 @@
             <div class="radio-group">
                 <p>Are there 10 or more play and learning settings?</p>
                 <div class="radio-options">
-                    <p class = 'level201'> Level 1: 0-3 settings</p>
+                    <p class = 'level201'>Level 1: 0-3 settings</p>
                     <p class = 'level202'>Level 2: 4-7 settings</p>
-                    <p class = 'level203'>Level 3: 8-9 settings<p/>
+                    <p class = 'level203'>Level 3: 8-9 settings</p>
                     <p class = 'level204'>Level 4: 10 settings or more</p>
                 </div>
             </div>
@@ -661,7 +662,7 @@
                 <div class="radio-options">
                     <p class = 'level211'> Level 1: 0-3 settings</p>
                     <p class = 'level212'>Level 2: 4-7 settings</p>
-                    <p class = 'level213'>Level 3: 8-9 settings<p/>
+                    <p class = 'level213'>Level 3: 8-9 settings</p>
                     <p class = 'level214'>Level 4: 10 settings or more</p>
                 </div>
             </div>
@@ -671,6 +672,225 @@
             <button type="submit" class="submit-button">Submit Assessment</button>
         </div>
     </form>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create arrays to store the selected checkbox values
+            const infantSettings = [];
+            const toddlerSettings = [];
+            const preschoolSettings = [];
+            
+            // Function to update infant settings highlighting
+            function updateInfantHighlighting() {
+                const levels = document.querySelectorAll('.form-section:nth-of-type(1) .radio-options p');
+                
+                // Reset all levels to default
+                levels.forEach(level => {
+                    level.style.fontWeight = 'normal';
+                    level.style.fontSize = '16px';
+                    level.style.color = '#333';
+                });
+                
+                // Determine which level to highlight based on count
+                let levelIndex;
+                if (infantSettings.length >= 8) {
+                    levelIndex = 3; // Level 4: 8 or more settings
+                } else if (infantSettings.length >= 5) {
+                    levelIndex = 2; // Level 3: 5-7 settings
+                } else if (infantSettings.length >= 2) {
+                    levelIndex = 1; // Level 2: 2-4 settings
+                } else {
+                    levelIndex = 0; // Level 1: 0-1 settings
+                }
+                
+                // Apply highlighting to the appropriate level
+                if (levels[levelIndex]) {
+                    levels[levelIndex].style.fontWeight = 'bold';
+                    levels[levelIndex].style.fontSize = '20px';
+                    levels[levelIndex].style.color = '#000';
+                }
+                
+                console.log("Infant settings count:", infantSettings.length, infantSettings);
+            }
+            
+            // Function to update toddler settings highlighting
+            function updateToddlerHighlighting() {
+                const levels = document.querySelectorAll('.form-section:nth-of-type(2) .radio-options p');
+                
+                // Reset all levels to default
+                levels.forEach(level => {
+                    level.style.fontWeight = 'normal';
+                    level.style.fontSize = '16px';
+                    level.style.color = '#333';
+                });
+                
+                // Determine which level to highlight based on count
+                let levelIndex;
+                if (toddlerSettings.length >= 10) {
+                    levelIndex = 3; // Level 4: 10 or more settings
+                } else if (toddlerSettings.length >= 8) {
+                    levelIndex = 2; // Level 3: 8-9 settings
+                } else if (toddlerSettings.length >= 4) {
+                    levelIndex = 1; // Level 2: 4-7 settings
+                } else {
+                    levelIndex = 0; // Level 1: 0-3 settings
+                }
+                
+                // Apply highlighting to the appropriate level
+                if (levels[levelIndex]) {
+                    levels[levelIndex].style.fontWeight = 'bold';
+                    levels[levelIndex].style.fontSize = '20px';
+                    levels[levelIndex].style.color = '#000';
+                }
+                
+                console.log("Toddler settings count:", toddlerSettings.length, toddlerSettings);
+            }
+            
+            // Function to update preschool settings highlighting
+            function updatePreschoolHighlighting() {
+                const levels = document.querySelectorAll('.form-section:nth-of-type(3) .radio-options p');
+                
+                // Reset all levels to default
+                levels.forEach(level => {
+                    level.style.fontWeight = 'normal';
+                    level.style.fontSize = '16px';
+                    level.style.color = '#333';
+                });
+                
+                // Determine which level to highlight based on count
+                let levelIndex;
+                if (preschoolSettings.length >= 10) {
+                    levelIndex = 3; // Level 4: 10 or more settings
+                } else if (preschoolSettings.length >= 8) {
+                    levelIndex = 2; // Level 3: 8-9 settings
+                } else if (preschoolSettings.length >= 4) {
+                    levelIndex = 1; // Level 2: 4-7 settings
+                } else {
+                    levelIndex = 0; // Level 1: 0-3 settings
+                }
+                
+                // Apply highlighting to the appropriate level
+                if (levels[levelIndex]) {
+                    levels[levelIndex].style.fontWeight = 'bold';
+                    levels[levelIndex].style.fontSize = '20px';
+                    levels[levelIndex].style.color = '#000';
+                }
+                
+                console.log("Preschool settings count:", preschoolSettings.length, preschoolSettings);
+            }
+            
+            // Add event listeners to all infant checkboxes
+            const infantCheckboxes = document.querySelectorAll('.form-section:nth-of-type(1) .checkbox-item input[type="checkbox"]');
+            infantCheckboxes.forEach(checkbox => {
+                // Check if the checkbox is already checked when the page loads
+                if (checkbox.checked) {
+                    infantSettings.push(checkbox.name || checkbox.id);
+                }
+                
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Add to array if checked
+                        infantSettings.push(this.name || this.id);
+                    } else {
+                        // Remove from array if unchecked
+                        const index = infantSettings.indexOf(this.name || this.id);
+                        if (index > -1) {
+                            infantSettings.splice(index, 1);
+                        }
+                    }
+                    updateInfantHighlighting();
+                });
+            });
+            
+            // Add event listeners to all toddler checkboxes
+            const toddlerCheckboxes = document.querySelectorAll('.form-section:nth-of-type(2) .checkbox-item input[type="checkbox"]');
+            toddlerCheckboxes.forEach(checkbox => {
+                // Check if the checkbox is already checked when the page loads
+                if (checkbox.checked) {
+                    toddlerSettings.push(checkbox.name || checkbox.id);
+                }
+                
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Add to array if checked
+                        toddlerSettings.push(this.name || this.id);
+                    } else {
+                        // Remove from array if unchecked
+                        const index = toddlerSettings.indexOf(this.name || this.id);
+                        if (index > -1) {
+                            toddlerSettings.splice(index, 1);
+                        }
+                    }
+                    updateToddlerHighlighting();
+                });
+            });
+            
+            // Add event listeners to all preschool checkboxes
+            const preschoolCheckboxes = document.querySelectorAll('.form-section:nth-of-type(3) .checkbox-item input[type="checkbox"]');
+            preschoolCheckboxes.forEach(checkbox => {
+                // Check if the checkbox is already checked when the page loads
+                if (checkbox.checked) {
+                    preschoolSettings.push(checkbox.name || checkbox.id);
+                }
+                
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Add to array if checked
+                        preschoolSettings.push(this.name || this.id);
+                    } else {
+                        // Remove from array if unchecked
+                        const index = preschoolSettings.indexOf(this.name || this.id);
+                        if (index > -1) {
+                            preschoolSettings.splice(index, 1);
+                        }
+                    }
+                    updatePreschoolHighlighting();
+                });
+            });
+            
+            // Set up hidden input fields to pass the checkbox data to the server
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                // Create hidden inputs for the arrays if they don't exist
+                if (!document.getElementById('infant_settings_data')) {
+                    const infantInput = document.createElement('input');
+                    infantInput.type = 'hidden';
+                    infantInput.name = 'infant_settings_data';
+                    infantInput.id = 'infant_settings_data';
+                    form.appendChild(infantInput);
+                }
+                
+                if (!document.getElementById('toddler_settings_data')) {
+                    const toddlerInput = document.createElement('input');
+                    toddlerInput.type = 'hidden';
+                    toddlerInput.name = 'toddler_settings_data';
+                    toddlerInput.id = 'toddler_settings_data';
+                    form.appendChild(toddlerInput);
+                }
+                
+                if (!document.getElementById('preschool_settings_data')) {
+                    const preschoolInput = document.createElement('input');
+                    preschoolInput.type = 'hidden';
+                    preschoolInput.name = 'preschool_settings_data';
+                    preschoolInput.id = 'preschool_settings_data';
+                    form.appendChild(preschoolInput);
+                }
+                
+                // Set the values of these inputs to JSON strings of the arrays
+                document.getElementById('infant_settings_data').value = JSON.stringify(infantSettings);
+                document.getElementById('toddler_settings_data').value = JSON.stringify(toddlerSettings);
+                document.getElementById('preschool_settings_data').value = JSON.stringify(preschoolSettings);
+                
+                // Let the form submit normally
+            });
+            
+            // Initialize highlighting based on any checkboxes that might be checked on page load
+            updateInfantHighlighting();
+            updateToddlerHighlighting();
+            updatePreschoolHighlighting();
+        });
+        </script>
 </body>
 </html>
 

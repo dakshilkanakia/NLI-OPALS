@@ -33,6 +33,10 @@ class OPALS(models.Model):
         ]
     )
     zip_code = models.CharField(max_length=10)
+    age_groups = models.CharField(max_length=255, 
+                                  default='',
+                                  help_text="Comma-separated age groups (e.g. Infant,Toddler,Preschool)")
+
 
     # page2 fields - Yes/No questions
     YES_NO_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
