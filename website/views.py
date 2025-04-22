@@ -212,4 +212,5 @@ def page4(request):
             print(form.errors)
     else:
         form = Page4Form()
-    return render(request, 'page4.html', {'form': form})
+    age_groups = request.session.get('age_groups', [])
+    return render(request, 'page4.html', {'form': form, 'age_groups': age_groups})

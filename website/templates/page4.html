@@ -134,6 +134,8 @@
         
         <h2 class="page-title">OPALS Assessment - Page 4</h2>
 
+        {% if "Infant" in age_groups%}
+
         <!-- Infant Settings Section -->
         <div class="form-section">
             <h3 class="section-title">Infants: Settings Available</h3>
@@ -271,8 +273,11 @@
                 </div>
             </div>
         </div>
+
+        {% endif %}
         
         <!-- Toddler Settings Section -->
+        {% if "Toddler" in age_groups%}
         <div class="form-section">
             <h3 class="section-title">Toddlers: Settings Available</h3>
             <p>Check all settings that are available for toddlers:</p>
@@ -459,8 +464,10 @@
                 </div>
             </div>
         </div>
-        
+        {% endif %}
+
         <!-- Preschool Settings Section -->
+        {% if "Preschool" in age_groups%}
         <div class="form-section">
             <h3 class="section-title">Preschool: Settings Available</h3>
             <p>Check all settings that are available for preschool children:</p>
@@ -666,6 +673,8 @@
                     <p class = 'level214'>Level 4: 10 settings or more</p>
                 </div>
             </div>
+
+            {% endif %}
         </div>
         
         <div class="button-container">
