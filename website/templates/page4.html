@@ -16,6 +16,20 @@
             margin: 0 auto;
             font-family: Arial, sans-serif;
         }
+
+        /* Question container styling */
+        .question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        /* Question text styling */
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
         
         /* Page title */
         .page-title {
@@ -69,10 +83,9 @@
         
         /* Radio button styling */
         .radio-group {
-            margin-top: 15px;
-            border-top: 1px dashed #ccc;
-            padding-top: 15px;
+            margin-top: 8px;
         }
+
         
         .radio-group p {
             font-weight: 500;
@@ -134,6 +147,7 @@
         
         <h2 class="page-title">OPALS Assessment - Page 4</h2>
 
+        <!-- use similar way for conditional rendering -->
         {% if "Infant" in age_groups%}
 
         <!-- Infant Settings Section -->
@@ -676,9 +690,36 @@
 
             {% endif %}
         </div>
+
+        <!-- <div class="question-container">
+            <p class="question-text"> Is the infant outdoor play and learning space directly connected to the infant classroom at the same floor level?</p>
+            <div class="radio-group">
+                {{ form.question22 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <p class="question-text"> Is there a looping/curvy, 4-feet (toddlers/twos) wide or 5-feet preschool) wide primary pathway, connected to the building, for circulation and wheeled-toy use in the OLE?</p>
+            <div class="radio-group">
+                {{ form.question23 }}
+            </div>
+        </div> -->
+
+        <div class="question-container">
+            <p class="question-text"> Is there a multipurpose activity setting sufficient for all children and teachers in a group to use together?</p>
+            <div class="radio-group">
+                {{ form.question24 }}
+            </div>
+        </div>
         
+        <div class="question-container">
+            <p class="question-text"> Is there a covered outdoor classroom/gathering place in the OLE large enough for all children in a class to use together?</p>
+            <div class="radio-group">
+                {{ form.question25 }}
+            </div>
+        </div>
         <div class="button-container">
-            <button type="submit" class="submit-button">Submit Assessment</button>
+            <button type="submit" class="submit-button">Next</button>
         </div>
     </form>
 

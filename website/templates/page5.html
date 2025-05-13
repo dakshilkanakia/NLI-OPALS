@@ -1,0 +1,1751 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPALS page 5</title>
+    <style>
+        /* Overall form styling */
+        .opals-form {
+            padding: 20px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Question container styling */
+        .question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        /* Question text styling */
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        /* Page title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+        
+        /* Section styling */
+        .form-section {
+            margin-bottom: 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        /* Checkbox grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        /* Checkbox item styling */
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        
+        .checkbox-item label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* Radio button styling */
+        .radio-group {
+            margin-top: 8px;
+        }
+        
+        .radio-group p {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .radio-options ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .radio-options li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .radio-options label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .radio-options input[type="radio"] {
+            margin-right: 8px;
+            margin-top: 3px;
+        }
+        
+        /* Button styling */
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .submit-button {
+            padding: 10px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .submit-button:hover {
+            background-color: #3e8e41;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+
+<body>
+    {% load static %}
+    <form class="opals-form" method="post">
+        {% csrf_token %}
+        
+        <h2 class="page-title">OPALS Assessment - Page 5</h2>
+
+        <!-- Infant Physical Activities Section -->
+        {% if "Infant" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Infant Physical Activities</h3>
+            <p>Check all physical activities available for infants:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.balancing1 }}
+                    <label for="{{ form.balancing1.id_for_label }}">Balancing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bouncing1 }}
+                    <label for="{{ form.bouncing1.id_for_label }}">Bouncing(Body)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bowling1 }}
+                    <label for="{{ form.bowling1.id_for_label }}">Bowling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.brachiating1 }}
+                    <label for="{{ form.brachiating1.id_for_label }}">Brachiating</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.climbing1 }}
+                    <label for="{{ form.climbing1.id_for_label }}">Climbing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.crawling1 }}
+                    <label for="{{ form.crawling1.id_for_label }}">Crawling through</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dribbling1 }}
+                    <label for="{{ form.dribbling1.id_for_label }}">Dribbling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.drumming1 }}
+                    <label for="{{ form.drumming1.id_for_label }}">Drumming</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hula_hopping1 }}
+                    <label for="{{ form.hula_hopping1.id_for_label }}">Hula Hopping/hoop rolling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.kicking1 }}
+                    <label for="{{ form.kicking1.id_for_label }}">Kicking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.rocking1 }}
+                    <label for="{{ form.rocking1.id_for_label }}">Rocking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sliding1 }}
+                    <label for="{{ form.sliding1.id_for_label }}">Sliding</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.throwing1 }}
+                    <label for="{{ form.throwing1.id_for_label }}">Throwing/Catching</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other4 }}
+                    <label for="{{ form.other4.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>Number of types of materials to support physical activities</p>
+                <div class="radio-options">
+                    <p class="level261">Level 1: 0 material(s) accessible to children</p>
+                    <p class="level262">Level 2: 1-2 material accessible to children</p>
+                    <p class="level263">Level 3: 3-4 material accessible to children</p>
+                    <p class="level264">Level 4: 5+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question26 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Infant Material Condition -->
+        <div class="question-container">
+            <p class="question-text">Good Repair/functional(has all needed parts, sturdy materials)</p>
+            <div class="radio-group">
+                {{ form.question29 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Toddler Physical Activities Section -->
+        {% if "Toddler" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Toddler Physical Activities</h3>
+            <p>Check all physical activities available for toddlers:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.balancing2 }}
+                    <label for="{{ form.balancing2.id_for_label }}">Balancing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bouncing2 }}
+                    <label for="{{ form.bouncing2.id_for_label }}">Bouncing(Body)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bowling2 }}
+                    <label for="{{ form.bowling2.id_for_label }}">Bowling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.brachiating2 }}
+                    <label for="{{ form.brachiating2.id_for_label }}">Brachiating</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.climbing2 }}
+                    <label for="{{ form.climbing2.id_for_label }}">Climbing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.crawling2 }}
+                    <label for="{{ form.crawling2.id_for_label }}">Crawling through</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dancing2 }}
+                    <label for="{{ form.dancing2.id_for_label }}">Dancing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.digging2 }}
+                    <label for="{{ form.digging2.id_for_label }}">Digging/Scooping</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dribbling2 }}
+                    <label for="{{ form.dribbling2.id_for_label }}">Dribbling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.drumming2 }}
+                    <label for="{{ form.drumming2.id_for_label }}">Drumming</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hula_hopping2 }}
+                    <label for="{{ form.hula_hopping2.id_for_label }}">Hula Hopping/hoop rolling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.jumping2 }}
+                    <label for="{{ form.jumping2.id_for_label }}">Jumping off/on</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.kicking2 }}
+                    <label for="{{ form.kicking2.id_for_label }}">Kicking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.lifting2 }}
+                    <label for="{{ form.lifting2.id_for_label }}">Lifting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pull_ups2 }}
+                    <label for="{{ form.pull_ups2.id_for_label }}">Pull Up/Hanging by arms or legs</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pushing2 }}
+                    <label for="{{ form.pushing2.id_for_label }}">Pushing/Pulling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.raking2 }}
+                    <label for="{{ form.raking2.id_for_label }}">Raking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.riding2 }}
+                    <label for="{{ form.riding2.id_for_label }}">Riding</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.rocking2 }}
+                    <label for="{{ form.rocking2.id_for_label }}">Rocking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sliding2 }}
+                    <label for="{{ form.sliding2.id_for_label }}">Sliding</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sweeping2 }}
+                    <label for="{{ form.sweeping2.id_for_label }}">Sweeping</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.swinging2 }}
+                    <label for="{{ form.swinging2.id_for_label }}">Swinging</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.throwing2 }}
+                    <label for="{{ form.throwing2.id_for_label }}">Throwing/Catching</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other5 }}
+                    <label for="{{ form.other5.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>Number of types of materials to support physical activities</p>
+                <div class="radio-options">
+                    <p class="level271">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level272">Level 2: 3-4 material accessible to children</p>
+                    <p class="level273">Level 3: 5-6 material accessible to children</p>
+                    <p class="level274">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question27 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Toddler Material Condition -->
+        <div class="question-container">
+            <p class="question-text">Good/Repair functional(has all needed parts,sturdy materials)</p>
+            <div class="radio-group">
+                {{ form.question30 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Preschool Physical Activities Section -->
+        {% if "Preschool" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Preschool Physical Activities</h3>
+            <p>Check all physical activities available for preschool children:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.balancing3 }}
+                    <label for="{{ form.balancing3.id_for_label }}">Balancing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bouncing3 }}
+                    <label for="{{ form.bouncing3.id_for_label }}">Bouncing(Body)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.bowling3 }}
+                    <label for="{{ form.bowling3.id_for_label }}">Bowling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.brachiating3 }}
+                    <label for="{{ form.brachiating3.id_for_label }}">Brachiating</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.climbing3 }}
+                    <label for="{{ form.climbing3.id_for_label }}">Climbing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.crawling3 }}
+                    <label for="{{ form.crawling3.id_for_label }}">Crawling through</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dancing3 }}
+                    <label for="{{ form.dancing3.id_for_label }}">Dancing</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.digging3 }}
+                    <label for="{{ form.digging3.id_for_label }}">Digging/Scooping</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dribbling3 }}
+                    <label for="{{ form.dribbling3.id_for_label }}">Dribbling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.drumming3 }}
+                    <label for="{{ form.drumming3.id_for_label }}">Drumming</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hammering3 }}
+                    <label for="{{ form.hammering3.id_for_label }}">Hammering</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hopping3 }}
+                    <label for="{{ form.hopping3.id_for_label }}">Hopping</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hula_hopping3 }}
+                    <label for="{{ form.hula_hopping3.id_for_label }}">Hula Hopping/hoop rolling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.jumping3 }}
+                    <label for="{{ form.jumping3.id_for_label }}">Jumping off/on</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.kicking3 }}
+                    <label for="{{ form.kicking3.id_for_label }}">Kicking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.lifting3 }}
+                    <label for="{{ form.lifting3.id_for_label }}">Lifting</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pull_ups3 }}
+                    <label for="{{ form.pull_ups3.id_for_label }}">Pull Up/Hanging by arms or legs</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pushing3 }}
+                    <label for="{{ form.pushing3.id_for_label }}">Pushing/Pulling</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.raking3 }}
+                    <label for="{{ form.raking3.id_for_label }}">Raking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.riding3 }}
+                    <label for="{{ form.riding3.id_for_label }}">Riding</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.rocking3 }}
+                    <label for="{{ form.rocking3.id_for_label }}">Rocking</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sliding3 }}
+                    <label for="{{ form.sliding3.id_for_label }}">Sliding</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sweeping3 }}
+                    <label for="{{ form.sweeping3.id_for_label }}">Sweeping</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.swinging3 }}
+                    <label for="{{ form.swinging3.id_for_label }}">Swinging</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.throwing3 }}
+                    <label for="{{ form.throwing3.id_for_label }}">Throwing/Catching</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other6 }}
+                    <label for="{{ form.other6.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>Number of types of materials to support physical activity</p>
+                <div class="radio-options">
+                    <p class="level281">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level282">Level 2: 3-4 material accessible to children</p>
+                    <p class="level283">Level 3: 5-6 material accessible to children</p>
+                    <p class="level284">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question28 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Preschool Material Condition -->
+        <div class="question-container">
+            <p class="question-text">Good/Repari functional(has all needed parts,sturdy materials)</p>
+            <div class="radio-group">
+                {{ form.question31 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Infant Language Section -->
+        {% if "Infant" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Infant Language Materials</h3>
+            <p>Check all language materials available for infants:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.audio1 }}
+                    <label for="{{ form.audio1.id_for_label }}">Audio books</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.books1 }}
+                    <label for="{{ form.books1.id_for_label }}">Books</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.display_pictures1 }}
+                    <label for="{{ form.display_pictures1.id_for_label }}">Display Pictures (e.g., photographs, paintings)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.environmental_print1 }}
+                    <label for="{{ form.environmental_print1.id_for_label }}">Environmental Print (e.g., labels, food boxes, words)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.microphone1 }}
+                    <label for="{{ form.microphone1.id_for_label }}">Microphone/Talk tubes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.language_cards1 }}
+                    <label for="{{ form.language_cards1.id_for_label }}">Picture/Language Cards</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.storytelling1 }}
+                    <label for="{{ form.storytelling1.id_for_label }}">Story telling materials (e.g., flannel boards, velcro, magnets, story blocks)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other7 }}
+                    <label for="{{ form.other7.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many language materials are accessible to infant children?</p>
+                <div class="radio-options">
+                    <p class="level321">Level 1: 0 material(s) accessible to children</p>
+                    <p class="level322">Level 2: 1 material accessible to children</p>
+                    <p class="level323">Level 3: 2 material accessible to children</p>
+                    <p class="level324">Level 4: 3+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question32 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Infant Language Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the infant language materials?</p>
+            <div class="radio-group">
+                {{ form.question35 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Toddler Language Materials Section -->
+        {% if "Toddler" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Toddler Language Materials</h3>
+            <p>Check all language materials available for toddlers:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.alphabet2 }}
+                    <label for="{{ form.alphabet2.id_for_label }}">Alphabet materials</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.audio2 }}
+                    <label for="{{ form.audio2.id_for_label }}">Audio books</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.books2 }}
+                    <label for="{{ form.books2.id_for_label }}">Books</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.display_pictures2 }}
+                    <label for="{{ form.display_pictures2.id_for_label }}">Display Pictures (e.g., photographs, paintings)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.environmental_print2 }}
+                    <label for="{{ form.environmental_print2.id_for_label }}">Environmental Print (e.g., labels, food boxes, words)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.microphone2 }}
+                    <label for="{{ form.microphone2.id_for_label }}">Microphone/Talk tubes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.language_cards2 }}
+                    <label for="{{ form.language_cards2.id_for_label }}">Picture/Language Cards</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.storytelling2 }}
+                    <label for="{{ form.storytelling2.id_for_label }}">Story telling materials (e.g., flannel boards, velcro, magnets, story blocks)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.language_games2 }}
+                    <label for="{{ form.language_games2.id_for_label }}">Word and language games</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other8 }}
+                    <label for="{{ form.other8.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many language materials are accessible to toddler children?</p>
+                <div class="radio-options">
+                    <p class="level331">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level332">Level 2: 3-4 material accessible to children</p>
+                    <p class="level333">Level 3: 5-6 material accessible to children</p>
+                    <p class="level334">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question33 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Toddler Language Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the toddler language materials?</p>
+            <div class="radio-group">
+                {{ form.question36 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Preschool Language Materials Section -->
+        {% if "Preschool" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Preschool Language Materials</h3>
+            <p>Check all language materials available for preschool children:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.journaling3 }}
+                    <label for="{{ form.journaling3.id_for_label }}">Additional materials for journaling or recording observations, collecting data</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.alphabet3 }}
+                    <label for="{{ form.alphabet3.id_for_label }}">Alphabet materials</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.audio3 }}
+                    <label for="{{ form.audio3.id_for_label }}">Audio books</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.books3 }}
+                    <label for="{{ form.books3.id_for_label }}">Books</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.display_pictures3 }}
+                    <label for="{{ form.display_pictures3.id_for_label }}">Display Pictures (e.g., photographs, paintings)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.environmental_print3 }}
+                    <label for="{{ form.environmental_print3.id_for_label }}">Environmental Print (e.g., labels, food boxes, words)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.microphone3 }}
+                    <label for="{{ form.microphone3.id_for_label }}">Microphone/Talk tubes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.language_cards3 }}
+                    <label for="{{ form.language_cards3.id_for_label }}">Picture/Language Cards</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.storytelling3 }}
+                    <label for="{{ form.storytelling3.id_for_label }}">Story telling materials (e.g., flannel boards, velcro, magnets, story blocks)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.language_games3 }}
+                    <label for="{{ form.language_games3.id_for_label }}">Word and language games</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other9 }}
+                    <label for="{{ form.other9.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many language materials are accessible to preschool children?</p>
+                <div class="radio-options">
+                    <p class="level341">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level342">Level 2: 3-4 material accessible to children</p>
+                    <p class="level343">Level 3: 5-6 material accessible to children</p>
+                    <p class="level344">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question34 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Preschool Language Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the preschool language materials?</p>
+            <div class="radio-group">
+                {{ form.question37 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Infant Math/Science Materials Section -->
+        {% if "Infant" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Infant Math/Science Materials</h3>
+            <p>Check all math/science materials available for infants:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.bird_feeder1 }}
+                    <label for="{{ form.bird_feeder1.id_for_label }}">Bird Feeder</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.building_materials1 }}
+                    <label for="{{ form.building_materials1.id_for_label }}">Building Materials</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.discovery_bottles1 }}
+                    <label for="{{ form.discovery_bottles1.id_for_label }}">Discovery Bottles/Bins</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.fill_dump_station1 }}
+                    <label for="{{ form.fill_dump_station1.id_for_label }}">Fill and Dump Station</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.funnels1 }}
+                    <label for="{{ form.funnels1.id_for_label }}">Funnels and Tubes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.garden1 }}
+                    <label for="{{ form.garden1.id_for_label }}">Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.grid1 }}
+                    <label for="{{ form.grid1.id_for_label }}">Grid/100 Chart</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hopscotch1 }}
+                    <label for="{{ form.hopscotch1.id_for_label }}">Hopscotch</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.living_animals1 }}
+                    <label for="{{ form.living_animals1.id_for_label }}">Living Animals</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.magnifying_glasses1 }}
+                    <label for="{{ form.magnifying_glasses1.id_for_label }}">Magnifying Glass</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.matching_games1 }}
+                    <label for="{{ form.matching_games1.id_for_label }}">Matching Games</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.mirrors1 }}
+                    <label for="{{ form.mirrors1.id_for_label }}">Mirrors</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.numbers1 }}
+                    <label for="{{ form.numbers1.id_for_label }}">Numbers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.prism1 }}
+                    <label for="{{ form.prism1.id_for_label }}">Prism/Color tiles</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.rolling_ramps1 }}
+                    <label for="{{ form.rolling_ramps1.id_for_label }}">Rolling Ramps</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.slime1 }}
+                    <label for="{{ form.slime1.id_for_label }}">Slime/goop/shaving cream/bubbles</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sorting_containers1 }}
+                    <label for="{{ form.sorting_containers1.id_for_label }}">Sorting Containers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.varying_size_containers1 }}
+                    <label for="{{ form.varying_size_containers1.id_for_label }}">Varying Size Containers(Atleast 2 sizes)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.visual_patterns1 }}
+                    <label for="{{ form.visual_patterns1.id_for_label }}">Visual Patterns</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.wind_chimes1 }}
+                    <label for="{{ form.wind_chimes1.id_for_label }}">Wind Chimes/pinwheel</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other10 }}
+                    <label for="{{ form.other10.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many math/science materials are accessible to infant children?</p>
+                <div class="radio-options">
+                    <p class="level381">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level382">Level 2: 3-4 material accessible to children</p>
+                    <p class="level383">Level 3: 5-6 material accessible to children</p>
+                    <p class="level384">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question38 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Infant Math/Science Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the infant math/science materials?</p>
+            <div class="radio-group">
+                {{ form.question41 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Toddler Math/Science Materials Section -->
+        {% if "Toddler" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Toddler Math/Science Materials</h3>
+            <p>Check all math/science materials available for toddlers:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.bird_feeder2 }}
+                    <label for="{{ form.bird_feeder2.id_for_label }}">Bird Feeder</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.building_materials2 }}
+                    <label for="{{ form.building_materials2.id_for_label }}">Building Materials</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.discovery_bottles2 }}
+                    <label for="{{ form.discovery_bottles2.id_for_label }}">Discovery Bottles/Bins</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.fill_dump_station2 }}
+                    <label for="{{ form.fill_dump_station2.id_for_label }}">Fill and Dump Station</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.funnels2 }}
+                    <label for="{{ form.funnels2.id_for_label }}">Funnels and Tubes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.garden2 }}
+                    <label for="{{ form.garden2.id_for_label }}">Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hopscotch2 }}
+                    <label for="{{ form.hopscotch2.id_for_label }}">Hopscotch</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.living_animals2 }}
+                    <label for="{{ form.living_animals2.id_for_label }}">Living Animals</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.magnifying_glasses2 }}
+                    <label for="{{ form.magnifying_glasses2.id_for_label }}">Magnifying Glass</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.matching_games2 }}
+                    <label for="{{ form.matching_games2.id_for_label }}">Matching Games</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.mirrors2 }}
+                    <label for="{{ form.mirrors2.id_for_label }}">Mirrors</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.numbers2 }}
+                    <label for="{{ form.numbers2.id_for_label }}">Numbers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.prism2 }}
+                    <label for="{{ form.prism2.id_for_label }}">Prism/Color tiles</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.recording_temp2 }}
+                    <label for="{{ form.recording_temp2.id_for_label }}">Recording temp/rain</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.rolling_ramps2 }}
+                    <label for="{{ form.rolling_ramps2.id_for_label }}">Rolling Ramps</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.scales2 }}
+                    <label for="{{ form.scales2.id_for_label }}">Scales</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.slime2 }}
+                    <label for="{{ form.slime2.id_for_label }}">Slime/goop/shaving cream/bubbles</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sorting_containers2 }}
+                    <label for="{{ form.sorting_containers2.id_for_label }}">Sorting Containers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.spinners2 }}
+                    <label for="{{ form.spinners2.id_for_label }}">Spinners</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.steps2 }}
+                    <label for="{{ form.steps2.id_for_label }}">Steps/Visual Schedule</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.varying_size_containers2 }}
+                    <label for="{{ form.varying_size_containers2.id_for_label }}">Varying Size Containers(Atleast 2 sizes)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.visual_patterns2 }}
+                    <label for="{{ form.visual_patterns2.id_for_label }}">Visual Patterns</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.wind_chimes2 }}
+                    <label for="{{ form.wind_chimes2.id_for_label }}">Wind Chimes/pinwheel</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other11 }}
+                    <label for="{{ form.other11.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many math/science materials are accessible to toddler children?</p>
+                <div class="radio-options">
+                    <p class="level391">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level392">Level 2: 3-4 material accessible to children</p>
+                    <p class="level393">Level 3: 5-6 material accessible to children</p>
+                    <p class="level394">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question39 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Toddler Math/Science Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the toddler math/science materials?</p>
+            <div class="radio-group">
+                {{ form.question42 }}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Preschool Math/Science Materials Section -->
+        {% if "Preschool" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Preschool Math/Science Materials</h3>
+            <p>Check all math/science materials available for preschool children:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.bird_feeder3 }}
+                    <label for="{{ form.bird_feeder3.id_for_label }}">Bird Feeder</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.building_materials3 }}
+                    <label for="{{ form.building_materials3.id_for_label }}">Building Materials</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dice3 }}
+                    <label for="{{ form.dice3.id_for_label }}">Dice</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.discovery_bottles3 }}
+                    <label for="{{ form.discovery_bottles3.id_for_label }}">Discovery Bottles/Bins</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.fill_dump_station3 }}
+                    <label for="{{ form.fill_dump_station3.id_for_label }}">Fill and Dump Station</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.funnels3 }}
+                    <label for="{{ form.funnels3.id_for_label }}">Funnels and Tubes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.garden3 }}
+                    <label for="{{ form.garden3.id_for_label }}">Garden</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.grid3 }}
+                    <label for="{{ form.grid3.id_for_label }}">Grid/100 Chart</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.hopscotch3 }}
+                    <label for="{{ form.hopscotch3.id_for_label }}">Hopscotch</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.living_animals3 }}
+                    <label for="{{ form.living_animals3.id_for_label }}">Living Animals</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.magnifying_glasses3 }}
+                    <label for="{{ form.magnifying_glasses3.id_for_label }}">Magnifying Glass</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.matching_games3 }}
+                    <label for="{{ form.matching_games3.id_for_label }}">Matching Games</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.mirrors3 }}
+                    <label for="{{ form.mirrors3.id_for_label }}">Mirrors</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.numbers3 }}
+                    <label for="{{ form.numbers3.id_for_label }}">Numbers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.prism3 }}
+                    <label for="{{ form.prism3.id_for_label }}">Prism/Color tiles</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.pulleys3 }}
+                    <label for="{{ form.pulleys3.id_for_label }}">Pulleys/Levers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.recording_temp3 }}
+                    <label for="{{ form.recording_temp3.id_for_label }}">Recording temp/rain</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.rolling_ramps3 }}
+                    <label for="{{ form.rolling_ramps3.id_for_label }}">Rolling Ramps</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.scales3 }}
+                    <label for="{{ form.scales3.id_for_label }}">Scales</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.slime3 }}
+                    <label for="{{ form.slime3.id_for_label }}">Slime/goop/shaving cream/bubbles</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.sorting_containers3 }}
+                    <label for="{{ form.sorting_containers3.id_for_label }}">Sorting Containers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.spinners3 }}
+                    <label for="{{ form.spinners3.id_for_label }}">Spinners</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.steps3 }}
+                    <label for="{{ form.steps3.id_for_label }}">Steps/Visual Schedule</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.timers3 }}
+                    <label for="{{ form.timers3.id_for_label }}">Timer/Stopwatchers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.varying_size_containers3 }}
+                    <label for="{{ form.varying_size_containers3.id_for_label }}">Varying Size Containers(Atleast 2 sizes)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.visual_patterns3 }}
+                    <label for="{{ form.visual_patterns3.id_for_label }}">Visual Patterns</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.wind_chimes3 }}
+                    <label for="{{ form.wind_chimes3.id_for_label }}">Wind Chimes/pinwheel</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.other12 }}
+                    <label for="{{ form.other12.id_for_label }}">Other</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many math/science materials are accessible to preschool children?</p>
+                <div class="radio-options">
+                    <p class="level401">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level402">Level 2: 3-4 material accessible to children</p>
+                    <p class="level403">Level 3: 5-6 material accessible to children</p>
+                    <p class="level404">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question40 }}
+                </div> -->
+            </div>
+        </div>
+        
+        <!-- Preschool Math/Science Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the preschool math/science materials?</p>
+            <div class="radio-group">
+                {{ form.question43 }}
+            </div>
+        </div>
+        {% endif %}
+
+
+        <!-- Infant Dramatic Play Materials Section -->
+        {% if "Infant" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Infant Dramatic Play Materials</h3>
+            <p>Check all dramatic play materials available for infants:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.animal_figures1 }}
+                    <label for="{{ form.animal_figures1.id_for_label }}">Animal Figures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.crayons1 }}
+                    <label for="{{ form.crayons1.id_for_label }}">Crayons/Pens/Pencils/Markers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.child_sized_furniture1 }}
+                    <label for="{{ form.child_sized_furniture1.id_for_label }}">Child-Sized Furniture</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.collage_materials1 }}
+                    <label for="{{ form.collage_materials1.id_for_label }}">Collage Materials with different textures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.cooking_eating_equipment1 }}
+                    <label for="{{ form.cooking_eating_equipment1.id_for_label }}">Cooking eating equipment (e.g., pots and pans, dishes, spoons)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dolls1 }}
+                    <label for="{{ form.dolls1.id_for_label }}">Dolls/Puppets</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dress_up1 }}
+                    <label for="{{ form.dress_up1.id_for_label }}">Dress Up Clothes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.easels1 }}
+                    <label for="{{ form.easels1.id_for_label }}">Easels(functional with eg chalk/paint)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.musical_instruments1 }}
+                    <label for="{{ form.musical_instruments1.id_for_label }}">Musical instruments or instruments to make music (e.g., pans, buckets, sticks)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paint_brushes1 }}
+                    <label for="{{ form.paint_brushes1.id_for_label }}">Paint Brushes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paints1 }}
+                    <label for="{{ form.paints1.id_for_label }}">Paints</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paper_cardboard1 }}
+                    <label for="{{ form.paper_cardboard1.id_for_label }}">Paper/Cardboard</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.play_dough1 }}
+                    <label for="{{ form.play_dough1.id_for_label }}">Play Dough</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.soft_animals1 }}
+                    <label for="{{ form.soft_animals1.id_for_label }}">Soft Animals</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.toy_telephones1 }}
+                    <label for="{{ form.toy_telephones1.id_for_label }}">Toy Telephones</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many dramatic play materials are accessible to infant children?</p>
+                <div class="radio-options">
+                    <p class="level441">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level442">Level 2: 3-4 material accessible to children</p>
+                    <p class="level443">Level 3: 5-6 material accessible to children</p>
+                    <p class="level444">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question44 }}
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Infant Dramatic Play Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the infant dramatic play materials?</p>
+            <div class="radio-group">
+                {{ form.question47 }}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Toddler Dramatic Play Materials Section -->
+        {% if "Toddler" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Toddler Dramatic Play Materials</h3>
+            <p>Check all dramatic play materials available for toddlers:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.animal_figures2 }}
+                    <label for="{{ form.animal_figures2.id_for_label }}">Animal Figures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.crayons2 }}
+                    <label for="{{ form.crayons2.id_for_label }}">Crayons/Pens/Pencils/Markers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.child_sized_furniture2 }}
+                    <label for="{{ form.child_sized_furniture2.id_for_label }}">Child-Sized Furniture</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.collage_materials2 }}
+                    <label for="{{ form.collage_materials2.id_for_label }}">Collage Materials with different textures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.cooking_eating_equipment2 }}
+                    <label for="{{ form.cooking_eating_equipment2.id_for_label }}">Cooking eating equipment (e.g., pots and pans, dishes, spoons)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dolls2 }}
+                    <label for="{{ form.dolls2.id_for_label }}">Dolls/Puppets</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dress_up2 }}
+                    <label for="{{ form.dress_up2.id_for_label }}">Dress Up Clothes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.easels2 }}
+                    <label for="{{ form.easels2.id_for_label }}">Easels(functional with eg chalk/paint)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.musical_instruments2 }}
+                    <label for="{{ form.musical_instruments2.id_for_label }}">Musical instruments or instruments to make music (e.g., pans, buckets, sticks)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paint_brushes2 }}
+                    <label for="{{ form.paint_brushes2.id_for_label }}">Paint Brushes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paints2 }}
+                    <label for="{{ form.paints2.id_for_label }}">Paints</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paper_cardboard2 }}
+                    <label for="{{ form.paper_cardboard2.id_for_label }}">Paper/Cardboard</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.play_dough2 }}
+                    <label for="{{ form.play_dough2.id_for_label }}">Play Dough</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.soft_animals2 }}
+                    <label for="{{ form.soft_animals2.id_for_label }}">Soft Animals</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.toy_telephones2 }}
+                    <label for="{{ form.toy_telephones2.id_for_label }}">Toy Telephones</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many dramatic play materials are accessible to toddler children?</p>
+                <div class="radio-options">
+                    <p class="level451">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level452">Level 2: 3-4 material accessible to children</p>
+                    <p class="level453">Level 3: 5-6 material accessible to children</p>
+                    <p class="level454">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question45 }}
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Toddler Dramatic Play Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the toddler dramatic play materials?</p>
+            <div class="radio-group">
+                {{ form.question48 }}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Preschool Dramatic Play Materials Section -->
+        {% if "Preschool" in age_groups %}
+        <div class="form-section">
+            <h3 class="section-title">Preschool Dramatic Play Materials</h3>
+            <p>Check all dramatic play materials available for preschool children:</p>
+            
+            <div class="checkbox-grid">
+                <div class="checkbox-item">
+                    {{ form.animal_figures3 }}
+                    <label for="{{ form.animal_figures3.id_for_label }}">Animal Figures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.crayons3 }}
+                    <label for="{{ form.crayons3.id_for_label }}">Crayons/Pens/Pencils/Markers</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.child_sized_furniture3 }}
+                    <label for="{{ form.child_sized_furniture3.id_for_label }}">Child-Sized Furniture</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.collage_materials3 }}
+                    <label for="{{ form.collage_materials3.id_for_label }}">Collage Materials with different textures</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.cooking_eating_equipment3 }}
+                    <label for="{{ form.cooking_eating_equipment3.id_for_label }}">Cooking eating equipment (e.g., pots and pans, dishes, spoons)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dolls3 }}
+                    <label for="{{ form.dolls3.id_for_label }}">Dolls/Puppets</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.dress_up3 }}
+                    <label for="{{ form.dress_up3.id_for_label }}">Dress Up Clothes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.easels3 }}
+                    <label for="{{ form.easels3.id_for_label }}">Easels(functional with eg chalk/paint)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.musical_instruments3 }}
+                    <label for="{{ form.musical_instruments3.id_for_label }}">Musical instruments or instruments to make music (e.g., pans, buckets, sticks)</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paint_brushes3 }}
+                    <label for="{{ form.paint_brushes3.id_for_label }}">Paint Brushes</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paints3 }}
+                    <label for="{{ form.paints3.id_for_label }}">Paints</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.paper_cardboard3 }}
+                    <label for="{{ form.paper_cardboard3.id_for_label }}">Paper/Cardboard</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.play_dough3 }}
+                    <label for="{{ form.play_dough3.id_for_label }}">Play Dough</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.soft_animals3 }}
+                    <label for="{{ form.soft_animals3.id_for_label }}">Soft Animals</label>
+                </div>
+                
+                <div class="checkbox-item">
+                    {{ form.toy_telephones3 }}
+                    <label for="{{ form.toy_telephones3.id_for_label }}">Toy Telephones</label>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <p>How many dramatic play materials are accessible to preschool children?</p>
+                <div class="radio-options">
+                    <p class="level461">Level 1: 0-2 material(s) accessible to children</p>
+                    <p class="level462">Level 2: 3-4 material accessible to children</p>
+                    <p class="level463">Level 3: 5-6 material accessible to children</p>
+                    <p class="level464">Level 4: 7+ material accessible to children</p>
+                </div>
+                <!-- <div style="margin-top: 15px;">
+                    {{ form.question46 }}
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Preschool Dramatic Play Material Condition -->
+        <div class="question-container">
+            <p class="question-text">What is the condition of the preschool dramatic play materials?</p>
+            <div class="radio-group">
+                {{ form.question49 }}
+            </div>
+        </div>
+        {% endif %}
+
+        
+        <!-- Outdoor Time Plan -->
+        <div class="question-container">
+            <p class="question-text">Is there a written plan for outdoor time?</p>
+            <div class="radio-group">
+                {{ form.question50 }}
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button type="submit" class="submit-button">Next</button>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Arrays to track selected activities/materials for each age group and category
+            const infantPhysicalActivities = [];
+            const toddlerPhysicalActivities = [];
+            const preschoolPhysicalActivities = [];
+            
+            const infantLanguageMaterials = [];
+            const toddlerLanguageMaterials = [];
+            const preschoolLanguageMaterials = [];
+            
+            const infantMathScienceMaterials = [];
+            const toddlerMathScienceMaterials = [];
+            const preschoolMathScienceMaterials = [];
+            
+            const infantDramaticPlayMaterials = [];
+            const toddlerDramaticPlayMaterials = [];
+            const preschoolDramaticPlayMaterials = [];
+        
+            // Helper function to update highlighting for any section
+            function updateHighlighting(sectionSelector, activityArray, levelThresholds) {
+                const levels = document.querySelectorAll(`${sectionSelector} .radio-options p`);
+                if (!levels || levels.length === 0) return;
+        
+                // Reset all levels
+                levels.forEach(level => {
+                    level.style.fontWeight = 'normal';
+                    level.style.fontSize = '16px';
+                    level.style.color = '#333';
+                });
+        
+                // Determine which level to highlight
+                let levelIndex;
+                if (activityArray.length >= levelThresholds[3]) {
+                    levelIndex = 3; // Level 4
+                } else if (activityArray.length >= levelThresholds[2]) {
+                    levelIndex = 2; // Level 3
+                } else if (activityArray.length >= levelThresholds[1]) {
+                    levelIndex = 1; // Level 2
+                } else {
+                    levelIndex = 0; // Level 1
+                }
+        
+                // Apply highlighting
+                if (levels[levelIndex]) {
+                    levels[levelIndex].style.fontWeight = 'bold';
+                    levels[levelIndex].style.fontSize = '20px';
+                    levels[levelIndex].style.color = '#000';
+                }
+        
+                console.log(`${sectionSelector} count:`, activityArray.length);
+            }
+        
+            // Helper function to setup checkbox listeners
+            function setupCheckboxListeners(sectionSelector, activityArray, levelThresholds) {
+                const checkboxes = document.querySelectorAll(`${sectionSelector} .checkbox-item input[type="checkbox"]`);
+                checkboxes.forEach(checkbox => {
+                    // Check initial state
+                    if (checkbox.checked) {
+                        activityArray.push(checkbox.name || checkbox.id);
+                    }
+        
+                    // Add change listener
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            activityArray.push(this.name || this.id);
+                        } else {
+                            const index = activityArray.indexOf(this.name || this.id);
+                            if (index > -1) {
+                                activityArray.splice(index, 1);
+                            }
+                        }
+                        updateHighlighting(sectionSelector, activityArray, levelThresholds);
+                    });
+                });
+                updateHighlighting(sectionSelector, activityArray, levelThresholds);
+            }
+        
+            // Define level thresholds for each section
+            const physicalInfantThresholds = [0, 1, 3, 5]; // Level 1: 0, Level 2: 1-2, Level 3: 3-4, Level 4: 5+
+            const physicalToddlerPreschoolThresholds = [0, 3, 5, 7]; // Level 1: 0-2, Level 2: 3-4, Level 3: 5-6, Level 4: 7+
+            const languageInfantThresholds = [0, 1, 2, 3]; // Level 1: 0, Level 2: 1, Level 3: 2, Level 4: 3+
+            const languageToddlerPreschoolThresholds = [0, 3, 5, 7]; // Level 1: 0-2, Level 2: 3-4, Level 3: 5-6, Level 4: 7+
+            const mathScienceThresholds = [0, 3, 5, 7]; // Level 1: 0-2, Level 2: 3-4, Level 3: 5-6, Level 4: 7+
+            const dramaticPlayThresholds = [0, 3, 5, 7]; // Level 1: 0-2, Level 2: 3-4, Level 3: 5-6, Level 4: 7+
+        
+            // Setup listeners for all sections
+            // Infant Physical Activities
+            setupCheckboxListeners('.form-section:nth-of-type(1)', infantPhysicalActivities, physicalInfantThresholds);
+        
+            // Toddler Physical Activities
+            setupCheckboxListeners('.form-section:nth-of-type(3)', toddlerPhysicalActivities, physicalToddlerPreschoolThresholds);
+        
+            // Preschool Physical Activities
+            setupCheckboxListeners('.form-section:nth-of-type(5)', preschoolPhysicalActivities, physicalToddlerPreschoolThresholds);
+        
+            // Infant Language
+            setupCheckboxListeners('.form-section:nth-of-type(7)', infantLanguageMaterials, languageInfantThresholds);
+        
+            // Toddler Language
+            setupCheckboxListeners('.form-section:nth-of-type(9)', toddlerLanguageMaterials, languageToddlerPreschoolThresholds);
+        
+            // Preschool Language
+            setupCheckboxListeners('.form-section:nth-of-type(11)', preschoolLanguageMaterials, languageToddlerPreschoolThresholds);
+        
+            // Infant Math/Science
+            setupCheckboxListeners('.form-section:nth-of-type(13)', infantMathScienceMaterials, mathScienceThresholds);
+        
+            // Toddler Math/Science
+            setupCheckboxListeners('.form-section:nth-of-type(15)', toddlerMathScienceMaterials, mathScienceThresholds);
+        
+            // Preschool Math/Science
+            setupCheckboxListeners('.form-section:nth-of-type(17)', preschoolMathScienceMaterials, mathScienceThresholds);
+        
+            // Infant Dramatic Play
+            setupCheckboxListeners('.form-section:nth-of-type(19)', infantDramaticPlayMaterials, dramaticPlayThresholds);
+        
+            // Toddler Dramatic Play
+            setupCheckboxListeners('.form-section:nth-of-type(21)', toddlerDramaticPlayMaterials, dramaticPlayThresholds);
+        
+            // Preschool Dramatic Play
+            setupCheckboxListeners('.form-section:nth-of-type(23)', preschoolDramaticPlayMaterials, dramaticPlayThresholds);
+        
+            // Set up hidden input fields for form submission
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                // Create hidden inputs for all arrays if they don't exist
+                const createHiddenInput = (id, value) => {
+                    if (!document.getElementById(id)) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = id;
+                        input.id = id;
+                        form.appendChild(input);
+                    }
+                    document.getElementById(id).value = JSON.stringify(value);
+                };
+        
+                // Create inputs for all tracking arrays
+                createHiddenInput('infant_physical_data', infantPhysicalActivities);
+                createHiddenInput('toddler_physical_data', toddlerPhysicalActivities);
+                createHiddenInput('preschool_physical_data', preschoolPhysicalActivities);
+                
+                createHiddenInput('infant_language_data', infantLanguageMaterials);
+                createHiddenInput('toddler_language_data', toddlerLanguageMaterials);
+                createHiddenInput('preschool_language_data', preschoolLanguageMaterials);
+                
+                createHiddenInput('infant_math_science_data', infantMathScienceMaterials);
+                createHiddenInput('toddler_math_science_data', toddlerMathScienceMaterials);
+                createHiddenInput('preschool_math_science_data', preschoolMathScienceMaterials);
+                
+                createHiddenInput('infant_dramatic_play_data', infantDramaticPlayMaterials);
+                createHiddenInput('toddler_dramatic_play_data', toddlerDramaticPlayMaterials);
+                createHiddenInput('preschool_dramatic_play_data', preschoolDramaticPlayMaterials);
+            });
+        });
+        </script>
+</body>
+</html>
+
+{% endblock %}

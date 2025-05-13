@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPALS Page 6</title>
+    <style>
+        /* Overall form styling */
+        .opals-form {
+            padding: 20px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Question container styling */
+        .question-container {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        
+        /* Question text styling */
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        /* Radio group container */
+        .radio-group {
+            margin-top: 8px;
+        }
+        
+        /* Fix for the radio lists */
+        .radio-group ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .radio-group li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        /* Radio label styling */
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        /* Radio input styling */
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+            margin-top: 3px;
+        }
+        
+        /* Page title */
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+        
+        /* Button styling */
+        .submit-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        /* Button container */
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <form class="opals-form" method="post">
+        {% csrf_token %}
+        
+        <h2 class="page-title">OPALS Assessment - Page 6</h2>
+
+        <h2 class="page-title">Interactions</h2>
+
+        <h4>Please note that the descriptors for each item in the table would be the potential wording in the tool and the other text would be part of a procedures handbook or notes for clarification</h4>
+
+        <div class="question-container">
+            <h5>Teacher verbalizations are relevant to children’s activities and/or interests</h5>
+            <p class="question-text">This item refers to teachers use of language with children in the outdoor space. It is expected that teachers talk is related to children’s activities and interests during play and exploration. And if teachers use restrictive language, this is done only when there is a safety issue. </p>
+            <div class="radio-group">
+                {{ form.question51 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Teacher verbalizations are relevant to children’s activities and/or interests</h5>
+            <p class="question-text">This item refers to teachers’ interactions with children in the outdoor space. It is expected that teachers are warm and positive with children, as well as attentive to their needs. Warm and positive interactions are indicated by using the children’s names, establishing eye contact, being near the children and/or speaking with positive tone or positive content to children.</p>
+            <div class="radio-group">
+                {{ form.question52 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Teachers promote children’s persistence and learning</h5>
+            <p class="question-text">This item refers to teachers’ promotion of children’s persistence and learning during outdoor play time. Persistence happens when children spend prolonged and continued amount of time and energy in one type of activity (e.g., symbolic play, nature exploration, climbing up a tree). Teachers can encourage children’s persistence and learning by offering materials, showing how to use materials in a new way, and asking open-ended questions. Expectations for persistence should take into account developmental level of the children. </p>
+            <div class="radio-group">
+                {{ form.question53 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Teachers are actively engaged (physically), model inquisitiveness and exploration</h5>
+            <p class="question-text">This item refers to teachers’ physical engagement with children in the outdoor space. Teachers' physical engagement is crucial for children to begin interacting more independently with the outdoor environment, especially for those who are younger or new to the environment. By being physically engaged in the outdoor environment, teachers model inquisitiveness and exploration. Teachers can offer and start activities, or they can be physically engaged in children’s play. </p>
+            <div class="radio-group">
+                {{ form.question54 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Teachers support/encourage positive peer interactions</h5>
+            <p class="question-text">This item refers to teachers’ support and encouragement of positive peer interactions during outdoor play. Teachers can support positive peer interactions by giving children strategies to problem solve when there is a conflict or challenging situation, or by encouraging children to play together in a positive way. If children already have positive peer interactions, teachers may praise positive peer interactions. </p>
+            <div class="radio-group">
+                {{ form.question55 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Teachers are actively engaging children with the natural elements/environment</h5>
+            <p class="question-text">This item refers to whether teachers actively engage children with natural elements/environment in the outdoor space. Active engagement consists of encouraging children to use their senses and skills to manipulate natural elements/environment and explore it. Active engagement with the natural environment involves actions such as touching, picking up, digging, planting, smelling, tasting as appropriate, etc. Children are allowed and encouraged to be actively engaged with natural elements and/or the natural environment. </p>
+            <div class="radio-group">
+                {{ form.question56 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Children show curiosity about natural elements/environment</h5>
+            <p class="question-text">This item refers to whether children show curiosity about natural elements/environment. If teachers do not prohibit interactions with natural elements/environment, young children are usually curious and want to explore and manipulate what surrounds them, including natural elements/environment.  </p>
+            <div class="radio-group">
+                {{ form.question57 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Children engage with natural elements/environment (quantity)*</h5>
+            <p class="question-text">This item addresses specifically the number of children who are seen engaging with natural elements/environment.</p>
+            <div class="radio-group">
+                {{ form.question58 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>The schedule and activities allow/facilitate children’s choices and independence</h5>
+            <p class="question-text">This item aims to identify if the schedule and activities allow and/or facilitate children in making their own choices and exercising independence. Usually, teacher-led activities in which children are required to participate do not allow them to follow their interests and independently choose activities and peers they would like to play with. Therefore, it is expected that children can choose their activities during outdoor playtime, and small or large group activities offered are optional or short in duration.</p>
+            <div class="radio-group">
+                {{ form.question59 }}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>There is a positive climate, characterized by enthusiasm, affection, and respect among children and adults.</h5>
+            <p class="question-text">This item aims to identify general patterns of behavior between teacher(s) and children. A positive climate is characterized by: (1) respectful interactions among teachers and children (i.e., respectful language, cooperation, and sharing); (2) enthusiasm and playful engagement with activities, materials, and peers; (3) affection by being physically close to children and touching children with affection (e.g., hugs, patting their back, social conversation, smiling, laugh, verbal affection). This item rates interactions globally, not individually.</p>
+            <div class="radio-group">
+                {{ form.question60 }}
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="submit-button">Next</button>
+        </div>
+    </form>
+</body>
+</html>
+
+{% endblock %}
