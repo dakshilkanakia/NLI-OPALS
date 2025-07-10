@@ -9,12 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPALS page 4</title>
     <style>
+        body {
+            background-color: #E9EDE1;
+            font-family: 'AvenirNext', Arial, sans-serif;
+        }
+
         /* Overall form styling */
         .opals-form {
-            padding: 20px 40px;
+            padding: 60px 40px 20px 40px;
             max-width: 1000px;
             margin: 0 auto;
-            font-family: Arial, sans-serif;
         }
 
         /* Question container styling */
@@ -22,7 +26,8 @@
             margin-bottom: 25px;
             padding: 15px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         /* Question text styling */
@@ -42,19 +47,27 @@
         /* Section styling */
         .form-section {
             margin-bottom: 40px;
-            border: 1px solid #ddd;
             border-radius: 8px;
+            padding: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            background-color: #D3F36B;
             padding: 20px;
-            background-color: #f9f9f9;
+            border-bottom-right-radius: 30px;
         }
         
         .section-title {
             font-size: 18px;
             font-weight: bold;
             color: #2c5282;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .form-section > div:not(.section-header) {
+            padding: 20px;
         }
         
         /* Checkbox grid */
@@ -72,8 +85,9 @@
             margin-bottom: 8px;
         }
         
-        .checkbox-item input[type="checkbox"] {
-            margin-right: 8px;
+        .custom-checkbox {
+            transform: scale(1.5);
+            margin-right: 10px;
         }
         
         .checkbox-item label {
@@ -85,34 +99,64 @@
         .radio-group {
             margin-top: 8px;
         }
-
         
         .radio-group p {
             font-weight: 500;
             margin-bottom: 10px;
         }
         
-        .radio-options ul {
-            list-style: none;
-            padding-left: 0;
+        .radio-options p {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
         }
-        
-        .radio-options li {
+        .radio-option {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            position: relative;
             margin-bottom: 10px;
         }
+        .radio-group input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+            margin: 0;
+        }
         
-        .radio-options label {
+        .radio-group label {
             display: inline-flex;
             align-items: center;
             cursor: pointer;
-            margin-left: 10px;
+            padding-left: 30px;
+            position: relative;
+            margin-right: 20px;
+            font-size: 14px;
         }
         
-        .radio-options input[type="radio"] {
-            margin-right: 8px;
-            margin-top: 3px;
+        .radio-group label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #555;
+            border-radius: 50%;
+            background-color: white;
+        }
+        
+        .radio-group input[type="radio"]:checked + label::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4CAF50;
         }
         
         /* Button styling */
@@ -121,611 +165,572 @@
             margin-top: 30px;
         }
         
-        .submit-button {
+        .btn-primary {
             padding: 10px 25px;
-            background-color: #4CAF50;
+            background-color: #333333;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 16px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
         
-        .submit-button:hover {
-            background-color: #3e8e41;
+        .btn-primary:hover {
+            background-color: #555555;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Progress bar styling */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 15px;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        
+        .progress {
+            width: 100%;
+            max-width: 1200px;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #FCB817;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            margin-top: 5px;
         }
     </style>
 </head>
 
 <body>
+    <div class="progress-container">
+        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar"></div>
+            <span class="progress-text">100%</span>
+        </div>
+        <div class="page-indicator">Page 4/4</div>
+    </div>
+    
     {% load static %}
     <form class="opals-form" method="post">
         {% csrf_token %}
         
         <h2 class="page-title">OPALS Assessment - Page 4</h2>
 
-        <!-- use similar way for conditional rendering -->
-        {% if "Infant" in age_groups%}
-
         <!-- Infant Settings Section -->
+        {% if "Infant" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Infants: Settings Available</h3>
-            <p>Check all settings that are available for infants:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Infants: Settings Available</h3>
+                <p>Check all settings that are available for infants:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.breast_feeding }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.breast_feeding.id_for_label }}" name="breast_feeding" {% if form.breast_feeding.value %}checked{% endif %}>
                     <label for="{{ form.breast_feeding.id_for_label }}">Breastfeeding/Bottle-Feeding Nook</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.indoor_outdoor_transition1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.indoor_outdoor_transition1.id_for_label }}" name="indoor_outdoor_transition1" {% if form.indoor_outdoor_transition1.value %}checked{% endif %}>
                     <label for="{{ form.indoor_outdoor_transition1.id_for_label }}">Covered Usable Indoor-Outdoor Transition Space</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.deck1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.deck1.id_for_label }}" name="deck1" {% if form.deck1.value %}checked{% endif %}>
                     <label for="{{ form.deck1.id_for_label }}">Deck</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.diaper_changing_station }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.diaper_changing_station.id_for_label }}" name="diaper_changing_station" {% if form.diaper_changing_station.value %}checked{% endif %}>
                     <label for="{{ form.diaper_changing_station.id_for_label }}">Diaper Changing Station</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.gathering_setting1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.gathering_setting1.id_for_label }}" name="gathering_setting1" {% if form.gathering_setting1.value %}checked{% endif %}>
                     <label for="{{ form.gathering_setting1.id_for_label }}">Gathering Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.grove_trees1 }}
+                <input type="checkbox" class="custom-checkbox" id="{{ form.grove_trees1.id_for_label }}" name="grove_trees1" {% if form.grove_trees1.value %}checked{% endif %}>
                     <label for="{{ form.grove_trees1.id_for_label }}">Grove of Small Trees/Large Shrubs</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.mound1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.mound1.id_for_label }}" name="mound1" {% if form.mound1.value %}checked{% endif %}>
                     <label for="{{ form.mound1.id_for_label }}">Mound/Slope</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.manufactured_play1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.manufactured_play1.id_for_label }}" name="manufactured_play1" {% if form.manufactured_play1.value %}checked{% endif %}>
                     <label for="{{ form.manufactured_play1.id_for_label }}">Manufactured Play Equipment</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multipurpose_lawn1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multipurpose_lawn1.id_for_label }}" name="multipurpose_lawn1" {% if form.multipurpose_lawn1.value %}checked{% endif %}>
                     <label for="{{ form.multipurpose_lawn1.id_for_label }}">Multipurpose Activity Setting/Lawn</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multisensory_pathway1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multisensory_pathway1.id_for_label }}" name="multisensory_pathway1" {% if form.multisensory_pathway1.value %}checked{% endif %}>
                     <label for="{{ form.multisensory_pathway1.id_for_label }}">Multisensory Pathway</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multisensory_setting1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multisensory_setting1.id_for_label }}" name="multisensory_setting1" {% if form.multisensory_setting1.value %}checked{% endif %}>
                     <label for="{{ form.multisensory_setting1.id_for_label }}">Multisensory Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.music_play1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.music_play1.id_for_label }}" name="music_play1" {% if form.music_play1.value %}checked{% endif %}>
                     <label for="{{ form.music_play1.id_for_label }}">Music Play Area</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.playhouse1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.playhouse1.id_for_label }}" name="playhouse1" {% if form.playhouse1.value %}checked{% endif %}>
                     <label for="{{ form.playhouse1.id_for_label }}">Playhouse</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pollinator_garden1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pollinator_garden1.id_for_label }}" name="pollinator_garden1" {% if form.pollinator_garden1.value %}checked{% endif %}>
                     <label for="{{ form.pollinator_garden1.id_for_label }}">Pollinator/Flower Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.porch_swing1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.porch_swing1.id_for_label }}" name="porch_swing1" {% if form.porch_swing1.value %}checked{% endif %}>
                     <label for="{{ form.porch_swing1.id_for_label }}">Porch Swing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.primary_pathway1 }}
-                    <label for="{{ form.primary_pathway1.id_for_label }}">Primary Pathway(Push/Pull Wheeled Toys)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.primary_pathway1.id_for_label }}" name="primary_pathway1" {% if form.primary_pathway1.value %}checked{% endif %}>
+                    <label for="{{ form.primary_pathway1.id_for_label }}">Primary Pathway (Push/Pull Wheeled Toys)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.ramp1 }}
-                    <label for="{{ form.ramp1.id_for_label }}">Ramp(if used to play)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.ramp1.id_for_label }}" name="ramp1" {% if form.ramp1.value %}checked{% endif %}>
+                    <label for="{{ form.ramp1.id_for_label }}">Ramp (if used to play)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sand_play1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sand_play1.id_for_label }}" name="sand_play1" {% if form.sand_play1.value %}checked{% endif %}>
                     <label for="{{ form.sand_play1.id_for_label }}">Sand Play Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.small_bridge }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.small_bridge.id_for_label }}" name="small_bridge" {% if form.small_bridge.value %}checked{% endif %}>
                     <label for="{{ form.small_bridge.id_for_label }}">Small Bridge</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.steppingstone_pathway1 }}
-                    <label for="{{ form.steppingstone_pathway1.id_for_label }}">Steppingstone Pathway(In Lawn)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.steppingstone_pathway1.id_for_label }}" name="steppingstone_pathway1" {% if form.steppingstone_pathway1.value %}checked{% endif %}>
+                    <label for="{{ form.steppingstone_pathway1.id_for_label }}">Steppingstone Pathway (In Lawn)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.tent_structures1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.tent_structures1.id_for_label }}" name="tent_structures1" {% if form.tent_structures1.value %}checked{% endif %}>
                     <label for="{{ form.tent_structures1.id_for_label }}">Tent-Like Play Structures</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.textured_panel }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.textured_panel.id_for_label }}" name="textured_panel" {% if form.textured_panel.value %}checked{% endif %}>
                     <label for="{{ form.textured_panel.id_for_label }}">Textured Panel Wall</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.water_play_hands_1 }}
-                    <label for="{{ form.water_play_hands_1.id_for_label }}">Water Play(Hands-In)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.water_play_hands_1.id_for_label }}" name="water_play_hands_1" {% if form.water_play_hands_1.value %}checked{% endif %}>
+                    <label for="{{ form.water_play_hands_1.id_for_label }}">Water Play (Hands-In)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other1.id_for_label }}" name="other1" {% if form.other1.value %}checked{% endif %}>
                     <label for="{{ form.other1.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>Are there 8 or more play and learning settings?</p>
                 <div class="radio-options">
-                    <p class = 'level191'>Level 1: 0-1 settings</p>
-                    <p class = 'level192'>Level 2: 2-4 settings</p>
-                    <p class = 'level193'>Level 3: 5-7 settings</p>
-                    <p class = 'level194'>Level 4: 8 or more settings</p>
+                    <p class="level191">Level 1: 0-1 settings</p>
+                    <p class="level192">Level 2: 2-4 settings</p>
+                    <p class="level193">Level 3: 5-7 settings</p>
+                    <p class="level194">Level 4: 8 or more settings</p>
                 </div>
             </div>
         </div>
-
         {% endif %}
         
         <!-- Toddler Settings Section -->
-        {% if "Toddler" in age_groups%}
+        {% if "Toddler" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Toddlers: Settings Available</h3>
-            <p>Check all settings that are available for toddlers:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Toddlers: Settings Available</h3>
+                <p>Check all settings that are available for toddlers:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.area_pets1 }}
-                    <label for="{{ form.area_pets1.id_for_label }}">Area for Pets(Chickens and Rabbits)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.area_pets1.id_for_label }}" name="area_pets1" {% if form.area_pets1.value %}checked{% endif %}>
+                    <label for="{{ form.area_pets1.id_for_label }}">Area for Pets (Chickens and Rabbits)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.indoor_outdoor_transition2 }}
-                    <label for="{{ form.indoor_outdoor_transition2.id_for_label }}">Covered Useable Indoor-Outdoor Transition Space</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.indoor_outdoor_transition2.id_for_label }}" name="indoor_outdoor_transition2" {% if form.indoor_outdoor_transition2.value %}checked{% endif %}>
+                    <label for="{{ form.indoor_outdoor_transition2.id_for_label }}">Covered Usable Indoor-Outdoor Transition Space</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.cozy_nook1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.cozy_nook1.id_for_label }}" name="cozy_nook1" {% if form.cozy_nook1.value %}checked{% endif %}>
                     <label for="{{ form.cozy_nook1.id_for_label }}">Cozy Nook</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.balance_beam1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.balance_beam1.id_for_label }}" name="balance_beam1" {% if form.balance_beam1.value %}checked{% endif %}>
                     <label for="{{ form.balance_beam1.id_for_label }}">Balance Beam</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bridge1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bridge1.id_for_label }}" name="bridge1" {% if form.bridge1.value %}checked{% endif %}>
                     <label for="{{ form.bridge1.id_for_label }}">Bridge</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.deck2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.deck2.id_for_label }}" name="deck2" {% if form.deck2.value %}checked{% endif %}>
                     <label for="{{ form.deck2.id_for_label }}">Deck</label>
                 </div>
-                
+
                 <div class="checkbox-item">
-                    {{ form.earth_play1 }}
-                    <label for="{{ form.earth_play1.id_for_label }}">Earth Play(Dirt or Mud)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.earth_play1.id_for_label }}" name="earth_play1" {% if form.earth_play1.value %}checked{% endif %}>
+                    <label for="{{ form.earth_play1.id_for_label }}">Earth Play (Dirt or Mud)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.editable_landscape1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.editable_landscape1.id_for_label }}" name="editable_landscape1" {% if form.editable_landscape1.value %}checked{% endif %}>
                     <label for="{{ form.editable_landscape1.id_for_label }}">Editable Landscape</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.fruit_garden1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.fruit_garden1.id_for_label }}" name="fruit_garden1" {% if form.fruit_garden1.value %}checked{% endif %}>
                     <label for="{{ form.fruit_garden1.id_for_label }}">Fruit and/or Vegetable Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.gathering_setting2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.gathering_setting2.id_for_label }}" name="gathering_setting2" {% if form.gathering_setting2.value %}checked{% endif %}>
                     <label for="{{ form.gathering_setting2.id_for_label }}">Gathering Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.grove_trees2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.grove_trees2.id_for_label }}" name="grove_trees2" {% if form.grove_trees2.value %}checked{% endif %}>
                     <label for="{{ form.grove_trees2.id_for_label }}">Grove of Small Trees/Large Shrubs</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hard_surface1 }}
-                    <label for="{{ form.hard_surface1.id_for_label }}">Hard Surface for Wheeled toys</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hard_surface1.id_for_label }}" name="hard_surface1" {% if form.hard_surface1.value %}checked{% endif %}>
+                    <label for="{{ form.hard_surface1.id_for_label }}">Hard Surface for Wheeled Toys</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.loose_parts1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.loose_parts1.id_for_label }}" name="loose_parts1" {% if form.loose_parts1.value %}checked{% endif %}>
                     <label for="{{ form.loose_parts1.id_for_label }}">Loose Parts Play Area</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.manufactured_play2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.manufactured_play2.id_for_label }}" name="manufactured_play2" {% if form.manufactured_play2.value %}checked{% endif %}>
                     <label for="{{ form.manufactured_play2.id_for_label }}">Manufactured Play Equipment</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.mound2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.mound2.id_for_label }}" name="mound2" {% if form.mound2.value %}checked{% endif %}>
                     <label for="{{ form.mound2.id_for_label }}">Mound/Slope</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multipurpose_lawn2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multipurpose_lawn2.id_for_label }}" name="multipurpose_lawn2" {% if form.multipurpose_lawn2.value %}checked{% endif %}>
                     <label for="{{ form.multipurpose_lawn2.id_for_label }}">Multipurpose Activity Setting/Lawn</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multisensory_pathway2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multisensory_pathway2.id_for_label }}" name="multisensory_pathway2" {% if form.multisensory_pathway2.value %}checked{% endif %}>
                     <label for="{{ form.multisensory_pathway2.id_for_label }}">Multisensory Pathway</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multisensory_setting2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multisensory_setting2.id_for_label }}" name="multisensory_setting2" {% if form.multisensory_setting2.value %}checked{% endif %}>
                     <label for="{{ form.multisensory_setting2.id_for_label }}">Multisensory Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.music_play2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.music_play2.id_for_label }}" name="music_play2" {% if form.music_play2.value %}checked{% endif %}>
                     <label for="{{ form.music_play2.id_for_label }}">Music Play Area</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.outdoor_classroom1 }}
-                    <label for="{{ form.outdoor_classroom1.id_for_label }}">Outdoor Classroom</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.outdoor_classroom1.id_for_label }}" name="outdoor_classroom1" {% if form.outdoor_classroom1.value %}checked{% endif %}>
+                    <label for="{{ form.outwoodoor_classroom1.id_for_label }}">Outdoor Classroom</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.playhouse2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.playhouse2.id_for_label }}" name="playhouse2" {% if form.playhouse2.value %}checked{% endif %}>
                     <label for="{{ form.playhouse2.id_for_label }}">Playhouse</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pollinator_garden2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pollinator_garden2.id_for_label }}" name="pollinator_garden2" {% if form.pollinator_garden2.value %}checked{% endif %}>
                     <label for="{{ form.pollinator_garden2.id_for_label }}">Pollinator/Flower Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.porch_swing2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.porch_swing2.id_for_label }}" name="porch_swing2" {% if form.porch_swing2.value %}checked{% endif %}>
                     <label for="{{ form.porch_swing2.id_for_label }}">Porch Swing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.primary_pathway2 }}
-                    <label for="{{ form.primary_pathway2.id_for_label }}">Primary Pathway(Push/Pull Wheeled Toys)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.primary_pathway2.id_for_label }}" name="primary_pathway2" {% if form.primary_pathway2.value %}checked{% endif %}>
+                    <label for="{{ form.primary_pathway2.id_for_label }}">Primary Pathway (Push/Pull Wheeled Toys)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.project_space }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.project_space.id_for_label }}" name="project_space" {% if form.project_space.value %}checked{% endif %}>
                     <label for="{{ form.project_space.id_for_label }}">Project Space</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.ramp2 }}
-                    <label for="{{ form.ramp2.id_for_label }}">Ramp(if used to play)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.ramp2.id_for_label }}" name="ramp2" {% if form.ramp2.value %}checked{% endif %}>
+                    <label for="{{ form.ramp2.id_for_label }}">Ramp (if used to play)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sand_play2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sand_play2.id_for_label }}" name="sand_play2" {% if form.sand_play2.value %}checked{% endif %}>
                     <label for="{{ form.sand_play2.id_for_label }}">Sand Play Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.steppingstone_pathway2 }}
-                    <label for="{{ form.steppingstone_pathway2.id_for_label }}">Steppingstone Pathway(In Lawn)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.steppingstone_pathway2.id_for_label }}" name="steppingstone_pathway2" {% if form.steppingstone_pathway2.value %}checked{% endif %}>
+                    <label for="{{ form.steppingstone_pathway2.id_for_label }}">Steppingstone Pathway (In Lawn)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.swing1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.swing1.id_for_label }}" name="swing1" {% if form.swing1.value %}checked{% endif %}>
                     <label for="{{ form.swing1.id_for_label }}">Swing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.table1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.table1.id_for_label }}" name="table1" {% if form.table1.value %}checked{% endif %}>
                     <label for="{{ form.table1.id_for_label }}">Table</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.tent_structures2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.tent_structures2.id_for_label }}" name="tent_structures2" {% if form.tent_structures2.value %}checked{% endif %}>
                     <label for="{{ form.tent_structures2.id_for_label }}">Tent-Like Play Structures</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.water_play_hands_2 }}
-                    <label for="{{ form.water_play_hands_2.id_for_label }}">Water Play(Hands-In)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.water_play_hands_2.id_for_label }}" name="water_play_hands_2" {% if form.water_play_hands_2.value %}checked{% endif %}>
+                    <label for="{{ form.water_play_hands_2.id_for_label }}">Water Play (Hands-In)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.water_play_body_1 }}
-                    <label for="{{ form.water_play_body_1.id_for_label }}">Water Play(Full Body)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.water_play_body_1.id_for_label }}" name="water_play_body_1" {% if form.water_play_body_1.value %}checked{% endif %}>
+                    <label for="{{ form.water_play_body_1.id_for_label }}">Water Play (Full Body)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other2.id_for_label }}" name="other2" {% if form.other2.value %}checked{% endif %}>
                     <label for="{{ form.other2.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>Are there 10 or more play and learning settings?</p>
                 <div class="radio-options">
-                    <p class = 'level201'>Level 1: 0-3 settings</p>
-                    <p class = 'level202'>Level 2: 4-7 settings</p>
-                    <p class = 'level203'>Level 3: 8-9 settings</p>
-                    <p class = 'level204'>Level 4: 10 settings or more</p>
+                    <p class="level201">Level 1: 0-3 settings</p>
+                    <p class="level202">Level 2: 4-7 settings</p>
+                    <p class="level203">Level 3: 8-9 settings</p>
+                    <p class="level204">Level 4: 10 settings or more</p>
                 </div>
             </div>
         </div>
         {% endif %}
 
         <!-- Preschool Settings Section -->
-        {% if "Preschool" in age_groups%}
+        {% if "Preschool" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Preschool: Settings Available</h3>
-            <p>Check all settings that are available for preschool children:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Preschool: Settings Available</h3>
+                <p>Check all settings that are available for preschool children:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.area_pets2 }}
-                    <label for="{{ form.area_pets2.id_for_label }}">Area for Pets(Chickens and Rabbits)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.area_pets2.id_for_label }}" name="area_pets2" {% if form.area_pets2.value %}checked{% endif %}>
+                    <label for="{{ form.area_pets2.id_for_label }}">Area for Pets (Chickens and Rabbits)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.balance_beam }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.balance_beam.id_for_label }}" name="balance_beam" {% if form.balance_beam.value %}checked{% endif %}>
                     <label for="{{ form.balance_beam.id_for_label }}">Balance Beam</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bridge2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bridge2.id_for_label }}" name="bridge2" {% if form.bridge2.value %}checked{% endif %}>
                     <label for="{{ form.bridge2.id_for_label }}">Bridge</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.indoor_outdoor_transition3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.indoor_outdoor_transition3.id_for_label }}" name="indoor_outdoor_transition3" {% if form.indoor_outdoor_transition3.value %}checked{% endif %}>
                     <label for="{{ form.indoor_outdoor_transition3.id_for_label }}">Covered Usable Indoor-Outdoor Transition Space</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.cozy_nook2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.cozy_nook2.id_for_label }}" name="cozy_nook2" {% if form.cozy_nook2.value %}checked{% endif %}>
                     <label for="{{ form.cozy_nook2.id_for_label }}">Cozy Nook</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.deck3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.deck3.id_for_label }}" name="deck3" {% if form.deck3.value %}checked{% endif %}>
                     <label for="{{ form.deck3.id_for_label }}">Deck</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.dry_creek_bed }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dry_creek_bed.id_for_label }}" name="dry_creek_bed" {% if form.dry_creek_bed.value %}checked{% endif %}>
                     <label for="{{ form.dry_creek_bed.id_for_label }}">Dry Creek Bed</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.earth_play2 }}
-                    <label for="{{ form.earth_play2.id_for_label }}">Earth Play(Dirt or Mud)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.earth_play2.id_for_label }}" name="earth_play2" {% if form.earth_play2.value %}checked{% endif %}>
+                    <label for="{{ form.earth_play2.id_for_label }}">Earth Play (Dirt or Mud)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.editable_landscape2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.editable_landscape2.id_for_label }}" name="editable_landscape2" {% if form.editable_landscape2.value %}checked{% endif %}>
                     <label for="{{ form.editable_landscape2.id_for_label }}">Editable Landscape</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.fruit_garden2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.fruit_garden2.id_for_label }}" name="fruit_garden2" {% if form.fruit_garden2.value %}checked{% endif %}>
                     <label for="{{ form.fruit_garden2.id_for_label }}">Fruit and/or Vegetable Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.gathering_setting3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.gathering_setting3.id_for_label }}" name="gathering_setting3" {% if form.gathering_setting3.value %}checked{% endif %}>
                     <label for="{{ form.gathering_setting3.id_for_label }}">Gathering Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.grass_maze }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.grass_maze.id_for_label }}" name="grass_maze" {% if form.grass_maze.value %}checked{% endif %}>
                     <label for="{{ form.grass_maze.id_for_label }}">Grass Maze</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.grove_trees3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.grove_trees3.id_for_label }}" name="grove_trees3" {% if form.grove_trees3.value %}checked{% endif %}>
                     <label for="{{ form.grove_trees3.id_for_label }}">Grove of Small Trees/Large Shrubs</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hard_surface2 }}
-                    <label for="{{ form.hard_surface2.id_for_label }}">Hard Surface for Wheeled toys</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hard_surface2.id_for_label }}" name="hard_surface2" {% if form.hard_surface2.value %}checked{% endif %}>
+                    <label for="{{ form.hard_surface2.id_for_label }}">Hard Surface for Wheeled Toys</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.loose_parts2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.loose_parts2.id_for_label }}" name="loose_parts2" {% if form.loose_parts2.value %}checked{% endif %}>
                     <label for="{{ form.loose_parts2.id_for_label }}">Loose Parts Play Area</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.manufactured_play3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.manufactured_play3.id_for_label }}" name="manufactured_play3" {% if form.manufactured_play3.value %}checked{% endif %}>
                     <label for="{{ form.manufactured_play3.id_for_label }}">Manufactured Play Equipment</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.mound3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.mound3.id_for_label }}" name="mound3" {% if form.mound3.value %}checked{% endif %}>
                     <label for="{{ form.mound3.id_for_label }}">Mound/Slope</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multipurpose_lawn3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multipurpose_lawn3.id_for_label }}" name="multipurpose_lawn3" {% if form.multipurpose_lawn3.value %}checked{% endif %}>
                     <label for="{{ form.multipurpose_lawn3.id_for_label }}">Multipurpose Activity Setting/Lawn</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multisensory_pathway3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multisensory_pathway3.id_for_label }}" name="multisensory_pathway3" {% if form.multisensory_pathway3.value %}checked{% endif %}>
                     <label for="{{ form.multisensory_pathway3.id_for_label }}">Multisensory Pathway</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.multisensory_setting3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.multisensory_setting3.id_for_label }}" name="multisensory_setting3" {% if form.multisensory_setting3.value %}checked{% endif %}>
                     <label for="{{ form.multisensory_setting3.id_for_label }}">Multisensory Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.music_play3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.music_play3.id_for_label }}" name="music_play3" {% if form.music_play3.value %}checked{% endif %}>
                     <label for="{{ form.music_play3.id_for_label }}">Music Play Area</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.natural_construction_area }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.natural_construction_area.id_for_label }}" name="natural_construction_area" {% if form.natural_construction_area.value %}checked{% endif %}>
                     <label for="{{ form.natural_construction_area.id_for_label }}">Natural Construction Area</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.outdoor_classroom2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.outdoor_classroom2.id_for_label }}" name="outdoor_classroom2" {% if form.outdoor_classroom2.value %}checked{% endif %}>
                     <label for="{{ form.outdoor_classroom2.id_for_label }}">Outdoor Classroom</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.performance_space }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.performance_space.id_for_label }}" name="performance_space" {% if form.performance_space.value %}checked{% endif %}>
                     <label for="{{ form.performance_space.id_for_label }}">Performance Space</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.playhouse3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.playhouse3.id_for_label }}" name="playhouse3" {% if form.playhouse3.value %}checked{% endif %}>
                     <label for="{{ form.playhouse3.id_for_label }}">Playhouse</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pollinator_garden3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pollinator_garden3.id_for_label }}" name="pollinator_garden3" {% if form.pollinator_garden3.value %}checked{% endif %}>
                     <label for="{{ form.pollinator_garden3.id_for_label }}">Pollinator/Flower Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.primary_pathway3 }}
-                    <label for="{{ form.primary_pathway3.id_for_label }}">Primary Pathway(Push/Pull Wheeled Toys)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.primary_pathway"}" name="primary_pathway3" {% if form.primary_pathway3.value %}checked{% endif %}>
+                    <label for="{{ form.primary_pathway3.id_for_label }}">Primary Pathway (Push/Pull Wheeled Toys)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.project_space2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.project_space2.id_for_label }}" name="project_space2" {% if form.project_space2.value %}checked{% endif %}>
                     <label for="{{ form.project_space2.id_for_label }}">Project Space</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.ramp3 }}
-                    <label for="{{ form.ramp3.id_for_label }}">Ramp(if used to play)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.ramp3.id_for_label }}" name="ramp3" {% if form.ramp3.value %}checked{% endif %}>
+                    <label for="{{ form.ramp3.id_for_label }}">Ramp (if used to play)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sand_play3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sand_play3.id_for_label }}" name="sand_play3" {% if form.sand_play3.value %}checked{% endif %}>
                     <label for="{{ form.sand_play3.id_for_label }}">Sand Play Setting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.steppingstone_pathway3 }}
-                    <label for="{{ form.steppingstone_pathway3.id_for_label }}">Steppingstone Pathway(In Lawn)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.steppingstone_pathway3.id_for_label }}" name="steppingstone_pathway3" {% if form.steppingstone_pathway3.value %}checked{% endif %}>
+                    <label for="{{ form.steppingstone_pathway3.id_for_label }}">Steppingstone Pathway (In Lawn)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.swing2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.swing2.id_for_label }}" name="swing2" {% if form.swing2.value %}checked{% endif %}>
                     <label for="{{ form.swing2.id_for_label }}">Swing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.table2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.table2.id_for_label }}" name="table2" {% if form.table2.value %}checked{% endif %}>
                     <label for="{{ form.table2.id_for_label }}">Table</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.tent_structures3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.tent_structures3.id_for_label }}" name="tent_structures3" {% if form.tent_structures3.value %}checked{% endif %}>
                     <label for="{{ form.tent_structures3.id_for_label }}">Tent-Like Play Structures</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.water_play_hands_3 }}
-                    <label for="{{ form.water_play_hands_3.id_for_label }}">Water Play(Hands-In)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.water_play_hands_3.id_for_label }}" name="water_play_hands_3" {% if form.water_play_hands_3.value %}checked{% endif %}>
+                    <label for="{{ form.water_play_hands_3.id_for_label }}">Water Play (Hands-In)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.water_play_body_2 }}
-                    <label for="{{ form.water_play_body_2.id_for_label }}">Water Play(Full Body)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.water_play_body_2.id_for_label }}" name="water_play_body_2" {% if form.water_play_body_2.value %}checked{% endif %}>
+                    <label for="{{ form.water_play_body_2.id_for_label }}">Water Play (Full Body)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.woodwork_bench }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.woodwork_bench.id_for_label }}" name="woodwork_bench" {% if form.woodwork_bench.value %}checked{% endif %}>
                     <label for="{{ form.woodwork_bench.id_for_label }}">Woodwork Bench</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other3.id_for_label }}" name="other3" {% if form.other3.value %}checked{% endif %}>
                     <label for="{{ form.other3.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>Are there 10 or more play and learning settings?</p>
                 <div class="radio-options">
-                    <p class = 'level211'> Level 1: 0-3 settings</p>
-                    <p class = 'level212'>Level 2: 4-7 settings</p>
-                    <p class = 'level213'>Level 3: 8-9 settings</p>
-                    <p class = 'level214'>Level 4: 10 settings or more</p>
+                    <p class="level211">Level 1: 0-3 settings</p>
+                    <p class="level212">Level 2: 4-7 settings</p>
+                    <p class="level213">Level 3: 8-9 settings</p>
+                    <p class="level214">Level 4: 10 settings or more</p>
                 </div>
             </div>
-
-            {% endif %}
         </div>
-
-        <!-- <div class="question-container">
-            <p class="question-text"> Is the infant outdoor play and learning space directly connected to the infant classroom at the same floor level?</p>
-            <div class="radio-group">
-                {{ form.question22 }}
-            </div>
-        </div>
+        {% endif %}
 
         <div class="question-container">
-            <p class="question-text"> Is there a looping/curvy, 4-feet (toddlers/twos) wide or 5-feet preschool) wide primary pathway, connected to the building, for circulation and wheeled-toy use in the OLE?</p>
-            <div class="radio-group">
-                {{ form.question23 }}
+    <p class="question-text">Is there a multipurpose activity setting sufficient for all children and teachers in a group to use together?</p>
+    <div class="radio-group">
+        {% for choice in form.question24 %}
+            <div class="radio-option">
+                {{ choice.tag }}
+                <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
             </div>
-        </div> -->
+        {% endfor %}
+    </div>
+</div>
 
-        <div class="question-container">
-            <p class="question-text"> Is there a multipurpose activity setting sufficient for all children and teachers in a group to use together?</p>
-            <div class="radio-group">
-                {{ form.question24 }}
+<div class="question-container">
+    <p class="question-text">Is there a covered outdoor classroom/gathering place in the OLE large enough for all children in a class to use together?</p>
+    <div class="radio-group">
+        {% for choice in form.question25 %}
+            <div class="radio-option">
+                {{ choice.tag }}
+                <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
             </div>
-        </div>
-        
-        <div class="question-container">
-            <p class="question-text"> Is there a covered outdoor classroom/gathering place in the OLE large enough for all children in a class to use together?</p>
-            <div class="radio-group">
-                {{ form.question25 }}
-            </div>
-        </div>
+        {% endfor %}
+    </div>
+</div>
+
         <div class="button-container">
-            <button type="submit" class="submit-button">Next</button>
+            <button type="submit" class="btn-primary">Next</button>
         </div>
     </form>
 
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Progress bar initialization
+            const progressBar = document.querySelector('.progress-bar');
+            const progressValue = progressBar.parentElement.getAttribute('aria-valuenow');
+            progressBar.style.width = progressValue + '%';
+
             // Create arrays to store the selected checkbox values
             const infantSettings = [];
             const toddlerSettings = [];
@@ -734,116 +739,88 @@
             // Function to update infant settings highlighting
             function updateInfantHighlighting() {
                 const levels = document.querySelectorAll('.form-section:nth-of-type(1) .radio-options p');
-                
-                // Reset all levels to default
                 levels.forEach(level => {
                     level.style.fontWeight = 'normal';
                     level.style.fontSize = '16px';
                     level.style.color = '#333';
                 });
-                
-                // Determine which level to highlight based on count
                 let levelIndex;
                 if (infantSettings.length >= 8) {
-                    levelIndex = 3; // Level 4: 8 or more settings
+                    levelIndex = 3; // Level 4
                 } else if (infantSettings.length >= 5) {
-                    levelIndex = 2; // Level 3: 5-7 settings
+                    levelIndex = 2; // Level 3
                 } else if (infantSettings.length >= 2) {
-                    levelIndex = 1; // Level 2: 2-4 settings
+                    levelIndex = 1; // Level 2
                 } else {
-                    levelIndex = 0; // Level 1: 0-1 settings
+                    levelIndex = 0; // Level 1
                 }
-                
-                // Apply highlighting to the appropriate level
                 if (levels[levelIndex]) {
                     levels[levelIndex].style.fontWeight = 'bold';
                     levels[levelIndex].style.fontSize = '20px';
                     levels[levelIndex].style.color = '#000';
                 }
-                
-                console.log("Infant settings count:", infantSettings.length, infantSettings);
             }
             
             // Function to update toddler settings highlighting
             function updateToddlerHighlighting() {
                 const levels = document.querySelectorAll('.form-section:nth-of-type(2) .radio-options p');
-                
-                // Reset all levels to default
                 levels.forEach(level => {
                     level.style.fontWeight = 'normal';
                     level.style.fontSize = '16px';
                     level.style.color = '#333';
                 });
-                
-                // Determine which level to highlight based on count
                 let levelIndex;
                 if (toddlerSettings.length >= 10) {
-                    levelIndex = 3; // Level 4: 10 or more settings
+                    levelIndex = 3; // Level 4
                 } else if (toddlerSettings.length >= 8) {
-                    levelIndex = 2; // Level 3: 8-9 settings
+                    levelIndex = 2; // Level 3
                 } else if (toddlerSettings.length >= 4) {
-                    levelIndex = 1; // Level 2: 4-7 settings
+                    levelIndex = 1; // Level 2
                 } else {
-                    levelIndex = 0; // Level 1: 0-3 settings
+                    levelIndex = 0; // Level 1
                 }
-                
-                // Apply highlighting to the appropriate level
                 if (levels[levelIndex]) {
                     levels[levelIndex].style.fontWeight = 'bold';
                     levels[levelIndex].style.fontSize = '20px';
                     levels[levelIndex].style.color = '#000';
                 }
-                
-                console.log("Toddler settings count:", toddlerSettings.length, toddlerSettings);
             }
             
             // Function to update preschool settings highlighting
             function updatePreschoolHighlighting() {
                 const levels = document.querySelectorAll('.form-section:nth-of-type(3) .radio-options p');
-                
-                // Reset all levels to default
                 levels.forEach(level => {
                     level.style.fontWeight = 'normal';
                     level.style.fontSize = '16px';
                     level.style.color = '#333';
                 });
-                
-                // Determine which level to highlight based on count
                 let levelIndex;
                 if (preschoolSettings.length >= 10) {
-                    levelIndex = 3; // Level 4: 10 or more settings
+                    levelIndex = 3; // Level 4
                 } else if (preschoolSettings.length >= 8) {
-                    levelIndex = 2; // Level 3: 8-9 settings
+                    levelIndex = 2; // Level 3
                 } else if (preschoolSettings.length >= 4) {
-                    levelIndex = 1; // Level 2: 4-7 settings
+                    levelIndex = 1; // Level 2
                 } else {
-                    levelIndex = 0; // Level 1: 0-3 settings
+                    levelIndex = 0; // Level 1
                 }
-                
-                // Apply highlighting to the appropriate level
                 if (levels[levelIndex]) {
                     levels[levelIndex].style.fontWeight = 'bold';
                     levels[levelIndex].style.fontSize = '20px';
                     levels[levelIndex].style.color = '#000';
                 }
-                
-                console.log("Preschool settings count:", preschoolSettings.length, preschoolSettings);
             }
             
-            // Add event listeners to all infant checkboxes
+            // Add event listeners to checkboxes
             const infantCheckboxes = document.querySelectorAll('.form-section:nth-of-type(1) .checkbox-item input[type="checkbox"]');
             infantCheckboxes.forEach(checkbox => {
-                // Check if the checkbox is already checked when the page loads
                 if (checkbox.checked) {
                     infantSettings.push(checkbox.name || checkbox.id);
                 }
-                
                 checkbox.addEventListener('change', function() {
                     if (this.checked) {
-                        // Add to array if checked
                         infantSettings.push(this.name || this.id);
                     } else {
-                        // Remove from array if unchecked
                         const index = infantSettings.indexOf(this.name || this.id);
                         if (index > -1) {
                             infantSettings.splice(index, 1);
@@ -853,20 +830,15 @@
                 });
             });
             
-            // Add event listeners to all toddler checkboxes
             const toddlerCheckboxes = document.querySelectorAll('.form-section:nth-of-type(2) .checkbox-item input[type="checkbox"]');
             toddlerCheckboxes.forEach(checkbox => {
-                // Check if the checkbox is already checked when the page loads
                 if (checkbox.checked) {
                     toddlerSettings.push(checkbox.name || checkbox.id);
                 }
-                
                 checkbox.addEventListener('change', function() {
                     if (this.checked) {
-                        // Add to array if checked
                         toddlerSettings.push(this.name || this.id);
                     } else {
-                        // Remove from array if unchecked
                         const index = toddlerSettings.indexOf(this.name || this.id);
                         if (index > -1) {
                             toddlerSettings.splice(index, 1);
@@ -876,20 +848,15 @@
                 });
             });
             
-            // Add event listeners to all preschool checkboxes
             const preschoolCheckboxes = document.querySelectorAll('.form-section:nth-of-type(3) .checkbox-item input[type="checkbox"]');
             preschoolCheckboxes.forEach(checkbox => {
-                // Check if the checkbox is already checked when the page loads
                 if (checkbox.checked) {
                     preschoolSettings.push(checkbox.name || checkbox.id);
                 }
-                
                 checkbox.addEventListener('change', function() {
                     if (this.checked) {
-                        // Add to array if checked
                         preschoolSettings.push(this.name || this.id);
                     } else {
-                        // Remove from array if unchecked
                         const index = preschoolSettings.indexOf(this.name || this.id);
                         if (index > -1) {
                             preschoolSettings.splice(index, 1);
@@ -899,10 +866,9 @@
                 });
             });
             
-            // Set up hidden input fields to pass the checkbox data to the server
+            // Handle form submission
             const form = document.querySelector('form');
             form.addEventListener('submit', function(e) {
-                // Create hidden inputs for the arrays if they don't exist
                 if (!document.getElementById('infant_settings_data')) {
                     const infantInput = document.createElement('input');
                     infantInput.type = 'hidden';
@@ -910,7 +876,6 @@
                     infantInput.id = 'infant_settings_data';
                     form.appendChild(infantInput);
                 }
-                
                 if (!document.getElementById('toddler_settings_data')) {
                     const toddlerInput = document.createElement('input');
                     toddlerInput.type = 'hidden';
@@ -918,7 +883,6 @@
                     toddlerInput.id = 'toddler_settings_data';
                     form.appendChild(toddlerInput);
                 }
-                
                 if (!document.getElementById('preschool_settings_data')) {
                     const preschoolInput = document.createElement('input');
                     preschoolInput.type = 'hidden';
@@ -926,21 +890,17 @@
                     preschoolInput.id = 'preschool_settings_data';
                     form.appendChild(preschoolInput);
                 }
-                
-                // Set the values of these inputs to JSON strings of the arrays
                 document.getElementById('infant_settings_data').value = JSON.stringify(infantSettings);
                 document.getElementById('toddler_settings_data').value = JSON.stringify(toddlerSettings);
                 document.getElementById('preschool_settings_data').value = JSON.stringify(preschoolSettings);
-                
-                // Let the form submit normally
             });
             
-            // Initialize highlighting based on any checkboxes that might be checked on page load
+            // Initialize highlighting
             updateInfantHighlighting();
             updateToddlerHighlighting();
             updatePreschoolHighlighting();
         });
-        </script>
+    </script>
 </body>
 </html>
 

@@ -9,12 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPALS page 5</title>
     <style>
+        body {
+            background-color: #E9EDE1;
+            font-family: 'AvenirNext', Arial, sans-serif;
+        }
+
         /* Overall form styling */
         .opals-form {
-            padding: 20px 40px;
+            padding: 60px 40px 20px 40px;
             max-width: 1000px;
             margin: 0 auto;
-            font-family: Arial, sans-serif;
         }
 
         /* Question container styling */
@@ -22,7 +26,8 @@
             margin-bottom: 25px;
             padding: 15px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         /* Question text styling */
@@ -42,19 +47,27 @@
         /* Section styling */
         .form-section {
             margin-bottom: 40px;
-            border: 1px solid #ddd;
             border-radius: 8px;
+            padding: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            background-color: #D3F36B;
             padding: 20px;
-            background-color: #f9f9f9;
+            border-bottom-right-radius: 30px;
         }
         
         .section-title {
             font-size: 18px;
             font-weight: bold;
             color: #2c5282;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+        
+        .form-section > div:not(.section-header) {
+            padding: 20px;
         }
         
         /* Checkbox grid */
@@ -72,8 +85,9 @@
             margin-bottom: 8px;
         }
         
-        .checkbox-item input[type="checkbox"] {
-            margin-right: 8px;
+        .custom-checkbox {
+            transform: scale(1.5);
+            margin-right: 10px;
         }
         
         .checkbox-item label {
@@ -91,27 +105,60 @@
             margin-bottom: 10px;
         }
         
-        .radio-options ul {
-            list-style: none;
-            padding-left: 0;
+        .radio-options p {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
         }
         
-        .radio-options li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
+        .radio-group input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+            margin: 0;
         }
         
-        .radio-options label {
+        .radio-group label {
             display: inline-flex;
             align-items: center;
             cursor: pointer;
-            margin-left: 10px;
+            padding-left: 30px;
+            position: relative;
+            margin-right: 20px;
+            font-size: 14px;
         }
         
-        .radio-options input[type="radio"] {
-            margin-right: 8px;
-            margin-top: 3px;
+        .radio-group label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #555;
+            border-radius: 50%;
+            background-color: white;
+        }
+        
+        .radio-group input[type="radio"]:checked + label::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 10px;
         }
         
         /* Button styling */
@@ -120,26 +167,82 @@
             margin-top: 30px;
         }
         
-        .submit-button {
+        .btn-primary {
             padding: 10px 25px;
-            background-color: #4CAF50;
+            background-color: #333333;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 20px;
             cursor: pointer;
             font-size: 16px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
         
-        .submit-button:hover {
-            background-color: #3e8e41;
+        .btn-primary:hover {
+            background-color: #555555;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Progress bar styling */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 15px;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        
+        .progress {
+            width: 100%;
+            max-width: 1200px;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #FCB817;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            margin-top: 5px;
         }
     </style>
 </head>
 
 <body>
+    <div class="progress-container">
+        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar"></div>
+            <span class="progress-text">100%</span>
+        </div>
+        <div class="page-indicator">Page 5/5</div>
+    </div>
+    
     {% load static %}
     <form class="opals-form" method="post">
         {% csrf_token %}
@@ -149,81 +252,68 @@
         <!-- Infant Physical Activities Section -->
         {% if "Infant" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Infant Physical Activities</h3>
-            <p>Check all physical activities available for infants:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Infant Physical Activities</h3>
+                <p>Check all physical activities available for infants:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.balancing1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.balancing1.id_for_label }}" name="balancing1" {% if form.balancing1.value %}checked{% endif %}>
                     <label for="{{ form.balancing1.id_for_label }}">Balancing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bouncing1 }}
-                    <label for="{{ form.bouncing1.id_for_label }}">Bouncing(Body)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bouncing1.id_for_label }}" name="bouncing1" {% if form.bouncing1.value %}checked{% endif %}>
+                    <label for="{{ form.bouncing1.id_for_label }}">Bouncing (Body)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bowling1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bowling1.id_for_label }}" name="bowling1" {% if form.bowling1.value %}checked{% endif %}>
                     <label for="{{ form.bowling1.id_for_label }}">Bowling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.brachiating1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.brachiating1.id_for_label }}" name="brachiating1" {% if form.brachiating1.value %}checked{% endif %}>
                     <label for="{{ form.brachiating1.id_for_label }}">Brachiating</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.climbing1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.climbing1.id_for_label }}" name="climbing1" {% if form.climbing1.value %}checked{% endif %}>
                     <label for="{{ form.climbing1.id_for_label }}">Climbing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.crawling1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.crawling1.id_for_label }}" name="crawling1" {% if form.crawling1.value %}checked{% endif %}>
                     <label for="{{ form.crawling1.id_for_label }}">Crawling through</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.dribbling1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dribbling1.id_for_label }}" name="dribbling1" {% if form.dribbling1.value %}checked{% endif %}>
                     <label for="{{ form.dribbling1.id_for_label }}">Dribbling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.drumming1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.drumming1.id_for_label }}" name="drumming1" {% if form.drumming1.value %}checked{% endif %}>
                     <label for="{{ form.drumming1.id_for_label }}">Drumming</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hula_hopping1 }}
-                    <label for="{{ form.hula_hopping1.id_for_label }}">Hula Hopping/hoop rolling</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hula_hopping1.id_for_label }}" name="hula_hopping1" {% if form.hula_hopping1.value %}checked{% endif %}>
+                    <label for="{{ form.hula_hopping1.id_for_label }}">Hula Hopping/Hoop Rolling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.kicking1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.kicking1.id_for_label }}" name="kicking1" {% if form.kicking1.value %}checked{% endif %}>
                     <label for="{{ form.kicking1.id_for_label }}">Kicking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.rocking1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.rocking1.id_for_label }}" name="rocking1" {% if form.rocking1.value %}checked{% endif %}>
                     <label for="{{ form.rocking1.id_for_label }}">Rocking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sliding1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sliding1.id_for_label }}" name="sliding1" {% if form.sliding1.value %}checked{% endif %}>
                     <label for="{{ form.sliding1.id_for_label }}">Sliding</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.throwing1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.throwing1.id_for_label }}" name="throwing1" {% if form.throwing1.value %}checked{% endif %}>
                     <label for="{{ form.throwing1.id_for_label }}">Throwing/Catching</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other4 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other4.id_for_label }}" name="other4" {% if form.other4.value %}checked{% endif %}>
                     <label for="{{ form.other4.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>Number of types of materials to support physical activities</p>
                 <div class="radio-options">
@@ -232,17 +322,19 @@
                     <p class="level263">Level 3: 3-4 material accessible to children</p>
                     <p class="level264">Level 4: 5+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question26 }}
-                </div> -->
             </div>
         </div>
         
         <!-- Infant Material Condition -->
         <div class="question-container">
-            <p class="question-text">Good Repair/functional(has all needed parts, sturdy materials)</p>
+            <p class="question-text">Good Repair/functional (has all needed parts, sturdy materials)</p>
             <div class="radio-group">
-                {{ form.question29 }}
+                {% for choice in form.question29 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -250,131 +342,108 @@
         <!-- Toddler Physical Activities Section -->
         {% if "Toddler" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Toddler Physical Activities</h3>
-            <p>Check all physical activities available for toddlers:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Toddler Physical Activities</h3>
+                <p>Check all physical activities available for toddlers:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.balancing2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.balancing2.id_for_label }}" name="balancing2" {% if form.balancing2.value %}checked{% endif %}>
                     <label for="{{ form.balancing2.id_for_label }}">Balancing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bouncing2 }}
-                    <label for="{{ form.bouncing2.id_for_label }}">Bouncing(Body)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bouncing2.id_for_label }}" name="bouncing2" {% if form.bouncing2.value %}checked{% endif %}>
+                    <label for="{{ form.bouncing2.id_for_label }}">Bouncing (Body)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bowling2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bowling2.id_for_label }}" name="bowling2" {% if form.bowling2.value %}checked{% endif %}>
                     <label for="{{ form.bowling2.id_for_label }}">Bowling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.brachiating2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.brachiating2.id_for_label }}" name="brachiating2" {% if form.brachiating2.value %}checked{% endif %}>
                     <label for="{{ form.brachiating2.id_for_label }}">Brachiating</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.climbing2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.climbing2.id_for_label }}" name="climbing2" {% if form.climbing2.value %}checked{% endif %}>
                     <label for="{{ form.climbing2.id_for_label }}">Climbing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.crawling2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.crawling2.id_for_label }}" name="crawling2" {% if form.crawling2.value %}checked{% endif %}>
                     <label for="{{ form.crawling2.id_for_label }}">Crawling through</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.dancing2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dancing2.id_for_label }}" name="dancing2" {% if form.dancing2.value %}checked{% endif %}>
                     <label for="{{ form.dancing2.id_for_label }}">Dancing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.digging2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.digging2.id_for_label }}" name="digging2" {% if form.digging2.value %}checked{% endif %}>
                     <label for="{{ form.digging2.id_for_label }}">Digging/Scooping</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.dribbling2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dribbling2.id_for_label }}" name="dribbling2" {% if form.dribbling2.value %}checked{% endif %}>
                     <label for="{{ form.dribbling2.id_for_label }}">Dribbling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.drumming2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.drumming2.id_for_label }}" name="drumming2" {% if form.drumming2.value %}checked{% endif %}>
                     <label for="{{ form.drumming2.id_for_label }}">Drumming</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hula_hopping2 }}
-                    <label for="{{ form.hula_hopping2.id_for_label }}">Hula Hopping/hoop rolling</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hula_hopping2.id_for_label }}" name="hula_hopping2" {% if form.hula_hopping2.value %}checked{% endif %}>
+                    <label for="{{ form.hula_hopping2.id_for_label }}">Hula Hopping/Hoop Rolling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.jumping2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.jumping2.id_for_label }}" name="jumping2" {% if form.jumping2.value %}checked{% endif %}>
                     <label for="{{ form.jumping2.id_for_label }}">Jumping off/on</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.kicking2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.kicking2.id_for_label }}" name="kicking2" {% if form.kicking2.value %}checked{% endif %}>
                     <label for="{{ form.kicking2.id_for_label }}">Kicking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.lifting2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.lifting2.id_for_label }}" name="lifting2" {% if form.lifting2.value %}checked{% endif %}>
                     <label for="{{ form.lifting2.id_for_label }}">Lifting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pull_ups2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pull_ups2.id_for_label }}" name="pull_ups2" {% if form.pull_ups2.value %}checked{% endif %}>
                     <label for="{{ form.pull_ups2.id_for_label }}">Pull Up/Hanging by arms or legs</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pushing2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pushing2.id_for_label }}" name="pushing2" {% if form.pushing2.value %}checked{% endif %}>
                     <label for="{{ form.pushing2.id_for_label }}">Pushing/Pulling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.raking2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.raking2.id_for_label }}" name="raking2" {% if form.raking2.value %}checked{% endif %}>
                     <label for="{{ form.raking2.id_for_label }}">Raking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.riding2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.riding2.id_for_label }}" name="riding2" {% if form.riding2.value %}checked{% endif %}>
                     <label for="{{ form.riding2.id_for_label }}">Riding</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.rocking2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.rocking2.id_for_label }}" name="rocking2" {% if form.rocking2.value %}checked{% endif %}>
                     <label for="{{ form.rocking2.id_for_label }}">Rocking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sliding2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sliding2.id_for_label }}" name="sliding2" {% if form.sliding2.value %}checked{% endif %}>
                     <label for="{{ form.sliding2.id_for_label }}">Sliding</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sweeping2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sweeping2.id_for_label }}" name="sweeping2" {% if form.sweeping2.value %}checked{% endif %}>
                     <label for="{{ form.sweeping2.id_for_label }}">Sweeping</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.swinging2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.swinging2.id_for_label }}" name="swinging2" {% if form.swinging2.value %}checked{% endif %}>
                     <label for="{{ form.swinging2.id_for_label }}">Swinging</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.throwing2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.throwing2.id_for_label }}" name="throwing2" {% if form.throwing2.value %}checked{% endif %}>
                     <label for="{{ form.throwing2.id_for_label }}">Throwing/Catching</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other5 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other5.id_for_label }}" name="other5" {% if form.other5.value %}checked{% endif %}>
                     <label for="{{ form.other5.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>Number of types of materials to support physical activities</p>
                 <div class="radio-options">
@@ -383,17 +452,19 @@
                     <p class="level273">Level 3: 5-6 material accessible to children</p>
                     <p class="level274">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question27 }}
-                </div> -->
             </div>
         </div>
         
         <!-- Toddler Material Condition -->
         <div class="question-container">
-            <p class="question-text">Good/Repair functional(has all needed parts,sturdy materials)</p>
+            <p class="question-text">Good/Repair functional (has all needed parts, sturdy materials)</p>
             <div class="radio-group">
-                {{ form.question30 }}
+                {% for choice in form.question30 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -401,141 +472,116 @@
         <!-- Preschool Physical Activities Section -->
         {% if "Preschool" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Preschool Physical Activities</h3>
-            <p>Check all physical activities available for preschool children:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Preschool Physical Activities</h3>
+                <p>Check all physical activities available for preschool children:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.balancing3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.balancing3.id_for_label }}" name="balancing3" {% if form.balancing3.value %}checked{% endif %}>
                     <label for="{{ form.balancing3.id_for_label }}">Balancing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bouncing3 }}
-                    <label for="{{ form.bouncing3.id_for_label }}">Bouncing(Body)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bouncing3.id_for_label }}" name="bouncing3" {% if form.bouncing3.value %}checked{% endif %}>
+                    <label for="{{ form.bouncing3.id_for_label }}">Bouncing (Body)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.bowling3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bowling3.id_for_label }}" name="bowling3" {% if form.bowling3.value %}checked{% endif %}>
                     <label for="{{ form.bowling3.id_for_label }}">Bowling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.brachiating3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.brachiating3.id_for_label }}" name="brachiating3" {% if form.brachiating3.value %}checked{% endif %}>
                     <label for="{{ form.brachiating3.id_for_label }}">Brachiating</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.climbing3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.climbing3.id_for_label }}" name="climbing3" {% if form.climbing3.value %}checked{% endif %}>
                     <label for="{{ form.climbing3.id_for_label }}">Climbing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.crawling3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.crawling3.id_for_label }}" name="crawling3" {% if form.crawling3.value %}checked{% endif %}>
                     <label for="{{ form.crawling3.id_for_label }}">Crawling through</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.dancing3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dancing3.id_for_label }}" name="dancing3" {% if form.dancing3.value %}checked{% endif %}>
                     <label for="{{ form.dancing3.id_for_label }}">Dancing</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.digging3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.digging3.id_for_label }}" name="digging3" {% if form.digging3.value %}checked{% endif %}>
                     <label for="{{ form.digging3.id_for_label }}">Digging/Scooping</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.dribbling3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dribbling3.id_for_label }}" name="dribbling3" {% if form.dribbling3.value %}checked{% endif %}>
                     <label for="{{ form.dribbling3.id_for_label }}">Dribbling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.drumming3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.drumming3.id_for_label }}" name="drumming3" {% if form.drumming3.value %}checked{% endif %}>
                     <label for="{{ form.drumming3.id_for_label }}">Drumming</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hammering3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hammering3.id_for_label }}" name="hammering3" {% if form.hammering3.value %}checked{% endif %}>
                     <label for="{{ form.hammering3.id_for_label }}">Hammering</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hopping3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hopping3.id_for_label }}" name="hopping3" {% if form.hopping3.value %}checked{% endif %}>
                     <label for="{{ form.hopping3.id_for_label }}">Hopping</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hula_hopping3 }}
-                    <label for="{{ form.hula_hopping3.id_for_label }}">Hula Hopping/hoop rolling</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hula_hopping3.id_for_label }}" name="hula_hopping3" {% if form.hula_hopping3.value %}checked{% endif %}>
+                    <label for="{{ form.hula_hopping3.id_for_label }}">Hula Hopping/Hoop Rolling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.jumping3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.jumping3.id_for_label }}" name="jumping3" {% if form.jumping3.value %}checked{% endif %}>
                     <label for="{{ form.jumping3.id_for_label }}">Jumping off/on</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.kicking3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.kicking3.id_for_label }}" name="kicking3" {% if form.kicking3.value %}checked{% endif %}>
                     <label for="{{ form.kicking3.id_for_label }}">Kicking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.lifting3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.lifting3.id_for_label }}" name="lifting3" {% if form.lifting3.value %}checked{% endif %}>
                     <label for="{{ form.lifting3.id_for_label }}">Lifting</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pull_ups3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pull_ups3.id_for_label }}" name="pull_ups3" {% if form.pull_ups3.value %}checked{% endif %}>
                     <label for="{{ form.pull_ups3.id_for_label }}">Pull Up/Hanging by arms or legs</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pushing3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pushing3.id_for_label }}" name="pushing3" {% if form.pushing3.value %}checked{% endif %}>
                     <label for="{{ form.pushing3.id_for_label }}">Pushing/Pulling</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.raking3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.raking3.id_for_label }}" name="raking3" {% if form.raking3.value %}checked{% endif %}>
                     <label for="{{ form.raking3.id_for_label }}">Raking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.riding3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.riding3.id_for_label }}" name="riding3" {% if form.riding3.value %}checked{% endif %}>
                     <label for="{{ form.riding3.id_for_label }}">Riding</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.rocking3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.rocking3.id_for_label }}" name="rocking3" {% if form.rocking3.value %}checked{% endif %}>
                     <label for="{{ form.rocking3.id_for_label }}">Rocking</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sliding3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sliding3.id_for_label }}" name="sliding3" {% if form.sliding3.value %}checked{% endif %}>
                     <label for="{{ form.sliding3.id_for_label }}">Sliding</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sweeping3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sweeping3.id_for_label }}" name="sweeping3" {% if form.sweeping3.value %}checked{% endif %}>
                     <label for="{{ form.sweeping3.id_for_label }}">Sweeping</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.swinging3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.swinging3.id_for_label }}" name="swinging3" {% if form.swinging3.value %}checked{% endif %}>
                     <label for="{{ form.swinging3.id_for_label }}">Swinging</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.throwing3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.throwing3.id_for_label }}" name="throwing3" {% if form.throwing3.value %}checked{% endif %}>
                     <label for="{{ form.throwing3.id_for_label }}">Throwing/Catching</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other6 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other6.id_for_label }}" name="other6" {% if form.other6.value %}checked{% endif %}>
                     <label for="{{ form.other6.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>Number of types of materials to support physical activity</p>
                 <div class="radio-options">
@@ -544,17 +590,19 @@
                     <p class="level283">Level 3: 5-6 material accessible to children</p>
                     <p class="level284">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question28 }}
-                </div> -->
             </div>
         </div>
         
         <!-- Preschool Material Condition -->
         <div class="question-container">
-            <p class="question-text">Good/Repari functional(has all needed parts,sturdy materials)</p>
+            <p class="question-text">Good/Repair functional (has all needed parts, sturdy materials)</p>
             <div class="radio-group">
-                {{ form.question31 }}
+                {% for choice in form.question31 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -562,51 +610,44 @@
         <!-- Infant Language Section -->
         {% if "Infant" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Infant Language Materials</h3>
-            <p>Check all language materials available for infants:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Infant Language Materials</h3>
+                <p>Check all language materials available for infants:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.audio1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.audio1.id_for_label }}" name="audio1" {% if form.audio1.value %}checked{% endif %}>
                     <label for="{{ form.audio1.id_for_label }}">Audio books</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.books1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.books1.id_for_label }}" name="books1" {% if form.books1.value %}checked{% endif %}>
                     <label for="{{ form.books1.id_for_label }}">Books</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.display_pictures1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.display_pictures1.id_for_label }}" name="display_pictures1" {% if form.display_pictures1.value %}checked{% endif %}>
                     <label for="{{ form.display_pictures1.id_for_label }}">Display Pictures (e.g., photographs, paintings)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.environmental_print1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.environmental_print1.id_for_label }}" name="environmental_print1" {% if form.environmental_print1.value %}checked{% endif %}>
                     <label for="{{ form.environmental_print1.id_for_label }}">Environmental Print (e.g., labels, food boxes, words)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.microphone1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.microphone1.id_for_label }}" name="microphone1" {% if form.microphone1.value %}checked{% endif %}>
                     <label for="{{ form.microphone1.id_for_label }}">Microphone/Talk tubes</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.language_cards1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.language_cards1.id_for_label }}" name="language_cards1" {% if form.language_cards1.value %}checked{% endif %}>
                     <label for="{{ form.language_cards1.id_for_label }}">Picture/Language Cards</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.storytelling1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.storytelling1.id_for_label }}" name="storytelling1" {% if form.storytelling1.value %}checked{% endif %}>
                     <label for="{{ form.storytelling1.id_for_label }}">Story telling materials (e.g., flannel boards, velcro, magnets, story blocks)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other7 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other7.id_for_label }}" name="other7" {% if form.other7.value %}checked{% endif %}>
                     <label for="{{ form.other7.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>How many language materials are accessible to infant children?</p>
                 <div class="radio-options">
@@ -615,9 +656,6 @@
                     <p class="level323">Level 3: 2 material accessible to children</p>
                     <p class="level324">Level 4: 3+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question32 }}
-                </div> -->
             </div>
         </div>
         
@@ -625,7 +663,12 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the infant language materials?</p>
             <div class="radio-group">
-                {{ form.question35 }}
+                {% for choice in form.question35 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -633,61 +676,52 @@
         <!-- Toddler Language Materials Section -->
         {% if "Toddler" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Toddler Language Materials</h3>
-            <p>Check all language materials available for toddlers:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Toddler Language Materials</h3>
+                <p>Check all language materials available for toddlers:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.alphabet2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.alphabet2.id_for_label }}" name="alphabet2" {% if form.alphabet2.value %}checked{% endif %}>
                     <label for="{{ form.alphabet2.id_for_label }}">Alphabet materials</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.audio2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.audio2.id_for_label }}" name="audio2" {% if form.audio2.value %}checked{% endif %}>
                     <label for="{{ form.audio2.id_for_label }}">Audio books</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.books2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.books2.id_for_label }}" name="books2" {% if form.books2.value %}checked{% endif %}>
                     <label for="{{ form.books2.id_for_label }}">Books</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.display_pictures2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.display_pictures2.id_for_label }}" name="display_pictures2" {% if form.display_pictures2.value %}checked{% endif %}>
                     <label for="{{ form.display_pictures2.id_for_label }}">Display Pictures (e.g., photographs, paintings)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.environmental_print2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.environmental_print2.id_for_label }}" name="environmental_print2" {% if form.environmental_print2.value %}checked{% endif %}>
                     <label for="{{ form.environmental_print2.id_for_label }}">Environmental Print (e.g., labels, food boxes, words)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.microphone2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.microphone2.id_for_label }}" name="microphone2" {% if form.microphone2.value %}checked{% endif %}>
                     <label for="{{ form.microphone2.id_for_label }}">Microphone/Talk tubes</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.language_cards2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.language_cards2.id_for_label }}" name="language_cards2" {% if form.language_cards2.value %}checked{% endif %}>
                     <label for="{{ form.language_cards2.id_for_label }}">Picture/Language Cards</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.storytelling2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.storytelling2.id_for_label }}" name="storytelling2" {% if form.storytelling2.value %}checked{% endif %}>
                     <label for="{{ form.storytelling2.id_for_label }}">Story telling materials (e.g., flannel boards, velcro, magnets, story blocks)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.language_games2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.language_games2.id_for_label }}" name="language_games2" {% if form.language_games2.value %}checked{% endif %}>
                     <label for="{{ form.language_games2.id_for_label }}">Word and language games</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other8 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other8.id_for_label }}" name="other8" {% if form.other8.value %}checked{% endif %}>
                     <label for="{{ form.other8.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>How many language materials are accessible to toddler children?</p>
                 <div class="radio-options">
@@ -696,9 +730,6 @@
                     <p class="level333">Level 3: 5-6 material accessible to children</p>
                     <p class="level334">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question33 }}
-                </div> -->
             </div>
         </div>
         
@@ -706,7 +737,12 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the toddler language materials?</p>
             <div class="radio-group">
-                {{ form.question36 }}
+                {% for choice in form.question36 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -714,66 +750,56 @@
         <!-- Preschool Language Materials Section -->
         {% if "Preschool" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Preschool Language Materials</h3>
-            <p>Check all language materials available for preschool children:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Preschool Language Materials</h3>
+                <p>Check all language materials available for preschool children:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.journaling3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.journaling3.id_for_label }}" name="journaling3" {% if form.journaling3.value %}checked{% endif %}>
                     <label for="{{ form.journaling3.id_for_label }}">Additional materials for journaling or recording observations, collecting data</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.alphabet3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.alphabet3.id_for_label }}" name="alphabet3" {% if form.alphabet3.value %}checked{% endif %}>
                     <label for="{{ form.alphabet3.id_for_label }}">Alphabet materials</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.audio3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.audio3.id_for_label }}" name="audio3" {% if form.audio3.value %}checked{% endif %}>
                     <label for="{{ form.audio3.id_for_label }}">Audio books</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.books3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.books3.id_for_label }}" name="books3" {% if form.books3.value %}checked{% endif %}>
                     <label for="{{ form.books3.id_for_label }}">Books</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.display_pictures3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.display_pictures3.id_for_label }}" name="display_pictures3" {% if form.display_pictures3.value %}checked{% endif %}>
                     <label for="{{ form.display_pictures3.id_for_label }}">Display Pictures (e.g., photographs, paintings)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.environmental_print3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.environmental_print3.id_for_label }}" name="environmental_print3" {% if form.environmental_print3.value %}checked{% endif %}>
                     <label for="{{ form.environmental_print3.id_for_label }}">Environmental Print (e.g., labels, food boxes, words)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.microphone3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.microphone3.id_for_label }}" name="microphone3" {% if form.microphone3.value %}checked{% endif %}>
                     <label for="{{ form.microphone3.id_for_label }}">Microphone/Talk tubes</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.language_cards3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.language_cards3.id_for_label }}" name="language_cards3" {% if form.language_cards3.value %}checked{% endif %}>
                     <label for="{{ form.language_cards3.id_for_label }}">Picture/Language Cards</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.storytelling3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.storytelling3.id_for_label }}" name="storytelling3" {% if form.storytelling3.value %}checked{% endif %}>
                     <label for="{{ form.storytelling3.id_for_label }}">Story telling materials (e.g., flannel boards, velcro, magnets, story blocks)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.language_games3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.language_games3.id_for_label }}" name="language_games3" {% if form.language_games3.value %}checked{% endif %}>
                     <label for="{{ form.language_games3.id_for_label }}">Word and language games</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other9 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other9.id_for_label }}" name="other9" {% if form.other9.value %}checked{% endif %}>
                     <label for="{{ form.other9.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>How many language materials are accessible to preschool children?</p>
                 <div class="radio-options">
@@ -782,9 +808,6 @@
                     <p class="level343">Level 3: 5-6 material accessible to children</p>
                     <p class="level344">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question34 }}
-                </div> -->
             </div>
         </div>
         
@@ -792,7 +815,12 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the preschool language materials?</p>
             <div class="radio-group">
-                {{ form.question37 }}
+                {% for choice in form.question37 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -800,116 +828,96 @@
         <!-- Infant Math/Science Materials Section -->
         {% if "Infant" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Infant Math/Science Materials</h3>
-            <p>Check all math/science materials available for infants:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Infant Math/Science Materials</h3>
+                <p>Check all math/science materials available for infants:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.bird_feeder1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bird_feeder1.id_for_label }}" name="bird_feeder1" {% if form.bird_feeder1.value %}checked{% endif %}>
                     <label for="{{ form.bird_feeder1.id_for_label }}">Bird Feeder</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.building_materials1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.building_materials1.id_for_label }}" name="building_materials1" {% if form.building_materials1.value %}checked{% endif %}>
                     <label for="{{ form.building_materials1.id_for_label }}">Building Materials</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.discovery_bottles1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.discovery_bottles1.id_for_label }}" name="discovery_bottles1" {% if form.discovery_bottles1.value %}checked{% endif %}>
                     <label for="{{ form.discovery_bottles1.id_for_label }}">Discovery Bottles/Bins</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.fill_dump_station1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.fill_dump_station1.id_for_label }}" name="fill_dump_station1" {% if form.fill_dump_station1.value %}checked{% endif %}>
                     <label for="{{ form.fill_dump_station1.id_for_label }}">Fill and Dump Station</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.funnels1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.funnels1.id_for_label }}" name="funnels1" {% if form.funnels1.value %}checked{% endif %}>
                     <label for="{{ form.funnels1.id_for_label }}">Funnels and Tubes</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.garden1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.garden1.id_for_label }}" name="garden1" {% if form.garden1.value %}checked{% endif %}>
                     <label for="{{ form.garden1.id_for_label }}">Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.grid1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.grid1.id_for_label }}" name="grid1" {% if form.grid1.value %}checked{% endif %}>
                     <label for="{{ form.grid1.id_for_label }}">Grid/100 Chart</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hopscotch1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hopscotch1.id_for_label }}" name="hopscotch1" {% if form.hopscotch1.value %}checked{% endif %}>
                     <label for="{{ form.hopscotch1.id_for_label }}">Hopscotch</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.living_animals1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.living_animals1.id_for_label }}" name="living_animals1" {% if form.living_animals1.value %}checked{% endif %}>
                     <label for="{{ form.living_animals1.id_for_label }}">Living Animals</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.magnifying_glasses1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.magnifying_glasses1.id_for_label }}" name="magnifying_glasses1" {% if form.magnifying_glasses1.value %}checked{% endif %}>
                     <label for="{{ form.magnifying_glasses1.id_for_label }}">Magnifying Glass</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.matching_games1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.matching_games1.id_for_label }}" name="matching_games1" {% if form.matching_games1.value %}checked{% endif %}>
                     <label for="{{ form.matching_games1.id_for_label }}">Matching Games</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.mirrors1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.mirrors1.id_for_label }}" name="mirrors1" {% if form.mirrors1.value %}checked{% endif %}>
                     <label for="{{ form.mirrors1.id_for_label }}">Mirrors</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.numbers1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.numbers1.id_for_label }}" name="numbers1" {% if form.numbers1.value %}checked{% endif %}>
                     <label for="{{ form.numbers1.id_for_label }}">Numbers</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.prism1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.prism1.id_for_label }}" name="prism1" {% if form.prism1.value %}checked{% endif %}>
                     <label for="{{ form.prism1.id_for_label }}">Prism/Color tiles</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.rolling_ramps1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.rolling_ramps1.id_for_label }}" name="rolling_ramps1" {% if form.rolling_ramps1.value %}checked{% endif %}>
                     <label for="{{ form.rolling_ramps1.id_for_label }}">Rolling Ramps</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.slime1 }}
-                    <label for="{{ form.slime1.id_for_label }}">Slime/goop/shaving cream/bubbles</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.slime1.id_for_label }}" name="slime1" {% if form.slime1.value %}checked{% endif %}>
+                    <label for="{{ form.slime1.id_for_label }}">Slime/Goop/Shaving Cream/Bubbles</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sorting_containers1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sorting_containers1.id_for_label }}" name="sorting_containers1" {% if form.sorting_containers1.value %}checked{% endif %}>
                     <label for="{{ form.sorting_containers1.id_for_label }}">Sorting Containers</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.varying_size_containers1 }}
-                    <label for="{{ form.varying_size_containers1.id_for_label }}">Varying Size Containers(Atleast 2 sizes)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.varying_size_containers1.id_for_label }}" name="varying_size_containers1" {% if form.varying_size_containers1.value %}checked{% endif %}>
+                    <label for="{{ form.varying_size_containers1.id_for_label }}">Varying Size Containers (At least 2 sizes)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.visual_patterns1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.visual_patterns1.id_for_label }}" name="visual_patterns1" {% if form.visual_patterns1.value %}checked{% endif %}>
                     <label for="{{ form.visual_patterns1.id_for_label }}">Visual Patterns</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.wind_chimes1 }}
-                    <label for="{{ form.wind_chimes1.id_for_label }}">Wind Chimes/pinwheel</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.wind_chimes1.id_for_label }}" name="wind_chimes1" {% if form.wind_chimes1.value %}checked{% endif %}>
+                    <label for="{{ form.wind_chimes1.id_for_label }}">Wind Chimes/Pinwheel</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other10 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other10.id_for_label }}" name="other10" {% if form.other10.value %}checked{% endif %}>
                     <label for="{{ form.other10.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>How many math/science materials are accessible to infant children?</p>
                 <div class="radio-options">
@@ -918,9 +926,6 @@
                     <p class="level383">Level 3: 5-6 material accessible to children</p>
                     <p class="level384">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question38 }}
-                </div> -->
             </div>
         </div>
         
@@ -928,7 +933,12 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the infant math/science materials?</p>
             <div class="radio-group">
-                {{ form.question41 }}
+                {% for choice in form.question41 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -936,131 +946,108 @@
         <!-- Toddler Math/Science Materials Section -->
         {% if "Toddler" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Toddler Math/Science Materials</h3>
-            <p>Check all math/science materials available for toddlers:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Toddler Math/Science Materials</h3>
+                <p>Check all math/science materials available for toddlers:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.bird_feeder2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bird_feeder2.id_for_label }}" name="bird_feeder2" {% if form.bird_feeder2.value %}checked{% endif %}>
                     <label for="{{ form.bird_feeder2.id_for_label }}">Bird Feeder</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.building_materials2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.building_materials2.id_for_label }}" name="building_materials2" {% if form.building_materials2.value %}checked{% endif %}>
                     <label for="{{ form.building_materials2.id_for_label }}">Building Materials</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.discovery_bottles2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.discovery_bottles2.id_for_label }}" name="discovery_bottles2" {% if form.discovery_bottles2.value %}checked{% endif %}>
                     <label for="{{ form.discovery_bottles2.id_for_label }}">Discovery Bottles/Bins</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.fill_dump_station2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.fill_dump_station2.id_for_label }}" name="fill_dump_station2" {% if form.fill_dump_station2.value %}checked{% endif %}>
                     <label for="{{ form.fill_dump_station2.id_for_label }}">Fill and Dump Station</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.funnels2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.funnels2.id_for_label }}" name="funnels2" {% if form.funnels2.value %}checked{% endif %}>
                     <label for="{{ form.funnels2.id_for_label }}">Funnels and Tubes</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.garden2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.garden2.id_for_label }}" name="garden2" {% if form.garden2.value %}checked{% endif %}>
                     <label for="{{ form.garden2.id_for_label }}">Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hopscotch2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hopscotch2.id_for_label }}" name="hopscotch2" {% if form.hopscotch2.value %}checked{% endif %}>
                     <label for="{{ form.hopscotch2.id_for_label }}">Hopscotch</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.living_animals2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.living_animals2.id_for_label }}" name="living_animals2" {% if form.living_animals2.value %}checked{% endif %}>
                     <label for="{{ form.living_animals2.id_for_label }}">Living Animals</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.magnifying_glasses2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.magnifying_glasses2.id_for_label }}" name="magnifying_glasses2" {% if form.magnifying_glasses2.value %}checked{% endif %}>
                     <label for="{{ form.magnifying_glasses2.id_for_label }}">Magnifying Glass</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.matching_games2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.matching_games2.id_for_label }}" name="matching_games2" {% if form.matching_games2.value %}checked{% endif %}>
                     <label for="{{ form.matching_games2.id_for_label }}">Matching Games</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.mirrors2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.mirrors2.id_for_label }}" name="mirrors2" {% if form.mirrors2.value %}checked{% endif %}>
                     <label for="{{ form.mirrors2.id_for_label }}">Mirrors</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.numbers2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.numbers2.id_for_label }}" name="numbers2" {% if form.numbers2.value %}checked{% endif %}>
                     <label for="{{ form.numbers2.id_for_label }}">Numbers</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.prism2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.prism2.id_for_label }}" name="prism2" {% if form.prism2.value %}checked{% endif %}>
                     <label for="{{ form.prism2.id_for_label }}">Prism/Color tiles</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.recording_temp2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.recording_temp2.id_for_label }}" name="recording_temp2" {% if form.recording_temp2.value %}checked{% endif %}>
                     <label for="{{ form.recording_temp2.id_for_label }}">Recording temp/rain</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.rolling_ramps2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.rolling_ramps2.id_for_label }}" name="rolling_ramps2" {% if form.rolling_ramps2.value %}checked{% endif %}>
                     <label for="{{ form.rolling_ramps2.id_for_label }}">Rolling Ramps</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.scales2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.scales2.id_for_label }}" name="scales2" {% if form.scales2.value %}checked{% endif %}>
                     <label for="{{ form.scales2.id_for_label }}">Scales</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.slime2 }}
-                    <label for="{{ form.slime2.id_for_label }}">Slime/goop/shaving cream/bubbles</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.slime2.id_for_label }}" name="slime2" {% if form.slime2.value %}checked{% endif %}>
+                    <label for="{{ form.slime2.id_for_label }}">Slime/Goop/Shaving Cream/Bubbles</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sorting_containers2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sorting_containers2.id_for_label }}" name="sorting_containers2" {% if form.sorting_containers2.value %}checked{% endif %}>
                     <label for="{{ form.sorting_containers2.id_for_label }}">Sorting Containers</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.spinners2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.spinners2.id_for_label }}" name="spinners2" {% if form.spinners2.value %}checked{% endif %}>
                     <label for="{{ form.spinners2.id_for_label }}">Spinners</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.steps2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.steps2.id_for_label }}" name="steps2" {% if form.steps2.value %}checked{% endif %}>
                     <label for="{{ form.steps2.id_for_label }}">Steps/Visual Schedule</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.varying_size_containers2 }}
-                    <label for="{{ form.varying_size_containers2.id_for_label }}">Varying Size Containers(Atleast 2 sizes)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.varying_size_containers2.id_for_label }}" name="varying_size_containers2" {% if form.varying_size_containers2.value %}checked{% endif %}>
+                    <label for="{{ form.varying_size_containers2.id_for_label }}">Varying Size Containers (At least 2 sizes)</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.visual_patterns2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.visual_patterns2.id_for_label }}" name="visual_patterns2" {% if form.visual_patterns2.value %}checked{% endif %}>
                     <label for="{{ form.visual_patterns2.id_for_label }}">Visual Patterns</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.wind_chimes2 }}
-                    <label for="{{ form.wind_chimes2.id_for_label }}">Wind Chimes/pinwheel</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.wind_chimes2.id_for_label }}" name="wind_chimes2" {% if form.wind_chimes2.value %}checked{% endif %}>
+                    <label for="{{ form.wind_chimes2.id_for_label }}">Wind Chimes/Pinwheel</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.other11 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other11.id_for_label }}" name="other11" {% if form.other11.value %}checked{% endif %}>
                     <label for="{{ form.other11.id_for_label }}">Other</label>
                 </div>
             </div>
-            
             <div class="radio-group">
                 <p>How many math/science materials are accessible to toddler children?</p>
                 <div class="radio-options">
@@ -1069,9 +1056,6 @@
                     <p class="level393">Level 3: 5-6 material accessible to children</p>
                     <p class="level394">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question39 }}
-                </div> -->
             </div>
         </div>
         
@@ -1079,7 +1063,12 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the toddler math/science materials?</p>
             <div class="radio-group">
-                {{ form.question42 }}
+                {% for choice in form.question42 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -1087,147 +1076,127 @@
         <!-- Preschool Math/Science Materials Section -->
         {% if "Preschool" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Preschool Math/Science Materials</h3>
-            <p>Check all math/science materials available for preschool children:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Preschool Math/Science Materials</h3>
+                <p>Check all math/science materials available for preschool children:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.bird_feeder3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.bird_feeder3.id_for_label }}" name="bird_feeder3" {% if form.bird_feeder3.value %}checked{% endif %}>
                     <label for="{{ form.bird_feeder3.id_for_label }}">Bird Feeder</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.building_materials3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.building_materials3.id_for_label }}" name="building_materials3" {% if form.building_materials3.value %}checked{% endif %}>
                     <label for="{{ form.building_materials3.id_for_label }}">Building Materials</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.dice3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dice3.id_for_label }}" name="dice3" {% if form.dice3.value %}checked{% endif %}>
                     <label for="{{ form.dice3.id_for_label }}">Dice</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.discovery_bottles3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.discovery_bottles3.id_for_label }}" name="discovery_bottles3" {% if form.discovery_bottles3.value %}checked{% endif %}>
                     <label for="{{ form.discovery_bottles3.id_for_label }}">Discovery Bottles/Bins</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.fill_dump_station3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.fill_dump_station3.id_for_label }}" name="fill_dump_station3" {% if form.fill_dump_station3.value %}checked{% endif %}>
                     <label for="{{ form.fill_dump_station3.id_for_label }}">Fill and Dump Station</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.funnels3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.funnels3.id_for_label }}" name="funnels3" {% if form.funnels3.value %}checked{% endif %}>
                     <label for="{{ form.funnels3.id_for_label }}">Funnels and Tubes</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.garden3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.garden3.id_for_label }}" name="garden3" {% if form.garden3.value %}checked{% endif %}>
                     <label for="{{ form.garden3.id_for_label }}">Garden</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.grid3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.grid3.id_for_label }}" name="grid3" {% if form.grid3.value %}checked{% endif %}>
                     <label for="{{ form.grid3.id_for_label }}">Grid/100 Chart</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.hopscotch3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.hopscotch3.id_for_label }}" name="hopscotch3" {% if form.hopscotch3.value %}checked{% endif %}>
                     <label for="{{ form.hopscotch3.id_for_label }}">Hopscotch</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.living_animals3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.living_animals3.id_for_label }}" name="living_animals3" {% if form.living_animals3.value %}checked{% endif %}>
                     <label for="{{ form.living_animals3.id_for_label }}">Living Animals</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.magnifying_glasses3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.magnifying_glasses3.id_for_label }}" name="magnifying_glasses3" {% if form.magnifying_glasses3.value %}checked{% endif %}>
                     <label for="{{ form.magnifying_glasses3.id_for_label }}">Magnifying Glass</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.matching_games3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.matching_games3.id_for_label }}" name="matching_games3" {% if form.matching_games3.value %}checked{% endif %}>
                     <label for="{{ form.matching_games3.id_for_label }}">Matching Games</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.mirrors3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.mirrors3.id_for_label }}" name="mirrors3" {% if form.mirrors3.value %}checked{% endif %}>
                     <label for="{{ form.mirrors3.id_for_label }}">Mirrors</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.numbers3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.numbers3.id_for_label }}" name="numbers3" {% if form.numbers3.value %}checked{% endif %}>
                     <label for="{{ form.numbers3.id_for_label }}">Numbers</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.prism3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.prism3.id_for_label }}" name="prism3" {% if form.prism3.value %}checked{% endif %}>
                     <label for="{{ form.prism3.id_for_label }}">Prism/Color tiles</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.pulleys3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.pulleys3.id_for_label }}" name="pulleys3" {% if form.pulleys3.value %}checked{% endif %}>
                     <label for="{{ form.pulleys3.id_for_label }}">Pulleys/Levers</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.recording_temp3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.recording_temp3.id_for_label }}" name="recording_temp3" {% if form.recording_temp3.value %}checked{% endif %}>
                     <label for="{{ form.recording_temp3.id_for_label }}">Recording temp/rain</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.rolling_ramps3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.rolling_ramps3.id_for_label }}" name="rolling_ramps3" {% if form.rolling_ramps3.value %}checked{% endif %}>
                     <label for="{{ form.rolling_ramps3.id_for_label }}">Rolling Ramps</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.scales3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.scales3.id_for_label }}" name="scales3" {% if form.scales3.value %}checked{% endif %}>
                     <label for="{{ form.scales3.id_for_label }}">Scales</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.slime3 }}
-                    <label for="{{ form.slime3.id_for_label }}">Slime/goop/shaving cream/bubbles</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.slime3.id_for_label }}" name="slime3" {% if form.slime3.value %}checked{% endif %}>
+                    <label for="{{ form.slime3.id_for_label }}">Slime/Goop/Shaving Cream/Bubbles</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.sorting_containers3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.sorting_containers3.id_for_label }}" name="sorting_containers3" {% if form.sorting_containers3.value %}checked{% endif %}>
                     <label for="{{ form.sorting_containers3.id_for_label }}">Sorting Containers</label>
                 </div>
-                
                 <div class="checkbox-item">
-                    {{ form.spinners3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.spinners3.id_for_label }}" name="spinners3" {% if form.spinners3.value %}checked{% endif %}>
                     <label for="{{ form.spinners3.id_for_label }}">Spinners</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.steps3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.steps3.id_for_label }}" name="steps3" {% if form.steps3.value %}checked{% endif %}>
                     <label for="{{ form.steps3.id_for_label }}">Steps/Visual Schedule</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.timers3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.timers3.id_for_label }}" name="timers3" {% if form.timers3.value %}checked{% endif %}>
                     <label for="{{ form.timers3.id_for_label }}">Timer/Stopwatchers</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.varying_size_containers3 }}
-                    <label for="{{ form.varying_size_containers3.id_for_label }}">Varying Size Containers(Atleast 2 sizes)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.varying_size_containers3.id_for_label }}" name="varying_size_containers3" {% if form.varying_size_containers3.value %}checked{% endif %}>
+                    <label for="{{ form.varying_size_containers3.id_for_label }}">Varying Size Containers (At least 2 sizes)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.visual_patterns3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.visual_patterns3.id_for_label }}" name="visual_patterns3" {% if form.visual_patterns3.value %}checked{% endif %}>
                     <label for="{{ form.visual_patterns3.id_for_label }}">Visual Patterns</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.wind_chimes3 }}
-                    <label for="{{ form.wind_chimes3.id_for_label }}">Wind Chimes/pinwheel</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.wind_chimes3.id_for_label }}" name="wind_chimes3" {% if form.wind_chimes3.value %}checked{% endif %}>
+                    <label for="{{ form.wind_chimes3.id_for_label }}">Wind Chimes/Pinwheel</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.other12 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.other12.id_for_label }}" name="other12" {% if form.other12.value %}checked{% endif %}>
                     <label for="{{ form.other12.id_for_label }}">Other</label>
                 </div>
             </div>
@@ -1240,9 +1209,6 @@
                     <p class="level403">Level 3: 5-6 material accessible to children</p>
                     <p class="level404">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question40 }}
-                </div> -->
             </div>
         </div>
         
@@ -1250,91 +1216,96 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the preschool math/science materials?</p>
             <div class="radio-group">
-                {{ form.question43 }}
+                {% for choice in form.question43 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
 
-
         <!-- Infant Dramatic Play Materials Section -->
         {% if "Infant" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Infant Dramatic Play Materials</h3>
-            <p>Check all dramatic play materials available for infants:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Infant Dramatic Play Materials</h3>
+                <p>Check all dramatic play materials available for infants:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.animal_figures1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.animal_figures1.id_for_label }}" name="animal_figures1" {% if form.animal_figures1.value %}checked{% endif %}>
                     <label for="{{ form.animal_figures1.id_for_label }}">Animal Figures</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.crayons1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.crayons1.id_for_label }}" name="crayons1" {% if form.crayons1.value %}checked{% endif %}>
                     <label for="{{ form.crayons1.id_for_label }}">Crayons/Pens/Pencils/Markers</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.child_sized_furniture1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.child_sized_furniture1.id_for_label }}" name="child_sized_furniture1" {% if form.child_sized_furniture1.value %}checked{% endif %}>
                     <label for="{{ form.child_sized_furniture1.id_for_label }}">Child-Sized Furniture</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.collage_materials1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.collage_materials1.id_for_label }}" name="collage_materials1" {% if form.collage_materials1.value %}checked{% endif %}>
                     <label for="{{ form.collage_materials1.id_for_label }}">Collage Materials with different textures</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.cooking_eating_equipment1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.cooking_eating_equipment1.id_for_label }}" name="cooking_eating_equipment1" {% if form.cooking_eating_equipment1.value %}checked{% endif %}>
                     <label for="{{ form.cooking_eating_equipment1.id_for_label }}">Cooking eating equipment (e.g., pots and pans, dishes, spoons)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.dolls1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dolls1.id_for_label }}" name="dolls1" {% if form.dolls1.value %}checked{% endif %}>
                     <label for="{{ form.dolls1.id_for_label }}">Dolls/Puppets</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.dress_up1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dress_up1.id_for_label }}" name="dress_up1" {% if form.dress_up1.value %}checked{% endif %}>
                     <label for="{{ form.dress_up1.id_for_label }}">Dress Up Clothes</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.easels1 }}
-                    <label for="{{ form.easels1.id_for_label }}">Easels(functional with eg chalk/paint)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.easels1.id_for_label }}" name="easels1" {% if form.easels1.value %}checked{% endif %}>
+                    <label for="{{ form.easels1.id_for_label }}">Easels (functional with e.g., chalk/paint)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.musical_instruments1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.musical_instruments1.id_for_label }}" name="musical_instruments1" {% if form.musical_instruments1.value %}checked{% endif %}>
                     <label for="{{ form.musical_instruments1.id_for_label }}">Musical instruments or instruments to make music (e.g., pans, buckets, sticks)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paint_brushes1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paint_brushes1.id_for_label }}" name="paint_brushes1" {% if form.paint_brushes1.value %}checked{% endif %}>
                     <label for="{{ form.paint_brushes1.id_for_label }}">Paint Brushes</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paints1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paints1.id_for_label }}" name="paints1" {% if form.paints1.value %}checked{% endif %}>
                     <label for="{{ form.paints1.id_for_label }}">Paints</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paper_cardboard1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paper_cardboard1.id_for_label }}" name="paper_cardboard1" {% if form.paper_cardboard1.value %}checked{% endif %}>
                     <label for="{{ form.paper_cardboard1.id_for_label }}">Paper/Cardboard</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.play_dough1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.play_dough1.id_for_label }}" name="play_dough1" {% if form.play_dough1.value %}checked{% endif %}>
                     <label for="{{ form.play_dough1.id_for_label }}">Play Dough</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.soft_animals1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.soft_animals1.id_for_label }}" name="soft_animals1" {% if form.soft_animals1.value %}checked{% endif %}>
                     <label for="{{ form.soft_animals1.id_for_label }}">Soft Animals</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.toy_telephones1 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.toy_telephones1.id_for_label }}" name="toy_telephones1" {% if form.toy_telephones1.value %}checked{% endif %}>
                     <label for="{{ form.toy_telephones1.id_for_label }}">Toy Telephones</label>
                 </div>
             </div>
@@ -1347,9 +1318,6 @@
                     <p class="level443">Level 3: 5-6 material accessible to children</p>
                     <p class="level444">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question44 }}
-                </div> -->
             </div>
         </div>
 
@@ -1357,7 +1325,12 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the infant dramatic play materials?</p>
             <div class="radio-group">
-                {{ form.question47 }}
+                {% for choice in form.question47 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -1365,82 +1338,83 @@
         <!-- Toddler Dramatic Play Materials Section -->
         {% if "Toddler" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Toddler Dramatic Play Materials</h3>
-            <p>Check all dramatic play materials available for toddlers:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Toddler Dramatic Play Materials</h3>
+                <p>Check all dramatic play materials available for toddlers:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.animal_figures2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.animal_figures2.id_for_label }}" name="animal_figures2" {% if form.animal_figures2.value %}checked{% endif %}>
                     <label for="{{ form.animal_figures2.id_for_label }}">Animal Figures</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.crayons2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.crayons2.id_for_label }}" name="crayons2" {% if form.crayons2.value %}checked{% endif %}>
                     <label for="{{ form.crayons2.id_for_label }}">Crayons/Pens/Pencils/Markers</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.child_sized_furniture2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.child_sized_furniture2.id_for_label }}" name="child_sized_furniture2" {% if form.child_sized_furniture2.value %}checked{% endif %}>
                     <label for="{{ form.child_sized_furniture2.id_for_label }}">Child-Sized Furniture</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.collage_materials2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.collage_materials2.id_for_label }}" name="collage_materials2" {% if form.collage_materials2.value %}checked{% endif %}>
                     <label for="{{ form.collage_materials2.id_for_label }}">Collage Materials with different textures</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.cooking_eating_equipment2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.cooking_eating_equipment2.id_for_label }}" name="cooking_eating_equipment2" {% if form.cooking_eating_equipment2.value %}checked{% endif %}>
                     <label for="{{ form.cooking_eating_equipment2.id_for_label }}">Cooking eating equipment (e.g., pots and pans, dishes, spoons)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.dolls2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dolls2.id_for_label }}" name="dolls2" {% if form.dolls2.value %}checked{% endif %}>
                     <label for="{{ form.dolls2.id_for_label }}">Dolls/Puppets</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.dress_up2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dress_up2.id_for_label }}" name="dress_up2" {% if form.dress_up2.value %}checked{% endif %}>
                     <label for="{{ form.dress_up2.id_for_label }}">Dress Up Clothes</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.easels2 }}
-                    <label for="{{ form.easels2.id_for_label }}">Easels(functional with eg chalk/paint)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.easels2.id_for_label }}" name="easels2" {% if form.easels2.value %}checked{% endif %}>
+                    <label for="{{ form.easels2.id_for_label }}">Easels (functional with e.g., chalk/paint)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.musical_instruments2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.musical_instruments2.id_for_label }}" name="musical_instruments2" {% if form.musical_instruments2.value %}checked{% endif %}>
                     <label for="{{ form.musical_instruments2.id_for_label }}">Musical instruments or instruments to make music (e.g., pans, buckets, sticks)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paint_brushes2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paint_brushes2.id_for_label }}" name="paint_brushes2" {% if form.paint_brushes2.value %}checked{% endif %}>
                     <label for="{{ form.paint_brushes2.id_for_label }}">Paint Brushes</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paints2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paints2.id_for_label }}" name="paints2" {% if form.paints2.value %}checked{% endif %}>
                     <label for="{{ form.paints2.id_for_label }}">Paints</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paper_cardboard2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paper_cardboard2.id_for_label }}" name="paper_cardboard2" {% if form.paper_cardboard2.value %}checked{% endif %}>
                     <label for="{{ form.paper_cardboard2.id_for_label }}">Paper/Cardboard</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.play_dough2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.play_dough2.id_for_label }}" name="play_dough2" {% if form.play_dough2.value %}checked{% endif %}>
                     <label for="{{ form.play_dough2.id_for_label }}">Play Dough</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.soft_animals2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.soft_animals2.id_for_label }}" name="soft_animals2" {% if form.soft_animals2.value %}checked{% endif %}>
                     <label for="{{ form.soft_animals2.id_for_label }}">Soft Animals</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.toy_telephones2 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.toy_telephones2.id_for_label }}" name="toy_telephones2" {% if form.toy_telephones2.value %}checked{% endif %}>
                     <label for="{{ form.toy_telephones2.id_for_label }}">Toy Telephones</label>
                 </div>
             </div>
@@ -1453,9 +1427,6 @@
                     <p class="level453">Level 3: 5-6 material accessible to children</p>
                     <p class="level454">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question45 }}
-                </div> -->
             </div>
         </div>
 
@@ -1463,7 +1434,12 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the toddler dramatic play materials?</p>
             <div class="radio-group">
-                {{ form.question48 }}
+                {% for choice in form.question48 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
@@ -1471,82 +1447,83 @@
         <!-- Preschool Dramatic Play Materials Section -->
         {% if "Preschool" in age_groups %}
         <div class="form-section">
-            <h3 class="section-title">Preschool Dramatic Play Materials</h3>
-            <p>Check all dramatic play materials available for preschool children:</p>
-            
+            <div class="section-header">
+                <h3 class="section-title">Preschool Dramatic Play Materials</h3>
+                <p>Check all dramatic play materials available for preschool children:</p>
+            </div>
             <div class="checkbox-grid">
                 <div class="checkbox-item">
-                    {{ form.animal_figures3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.animal_figures3.id_for_label }}" name="animal_figures3" {% if form.animal_figures3.value %}checked{% endif %}>
                     <label for="{{ form.animal_figures3.id_for_label }}">Animal Figures</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.crayons3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.crayons3.id_for_label }}" name="crayons3" {% if form.crayons3.value %}checked{% endif %}>
                     <label for="{{ form.crayons3.id_for_label }}">Crayons/Pens/Pencils/Markers</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.child_sized_furniture3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.child_sized_furniture3.id_for_label }}" name="child_sized_furniture3" {% if form.child_sized_furniture3.value %}checked{% endif %}>
                     <label for="{{ form.child_sized_furniture3.id_for_label }}">Child-Sized Furniture</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.collage_materials3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.collage_materials3.id_for_label }}" name="collage_materials3" {% if form.collage_materials3.value %}checked{% endif %}>
                     <label for="{{ form.collage_materials3.id_for_label }}">Collage Materials with different textures</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.cooking_eating_equipment3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.cooking_eating_equipment3.id_for_label }}" name="cooking_eating_equipment3" {% if form.cooking_eating_equipment3.value %}checked{% endif %}>
                     <label for="{{ form.cooking_eating_equipment3.id_for_label }}">Cooking eating equipment (e.g., pots and pans, dishes, spoons)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.dolls3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dolls3.id_for_label }}" name="dolls3" {% if form.dolls3.value %}checked{% endif %}>
                     <label for="{{ form.dolls3.id_for_label }}">Dolls/Puppets</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.dress_up3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.dress_up3.id_for_label }}" name="dress_up3" {% if form.dress_up3.value %}checked{% endif %}>
                     <label for="{{ form.dress_up3.id_for_label }}">Dress Up Clothes</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.easels3 }}
-                    <label for="{{ form.easels3.id_for_label }}">Easels(functional with eg chalk/paint)</label>
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.easels3.id_for_label }}" name="easels3" {% if form.easels3.value %}checked{% endif %}>
+                    <label for="{{ form.easels3.id_for_label }}">Easels (functional with e.g., chalk/paint)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.musical_instruments3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.musical_instruments3.id_for_label }}" name="musical_instruments3" {% if form.musical_instruments3.value %}checked{% endif %}>
                     <label for="{{ form.musical_instruments3.id_for_label }}">Musical instruments or instruments to make music (e.g., pans, buckets, sticks)</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paint_brushes3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paint_brushes3.id_for_label }}" name="paint_brushes3" {% if form.paint_brushes3.value %}checked{% endif %}>
                     <label for="{{ form.paint_brushes3.id_for_label }}">Paint Brushes</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paints3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paints3.id_for_label }}" name="paints3" {% if form.paints3.value %}checked{% endif %}>
                     <label for="{{ form.paints3.id_for_label }}">Paints</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.paper_cardboard3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.paper_cardboard3.id_for_label }}" name="paper_cardboard3" {% if form.paper_cardboard3.value %}checked{% endif %}>
                     <label for="{{ form.paper_cardboard3.id_for_label }}">Paper/Cardboard</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.play_dough3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.play_dough3.id_for_label }}" name="play_dough3" {% if form.play_dough3.value %}checked{% endif %}>
                     <label for="{{ form.play_dough3.id_for_label }}">Play Dough</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.soft_animals3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.soft_animals3.id_for_label }}" name="soft_animals3" {% if form.soft_animals3.value %}checked{% endif %}>
                     <label for="{{ form.soft_animals3.id_for_label }}">Soft Animals</label>
                 </div>
                 
                 <div class="checkbox-item">
-                    {{ form.toy_telephones3 }}
+                    <input type="checkbox" class="custom-checkbox" id="{{ form.toy_telephones3.id_for_label }}" name="toy_telephones3" {% if form.toy_telephones3.value %}checked{% endif %}>
                     <label for="{{ form.toy_telephones3.id_for_label }}">Toy Telephones</label>
                 </div>
             </div>
@@ -1559,9 +1536,6 @@
                     <p class="level463">Level 3: 5-6 material accessible to children</p>
                     <p class="level464">Level 4: 7+ material accessible to children</p>
                 </div>
-                <!-- <div style="margin-top: 15px;">
-                    {{ form.question46 }}
-                </div> -->
             </div>
         </div>
 
@@ -1569,22 +1543,31 @@
         <div class="question-container">
             <p class="question-text">What is the condition of the preschool dramatic play materials?</p>
             <div class="radio-group">
-                {{ form.question49 }}
+                {% for choice in form.question49 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         {% endif %}
 
-        
         <!-- Outdoor Time Plan -->
         <div class="question-container">
             <p class="question-text">Is there a written plan for outdoor time?</p>
             <div class="radio-group">
-                {{ form.question50 }}
+                {% for choice in form.question50 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         
         <div class="button-container">
-            <button type="submit" class="submit-button">Next</button>
+            <button type="submit" class="btn-primary">Next</button>
         </div>
     </form>
 
@@ -1744,7 +1727,7 @@
                 createHiddenInput('preschool_dramatic_play_data', preschoolDramaticPlayMaterials);
             });
         });
-        </script>
+    </script>
 </body>
 </html>
 

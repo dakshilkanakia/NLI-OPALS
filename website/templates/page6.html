@@ -9,57 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPALS Page 6</title>
     <style>
+        body {
+            background-color: #E9EDE1;
+            font-family: 'AvenirNext', Arial, sans-serif;
+        }
+
         /* Overall form styling */
         .opals-form {
-            padding: 20px 40px;
+            padding: 60px 40px 20px 40px;
             max-width: 1000px;
             margin: 0 auto;
-            font-family: Arial, sans-serif;
         }
-        
+
         /* Question container styling */
         .question-container {
             margin-bottom: 25px;
             padding: 15px;
             border-radius: 8px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         /* Question text styling */
         .question-text {
             font-weight: 500;
             margin-bottom: 10px;
-        }
-        
-        /* Radio group container */
-        .radio-group {
-            margin-top: 8px;
-        }
-        
-        /* Fix for the radio lists */
-        .radio-group ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .radio-group li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-        
-        /* Radio label styling */
-        .radio-group label {
-            display: inline-flex;
-            align-items: center;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        
-        /* Radio input styling */
-        .radio-group input[type="radio"] {
-            margin-right: 8px;
-            margin-top: 3px;
         }
         
         /* Page title */
@@ -70,97 +44,280 @@
             font-size: 24px;
         }
         
-        /* Button styling */
-        .submit-button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+        /* Section header styling */
+        .section-header {
+            background-color: #D3F36B;
+            padding: 20px;
+            border-bottom-right-radius: 30px;
+            margin-bottom: 20px;
         }
         
-        /* Button container */
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 10px;
+        }
+        
+        /* Radio group styling */
+        .radio-group {
+            margin-top: 8px;
+        }
+        
+        .radio-group p {
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .radio-options p {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
+        }
+        
+        .radio-group input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+            margin: 0;
+        }
+        
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            padding-left: 30px;
+            position: relative;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+        
+        .radio-group label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #555;
+            border-radius: 50%;
+            background-color: white;
+        }
+        
+        .radio-group input[type="radio"]:checked + label::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        /* Button styling */
         .button-container {
             text-align: center;
             margin-top: 30px;
         }
+        
+        .btn-primary {
+            padding: 10px 25px;
+            background-color: #333333;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #555555;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Progress bar styling */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 15px;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        
+        .progress {
+            width: 100%;
+            max-width: 1200px;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: #FCB817;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .page-indicator {
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
+    <div class="progress-container">
+        <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 100%"></div>
+            <span class="progress-text">100%</span>
+        </div>
+        <div class="page-indicator">Page 6/6</div>
+    </div>
+    
     {% load static %}
     <form class="opals-form" method="post">
         {% csrf_token %}
         
         <h2 class="page-title">OPALS Assessment - Page 6</h2>
 
-        <h2 class="page-title">Interactions</h2>
-
-        <h4>Please note that the descriptors for each item in the table would be the potential wording in the tool and the other text would be part of a procedures handbook or notes for clarification</h4>
-
-        <div class="question-container">
-            <h5>Teacher verbalizations are relevant to children’s activities and/or interests</h5>
-            <p class="question-text">This item refers to teachers use of language with children in the outdoor space. It is expected that teachers talk is related to children’s activities and interests during play and exploration. And if teachers use restrictive language, this is done only when there is a safety issue. </p>
-            <div class="radio-group">
-                {{ form.question51 }}
-            </div>
+        <div class="section-header">
+            <h2 class="section-title">Interactions</h2>
+            <p>Please note that the descriptors for each item in the table would be the potential wording in the tool and the other text would be part of a procedures handbook or notes for clarification</p>
         </div>
 
         <div class="question-container">
             <h5>Teacher verbalizations are relevant to children’s activities and/or interests</h5>
-            <p class="question-text">This item refers to teachers’ interactions with children in the outdoor space. It is expected that teachers are warm and positive with children, as well as attentive to their needs. Warm and positive interactions are indicated by using the children’s names, establishing eye contact, being near the children and/or speaking with positive tone or positive content to children.</p>
+            <p class="question-text">This item refers to teachers' use of language with children in the outdoor space. It is expected that teachers' talk is related to children’s activities and interests during play and exploration. And if teachers use restrictive language, this is done only when there is a safety issue.</p>
             <div class="radio-group">
-                {{ form.question52 }}
-                
+                {% for choice in form.question51 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="question-container">
+            <h5>Teacher interactions are warm and positive</h5>
+            <p class="question-text">This item refers to teachers’ interactions with children in the outdoor space. It is expected that teachers are warm and positive with children, as well as attentive to their needs. Warm and positive interactions are indicated by using the children’s names, establishing eye contact, being near the children, and/or speaking with a positive tone or positive content to children.</p>
+            <div class="radio-group">
+                {% for choice in form.question52 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="question-container">
             <h5>Teachers promote children’s persistence and learning</h5>
-            <p class="question-text">This item refers to teachers’ promotion of children’s persistence and learning during outdoor play time. Persistence happens when children spend prolonged and continued amount of time and energy in one type of activity (e.g., symbolic play, nature exploration, climbing up a tree). Teachers can encourage children’s persistence and learning by offering materials, showing how to use materials in a new way, and asking open-ended questions. Expectations for persistence should take into account developmental level of the children. </p>
+            <p class="question-text">This item refers to teachers’ promotion of children’s persistence and learning during outdoor play time. Persistence happens when children spend prolonged and continued amounts of time and energy in one type of activity (e.g., symbolic play, nature exploration, climbing up a tree). Teachers can encourage children’s persistence and learning by offering materials, showing how to use materials in a new way, and asking open-ended questions. Expectations for persistence should take into account the developmental level of the children.</p>
             <div class="radio-group">
-                {{ form.question53 }}
+                {% for choice in form.question53 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="question-container">
             <h5>Teachers are actively engaged (physically), model inquisitiveness and exploration</h5>
-            <p class="question-text">This item refers to teachers’ physical engagement with children in the outdoor space. Teachers' physical engagement is crucial for children to begin interacting more independently with the outdoor environment, especially for those who are younger or new to the environment. By being physically engaged in the outdoor environment, teachers model inquisitiveness and exploration. Teachers can offer and start activities, or they can be physically engaged in children’s play. </p>
+            <p class="question-text">This item refers to teachers’ physical engagement with children in the outdoor space. Teachers' physical engagement is crucial for children to begin interacting more independently with the outdoor environment, especially for those who are younger or new to the environment. By being physically engaged in the outdoor environment, teachers model inquisitiveness and exploration. Teachers can offer and start activities, or they can be physically engaged in children’s play.</p>
             <div class="radio-group">
-                {{ form.question54 }}
+                {% for choice in form.question54 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="question-container">
             <h5>Teachers support/encourage positive peer interactions</h5>
-            <p class="question-text">This item refers to teachers’ support and encouragement of positive peer interactions during outdoor play. Teachers can support positive peer interactions by giving children strategies to problem solve when there is a conflict or challenging situation, or by encouraging children to play together in a positive way. If children already have positive peer interactions, teachers may praise positive peer interactions. </p>
+            <p class="question-text">This item refers to teachers’ support and encouragement of positive peer interactions during outdoor play. Teachers can support positive peer interactions by giving children strategies to problem-solve when there is a conflict or challenging situation, or by encouraging children to play together in a positive way. If children already have positive peer interactions, teachers may praise positive peer interactions.</p>
             <div class="radio-group">
-                {{ form.question55 }}
+                {% for choice in form.question55 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="question-container">
-            <h5>Teachers are actively engaging children with the natural elements/environment</h5>
-            <p class="question-text">This item refers to whether teachers actively engage children with natural elements/environment in the outdoor space. Active engagement consists of encouraging children to use their senses and skills to manipulate natural elements/environment and explore it. Active engagement with the natural environment involves actions such as touching, picking up, digging, planting, smelling, tasting as appropriate, etc. Children are allowed and encouraged to be actively engaged with natural elements and/or the natural environment. </p>
+            <h5>Teachers actively engage children with the natural elements/environment</h5>
+            <p class="question-text">This item refers to whether teachers actively engage children with natural elements/environment in the outdoor space. Active engagement consists of encouraging children to use their senses and skills to manipulate natural elements/environment and explore it. Active engagement with the natural environment involves actions such as touching, picking up, digging, planting, smelling, tasting as appropriate, etc. Children are allowed and encouraged to be actively engaged with natural elements and/or the natural environment.</p>
             <div class="radio-group">
-                {{ form.question56 }}
+                {% for choice in form.question56 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="question-container">
             <h5>Children show curiosity about natural elements/environment</h5>
-            <p class="question-text">This item refers to whether children show curiosity about natural elements/environment. If teachers do not prohibit interactions with natural elements/environment, young children are usually curious and want to explore and manipulate what surrounds them, including natural elements/environment.  </p>
+            <p class="question-text">This item refers to whether children show curiosity about natural elements/environment. If teachers do not prohibit interactions with natural elements/environment, young children are usually curious and want to explore and manipulate what surrounds them, including natural elements/environment.</p>
             <div class="radio-group">
-                {{ form.question57 }}
+                {% for choice in form.question57 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="question-container">
-            <h5>Children engage with natural elements/environment (quantity)*</h5>
+            <h5>Children engage with natural elements/environment (quantity)</h5>
             <p class="question-text">This item addresses specifically the number of children who are seen engaging with natural elements/environment.</p>
             <div class="radio-group">
-                {{ form.question58 }}
+                {% for choice in form.question58 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
@@ -168,20 +325,30 @@
             <h5>The schedule and activities allow/facilitate children’s choices and independence</h5>
             <p class="question-text">This item aims to identify if the schedule and activities allow and/or facilitate children in making their own choices and exercising independence. Usually, teacher-led activities in which children are required to participate do not allow them to follow their interests and independently choose activities and peers they would like to play with. Therefore, it is expected that children can choose their activities during outdoor playtime, and small or large group activities offered are optional or short in duration.</p>
             <div class="radio-group">
-                {{ form.question59 }}
+                {% for choice in form.question59 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="question-container">
-            <h5>There is a positive climate, characterized by enthusiasm, affection, and respect among children and adults.</h5>
-            <p class="question-text">This item aims to identify general patterns of behavior between teacher(s) and children. A positive climate is characterized by: (1) respectful interactions among teachers and children (i.e., respectful language, cooperation, and sharing); (2) enthusiasm and playful engagement with activities, materials, and peers; (3) affection by being physically close to children and touching children with affection (e.g., hugs, patting their back, social conversation, smiling, laugh, verbal affection). This item rates interactions globally, not individually.</p>
+            <h5>There is a positive climate, characterized by enthusiasm, affection, and respect among children and adults</h5>
+            <p class="question-text">This item aims to identify general patterns of behavior between teacher(s) and children. A positive climate is characterized by: (1) respectful interactions among teachers and children (i.e., respectful language, cooperation, and sharing); (2) enthusiasm and playful engagement with activities, materials, and peers; (3) affection by being physically close to children and touching children with affection (e.g., hugs, patting their back, social conversation, smiling, laughter, verbal affection). This item rates interactions globally, not individually.</p>
             <div class="radio-group">
-                {{ form.question60 }}
+                {% for choice in form.question60 %}
+                    <div class="radio-option">
+                        {{ choice.tag }}
+                        <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
         <div class="button-container">
-            <button type="submit" class="submit-button">Next</button>
+            <button type="submit" class="btn-primary">Submit</button>
         </div>
     </form>
 </body>

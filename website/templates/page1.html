@@ -8,9 +8,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPALS page 1</title>
+    {% load static %}
+    <style>
+        @font-face {
+            font-family: 'AvenirNext';
+            src: url("{% static 'fonts/AvenirNext-Regular.ttf' %}") format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .center-placeholder {
+            border-radius: 20px;
+        }
+
+        .center-placeholder::placeholder {
+            text-align: center;
+        }
+
+        .text-center {
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .text-center option {
+            text-align: center;
+        }
+
+        body {
+            font-family: 'AvenirNext';
+            background-color: #D3F36B;
+            color: #343a40;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        h1, .btn-primary {
+            color: #007bff;
+        }
+
+        form {
+            background-color: #D3F36B;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn-primary {
+            background-color: #333333;
+            border-color: #333333;
+            margin-top: 10px;
+            border-radius: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        label {
+            font-size: 18px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        .form-check input[type="checkbox"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 20px;
+        }
+
+        .form-check {
+            margin-bottom: 15px;
+        }
+
+        .form-select {
+            height: 47px;
+        }
+    </style>
 </head>
 <body>
-    {% load static %}
     <form class="row" style="padding-left: 40px; padding-right: 40px;" method="post">
         {% csrf_token %}
         <br>
@@ -20,28 +106,21 @@
         <div>
             {{ form.last_name }}
         </div>
-
         <div>
             {{ form.email }}
         </div>
-
         <div>
             {{ form.address }}
         </div>
-
         <div>
             {{ form.city }}
         </div>
-
         <div>
             {{ form.state }}
         </div>
-
         <div>
             {{ form.zip_code }}
         </div>
-
-        <!-- used throughtout the form for conditional appearance of questions -->
         <div>
             {{ form.age_groups.label_tag }}
             {% for checkbox in form.age_groups %}
@@ -50,19 +129,12 @@
             </div>
             {% endfor %}
         </div>
-
         <button type="submit" class="btn btn-primary" id="nextButton" style="background-color: #333333; border-radius: 20px;">
-            Get Started</button>
-
-            <p style="padding: 10px;"></p>
-
+            Get Started
+        </button>
+        <p style="padding: 10px;"></p>
     </form>
-
-   
 </body>
-{% load static %}
-
 </html>
-
 
 {% endblock %}
